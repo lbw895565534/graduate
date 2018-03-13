@@ -2,7 +2,7 @@
     <div>
       <Research></Research>
       <div class="box_sort">
-        <Sort></Sort>
+        <SortFood></SortFood>
       </div>
       <div class="box_program">
         <div class="program">
@@ -34,13 +34,14 @@
 import Research from "../../components/research/index";
 import Banner from "../../components/banner/index";
 import Program from "../../components/program/index";
-import Sort from "../../components/sort/sort_food";
+import SortFood from "../../components/sort/sort_food";
+
 export default {
   components: {
     Banner,
     Research,
     Program,
-    Sort
+    SortFood
   }
 };
 </script>

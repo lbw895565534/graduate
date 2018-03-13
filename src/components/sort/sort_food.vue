@@ -1,18 +1,18 @@
 <template>
   <div>
-    <div class="sort_box">
+    <div class="sort_box" @click="getItem(txt[0])">
       <img class="sort_icon" src="../../assets/images/picture/rice.png" alt="">
       <span class="sort_name">{{ txt[0] }}</span>
     </div>
-    <div class="sort_box">
+    <div class="sort_box" @click="getItem(txt[1])">
       <img class="sort_icon" src="../../assets/images/picture/drink.png" alt="">
       <span class="sort_name">{{ txt[1] }}</span>
     </div>
-    <div class="sort_box">
+    <div class="sort_box" @click="getItem(txt[2])">
       <img class="sort_icon" src="../../assets/images/picture/pizza.png" alt="">
       <span class="sort_name">{{ txt[2] }}</span>
     </div>
-    <div class="sort_box">
+    <div class="sort_box" @click="getItem(txt[3])">
       <img class="sort_icon" src="../../assets/images/picture/cake.png" alt="">
       <span class="sort_name">{{ txt[3] }}</span>
     </div>
@@ -24,10 +24,15 @@
           return {
             txt: ["米饭", "饮料", "比萨", "蛋糕"]
           }
+        },
+        methods: {
+          getItem: function (i){
+            this.$router.push('/sort');
+          }
         }
     }
 </script>
-<style>
+<style scoped>
   .sort_box {
     float: left;
     text-align: center;
