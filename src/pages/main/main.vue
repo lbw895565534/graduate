@@ -1,6 +1,6 @@
 <template>
     <div>
-      <Research></Research>
+      <Search></Search>
       <div class="box_sort">
         <SortFood></SortFood>
       </div>
@@ -31,7 +31,7 @@
     </div>
 </template>
 <script type="text/ecmascript-6">
-import Research from "../../components/research/index";
+import Search from "../../components/search/index";
 import Banner from "../../components/banner/index";
 import Program from "../../components/program/index";
 import SortFood from "../../components/sort/sort_food";
@@ -39,7 +39,7 @@ import SortFood from "../../components/sort/sort_food";
 export default {
   components: {
     Banner,
-    Research,
+    Search,
     Program,
     SortFood
   }
