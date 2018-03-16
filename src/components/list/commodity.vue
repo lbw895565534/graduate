@@ -1,29 +1,53 @@
 <template>
     <div class="list_box">
-      <div class="list_item">
+      <div class="list_item" v-for="commodity in shoplist">
         <div class="list_item_picture">
-          <img src="./commodity1.jpg" alt="">
+          <img :src="commodity.img" alt="">
         </div>
         <div class="item list_item_name">
-          <div class="item_name">香葱11111111111111</div>
+          <div class="item_name">{{ commodity.name }}</div>
         </div>
         <div class="item list_item_price">
-          <div class="item_price">15.00</div>
+          <div class="item_price">{{ commodity.price }}.00/<small>{{ commodity.unit }}</small></div>
         </div>
         <div class="item list_item_site">
-          <div class="item_site">广州</div>
+          <div class="item_site">{{ commodity.site }}</div>
         </div>
         <div class="item list_item_select">
           <div class="item_select">
-            <button class="item_select—_btn">加入购物车</button>
+            <button class="item_select—_btn" @click="addToCart(shop)">加入购物车</button>
           </div>
         </div>
       </div>
     </div>
 </template>
 <script type="text/ecmascript-6">
+import { mapGetters, mapActions } from "vuex";
 export default {
-  props: []
+  props: [],
+  data() {
+    name: "product";
+    return {
+      commoditys: []
+    };
+  },
+  mounted() {
+    this.$http.get("/commodity").then(
+      res => {
+        this.commoditys = res.data.data;
+        console.log(this.commoditys);
+      },
+      res => {
+        console.log("请求无响应");
+      }
+    );
+  },
+  computed: {
+    ...mapGetters(['shoplist'])
+  },
+  methods: {
+    ...mapActions(['addToCart'])
+  }
 };
 </script>
 <style scoped>
@@ -32,11 +56,11 @@ export default {
   padding: 0;
 }
 .list_box {
-  border-bottom: 1px solid #555;
 }
 .list_item {
   width: 100%;
   height: 100px;
+  border-bottom: 1px solid #555;
 }
 .list_item_picture {
   width: 98px;
@@ -64,8 +88,12 @@ export default {
 }
 .item_price {
   color: red;
-  font-size: 28px;
+  font-size: 24px;
   margin: 10px 0 0 10px;
+}
+small {
+  font-size: 16px !important;
+  color: black;
 }
 .item_site {
   color: #555;

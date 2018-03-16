@@ -16,10 +16,9 @@ Vue.use(Router)
 
 export default new Router({
   routes: [{
-    path: '/main',
+    path: '/',
     name: 'main',
-    component: Main,
-    alias: '/',
+    component: Main
   },
   {
     path: '/sort',

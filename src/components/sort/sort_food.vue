@@ -1,27 +1,27 @@
 <template>
   <div>
-    <router-link :to="{ name:'sort', params: {txt: txt[0]} }">
+    <router-link :to="{ name:'sort', params: {name: txt[0].name, type: txt[0].type} }" class="keep">
       <div class="sort_box">
         <img class="sort_icon" src="../../assets/images/picture/rice.png" alt="">
-        <span class="sort_name">{{ txt[0] }}</span>
+        <span class="sort_name">{{ txt[0].name }}</span>
       </div>
     </router-link>
-    <router-link :to="{ name:'sort', params: {txt: txt[1]} }">
+    <router-link :to="{ name:'sort', params: {name: txt[1].name, type: txt[1].type} }" class="keep">
       <div class="sort_box" @click="getItem(txt[1])">
         <img class="sort_icon" src="../../assets/images/picture/drink.png" alt="">
-        <span class="sort_name">{{ txt[1] }}</span>
+        <span class="sort_name">{{ txt[1].name }}</span>
       </div>
     </router-link>
-    <router-link :to="{ name:'sort', params: {txt: txt[2]} }">
+    <router-link :to="{ name:'sort', params: {name: txt[2].name, type: txt[2].type} }" class="keep">
       <div class="sort_box" @click="getItem(txt[2])">
         <img class="sort_icon" src="../../assets/images/picture/pizza.png" alt="">
-        <span class="sort_name">{{ txt[2] }}</span>
+        <span class="sort_name">{{ txt[2].name }}</span>
       </div>
     </router-link>
-    <router-link :to="{ name:'sort', params: {txt: txt[3]} }">
+    <router-link :to="{ name:'sort', params: {name: txt[3].name, type: txt[3].type} }" class="keep">
       <div class="sort_box" @click="getItem(txt[3])">
         <img class="sort_icon" src="../../assets/images/picture/cake.png" alt="">
-        <span class="sort_name">{{ txt[3] }}</span>
+        <span class="sort_name">{{ txt[3].name }}</span>
       </div>
     </router-link>
   </div>
@@ -30,12 +30,16 @@
 export default {
   data: function() {
     return {
-      txt: ["米饭", "饮料", "比萨", "蛋糕"]
+      txt: [
+      {name: "常菜", type: "homecook"}, 
+      {name: "饮料", type: "drink"}, 
+      {name: "比萨", type: "pizza"}, 
+      {name: "蛋糕", type: "cake"}]
     };
   },
   methods: {
     getItem: function(i) {
-      this.$router.push("/main/sort");
+      this.$router.go(-1);
     }
   }
 };
@@ -56,5 +60,11 @@ export default {
 .sort_name {
   display: block;
   margin-top: 5px;
+}
+.keep:link {
+  color: black;
+}
+.keep:visited {
+  color: black;
 }
 </style>

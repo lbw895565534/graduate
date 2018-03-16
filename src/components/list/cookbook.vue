@@ -1,26 +1,27 @@
 <template>
     <div class="list_box">
-      <div class="list_item">
+      <div class="list_item" v-for="food in foods">
         <div class="list_item_picture">
-          <img src="./cookbook1.jpg" alt="">
+          <img v-bind:src="food.img" alt="">
         </div>
         <div class="item list_item_name">
-          <div class="item_name">凉拌茄子</div>
+          <div class="item_name">{{ food.name }}</div>
         </div>
         <div class="item list_item_info">
           <div class="item_info">
-            凉拌菜是餐桌不可忽视美味。即使是素菜，凉拌一下也很美味，凉拌茄子是最喜欢的凉拌菜之一。简单、美味、开胃，多吃也不怕长肉。
+            {{ food.info }}
           </div>
         </div>
+        <div class="blank"></div>
         <div class="item list_item_op">
           <div class="item_op">
             <div class="op_like">
-              <img src="../../assets/share/like.svg" width="18px">
-              <span>1111{{ likes }}</span>
+              <img src="../../assets/share/like.svg" width="16px">
+              <span>{{ food.likes }}</span>
             </div>
             <div class="op_collect">
-              <img src="../../assets/share/collect.svg" width="18px">
-              <span>1111{{ collects }}</span>
+              <img src="../../assets/share/collect.svg" width="16px">
+              <span>{{ food.collects }}</span>
             </div>
           </div>
         </div>
@@ -29,7 +30,22 @@
 </template>
 <script type="text/ecmascript-6">
 export default {
-  props: []
+  data () {
+    return {
+      foods: [],
+      params: ''
+    }
+  },
+  mounted() {
+    this.params = this.$route.params;
+    this.$http.get("/sort/" + this.params.type).then(res => {
+      this.foods = res.data.data;
+      console.log(this.foods);
+    }, res => {
+      console.log("请求无响应");
+    })
+  }
+
 };
 </script>
 <style scoped>
@@ -37,7 +53,7 @@ export default {
   margin: 0;
   padding: 0;
 }
-.list_box {
+.list_item {
   border-bottom: 1px solid #555;
 }
 .list_item {
@@ -63,9 +79,13 @@ export default {
 }
 .list_item_name {
   height: 25%;
+  font-weight: bold;
 }
 .list_item_info {
-  height: 50%;
+  height: 44%;
+}
+.blank {
+  height: 6%;
 }
 .list_item_op {
   height: 25%;
@@ -96,14 +116,17 @@ export default {
   float: left;
 }
 .list_item_op img {
-  margin-top: 1px;
 }
 .list_item_op span {
   width: 40px;
   height: 18px;
+  margin-left: -1px;
   display: inline-block;
   vertical-align:top;
   color: rgb(180, 180, 180);
+}
+span, div {
+  font-family: Helvetica, Tahoma, Arial, '华文细黑', 'Microsoft YaHei', '微软雅黑', sans-serif;
 }
 </style>
 

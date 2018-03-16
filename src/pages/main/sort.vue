@@ -1,8 +1,8 @@
 <template>
     <div>
       <div class="title-second">
-        <a class="last">分类</a>
-        <span class="next">>{{ $route.params.txt }}</span>
+        <a class="last" @click="back">分类</a>
+        <span class="next">>{{ $route.params.name }}</span>
         </div>
       <div class="content">
         <Cookbook></Cookbook>
@@ -19,6 +19,11 @@ export default {
   props: ['SortName'],
   mounted: function() {
     console.log(this.$route.params.txt);
+  },
+  methods: {
+    back: function () {
+      this.$router.push('/');
+    }
   }
 };
 </script>
