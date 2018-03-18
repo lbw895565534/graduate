@@ -1,43 +1,53 @@
 <template>
     <div class="list_box">
-      <div class="list_item" v-for="c in cart">
+      <div class="list_item" v-for="(shop,index) in cartProducts">
         <div class="list_item_radio">
-          <input type="radio" :checked="c.checked">
+          <input type="checkbox" @click="shopChecked(shop)" :checked="shop.checked">
         </div>
         <div class="list_item_picture">
-          <img :src="c.img" alt="">
+          <img :src="shop.img" alt="">
         </div>
         <div class="center">
           <div class="item list_item_name">
-            <div class="item_name">{{ c.name }}</div>
+            <div class="item_name">{{ shop.name }}</div>
           </div>
           <div class="item list_item_info">
-            <div class="item_site">{{ c.info }}</div>
+            <div class="item_site">{{ shop.info }}</div>
           </div>
           <div class="item list_item_price">
-            <div class="item_price">￥{{ c.price }}.00</small></div>
+            <div class="item_price">￥{{ shop.price }}.00</small></div>
           </div>
         </div>
         <div class="right">
           <div class="item_total">
-              <div class="add">+</div>
-              <div class="total">{{ c.num }}</div>
-              <div class="reduce">-</div>
+              <div class="add" @click="addNum(shop)">+</div>
+              <div class="total">{{ shop.num }}</div>
+              <div class="reduce" @click="reduceNum(shop)">-</div>
             </div>
              <div class="del">
-            <img src="@/assets/share/del.svg" class="btn_del"></button>
+            <img src="@/assets/share/del.svg" class="btn_del" @click='delProduct(shop)'>
           </div>
         </div>
       </div>
     </div>
 </template>
 <script type="text/ecmascript-6">
+import { mapGetters, mapActions } from "vuex";
 export default {
-  props: ['cart'],
+  props: ["cart"],
   mounted() {
-    console.log(this.cart);
+
+  },
+  computed: {
+    ...mapGetters(["cartProducts"])
+  },
+  methods: {
+    ...mapActions(["delProduct"]),
+    ...mapActions(["addNum"]),
+    ...mapActions(["reduceNum"]),
+    ...mapActions(["shopChecked"])
   }
-}
+};
 </script>
 <style scoped>
 * {
@@ -53,7 +63,7 @@ export default {
 .list_item_radio {
   flex: 1;
 }
-input[type=radio] {
+input[type="checkbox"] {
   margin: 43px auto;
   display: block;
   width: 16px;

@@ -1,30 +1,36 @@
 <template>
     <div class="box_operate">
         <div class="item-wrapper">
-            <div class='item_sel'>
+            <div class='item_sel' @click="allChecked">
               全选
             </div>
             <div class='item_total'>
-                合计：￥{{ total }}
+                合计：￥{{ totalPrice }}
             </div>
             <div class="item_pay">
-              <button class="btn_pay">结算</button>
+              <button class="btn_pay">结算({{ totalNum }})</button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: 'info',
+  name: "info",
   data() {
     return {
-      totalNum: 13,
-      totalPrice: 342,
+
     };
   },
+  methods: {
+    ...mapActions(["clearAllCart"]),
+    ...mapActions(["allChecked"])
+  },
+  computed: {
+    ...mapGetters(["totalPrice", "totalNum"])
+  }
 };
 </script>
 

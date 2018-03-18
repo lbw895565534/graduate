@@ -1,91 +1,5 @@
 //初始化数据
-const state = {};
-
-//getter 抛出去的数据
-const getters = {
-  //商品列表
-  shoplist:state => lists.shop_list,
-  //购物车的列表
-  cartProdects:state => {
-    return state.added.map(({id,num}) => {
-      let product = lists.shop_list.find(n=>n.id == id)
-
-      return {
-        ...product,
-        num
-      }
-    })
-  },
-  //计算总价
-  totalNum:(lists,getters) => {
-    let total = 0;
-    getters.cartProdects.forEach(n => {
-      total += n.price * n.num
-    })
-    return total;
-  },
-  //计算总数量
-  totalNum:(lists,getters) => {
-    let total = 0;
-    getters.cartProducts.forEach(n => {
-      total += n.num;
-    })
-    return total;
-  }
-};
-
-//action 异步的操作
-const actions = {
-  //添加到购物车操作
-  addToCart({commit}, product) {
-    commit('add', {
-      id:product.id
-    })
-  },
-  //清除购物车
-  clearAllCart({commit}) {
-    commit('clearAll')
-  },
-  //删除购物车的指定的商品
-  delProduct({commit}, product) {
-    commit('del', product)
-  }
-};
-
-//mutation
-const mutations = {
-  //添加到购物车操作
-  add(lists, {id}) {
-    let record = lists.added.find(n=>n.id == id);
-    if(!record) {
-      lists.added.push({
-        id,
-        num: 1
-      })
-    }else {
-      record.num++;
-    }
-  },
-  clearAll(lists) {
-    lists.added = []
-  },
-  del(lists, product) {
-    lists.added.forEach((n,i) => {
-      if(n.id == product.id) {
-        lists.added.splice(i,i)
-      }
-    })
-  }
-};
-
-export default {
-  lists,
-  mutations,
-  actions,
-  getters,
-};
-
-const lists = {
+const state = {
   //商品列表
   shop_list: [
     {
@@ -130,3 +44,138 @@ const lists = {
   added: []
 }
 
+//getter 抛出去的数据
+const getters = {
+  //商品列表
+  shoplist: state => state.shop_list,
+  //购物车的列表
+  cartProducts: state => {
+    return state.added.map(({ id, num, checked }) => {
+      let product = state.shop_list.find(n => n.id == id)
+      // console.info('product',product)
+      return {
+        ...product,
+        num,
+        checked
+      }
+    })
+  },
+  //计算总价
+  totalPrice: (state, getters) => {
+    let total = 0;
+    getters.cartProducts.forEach(n => {
+      if (n.checked) {
+        total += n.price * n.num
+      }
+    })
+    return total;
+  },
+  //计算总数量
+  totalNum: (state, getters) => {
+    let total = 0;
+    getters.cartProducts.forEach(n => {
+      if (n.checked) {
+        total += n.num
+      }
+    })
+    return total;
+  },
+}
+
+//action 异步的操作
+const actions = {
+  //添加到购物车操作
+  addToCart({ commit }, product) {
+    commit('add', {
+      id: product.id
+    })
+  },
+  //清除购物车
+  clearAllCart({ commit }) {
+    commit('clearAll')
+  },
+  //删除购物车的指定的商品
+  delProduct({ commit }, product) {
+    commit('del', product)
+  },
+  //添加商品数量
+  addNum({ commit }, product) {
+    commit('addNum', product)
+  },
+  //减少商品数量
+  reduceNum({ commit }, product) {
+    commit('reduceNum', product)
+  },
+  //选中状态
+  shopChecked({ commit }, product) {
+    commit('shopChecked', product)
+  },
+  //全选中状态
+  allChecked({ commit }) {
+    commit('allChecked')
+  }
+}
+
+//mutation
+const mutations = {
+  //添加到购物车操作
+  add(state, { id }) {
+    let record = state.added.find(n => n.id == id);
+    if (!record) {
+      state.added.push({
+        id,
+        num: 1,
+        checked: false
+      })
+    } else {
+      record.num++
+    }
+    // console.info(record)
+
+  },
+  //清除购物车
+  clearAll(state) {
+    state.added = []
+  },
+  //删除购物车的指定的商品
+  del(state, product) {
+    state.added.forEach((n, i) => {
+      if (n.id == product.id) {
+        //console.info(11,n)
+        //找到index的下标值
+        state.added.splice(i, 1)
+      }
+    })
+  },
+  addNum(state, product) {
+    state.added.forEach((n, i) => {
+      if (n.id == product.id) {
+        state.added[i].num++;
+      }
+    })
+  },
+  reduceNum(state, product) {
+    state.added.forEach((n, i) => {
+      if (state.added[i].num > 1) {
+        state.added[i].num--;
+      }
+    })
+  },
+  shopChecked(state, product) {
+    state.added.forEach((n, i) => {
+      state.added[i].checked = !state.added[i].checked;
+    })
+  },
+  allChecked(state) {
+    state.added.forEach(n => {
+      n.checked = !n.checked;
+    })
+  }
+}
+
+export default {
+  state,
+  mutations,
+  actions,
+  getters,
+};

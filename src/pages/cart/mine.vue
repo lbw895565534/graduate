@@ -7,6 +7,7 @@
 <script type="text/ecmascript-6">
 import Cart from "@/components/list/cart";
 import Operate from "@/pages/cart/operate";
+import { mapGetters, mapActions } from "vuex";
 export default {
   components: {
     Cart,
@@ -16,18 +17,20 @@ export default {
   data() {
     return {
       cart: []
-    }
+    };
   },
   mounted() {
     this.$http.get("/commodity").then(
       res => {
         this.cart = res.data.data;
-        console.log(this.cart);
       },
       res => {
         console.log("请求无响应");
       }
     );
+  },
+  computed: {
+    ...mapGetters(["cartProducts"])
   }
 };
 </script>

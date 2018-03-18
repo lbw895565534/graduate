@@ -1,17 +1,17 @@
 <template>
     <div class="list_box">
-      <div class="list_item" v-for="commodity in shoplist">
+      <div class="list_item" v-for="(shop,index) in shoplist">
         <div class="list_item_picture">
-          <img :src="commodity.img" alt="">
+          <img :src="shop.img" alt="">
         </div>
         <div class="item list_item_name">
-          <div class="item_name">{{ commodity.name }}</div>
+          <div class="item_name">{{ shop.name }}</div>
         </div>
         <div class="item list_item_price">
-          <div class="item_price">{{ commodity.price }}.00/<small>{{ commodity.unit }}</small></div>
+          <div class="item_price">{{ shop.price }}.00/<small>{{ shop.unit }}</small></div>
         </div>
         <div class="item list_item_site">
-          <div class="item_site">{{ commodity.site }}</div>
+          <div class="item_site">{{ shop.site }}</div>
         </div>
         <div class="item list_item_select">
           <div class="item_select">
@@ -32,15 +32,15 @@ export default {
     };
   },
   mounted() {
-    this.$http.get("/commodity").then(
-      res => {
-        this.commoditys = res.data.data;
-        console.log(this.commoditys);
-      },
-      res => {
-        console.log("请求无响应");
-      }
-    );
+    // this.$http.get("/commodity").then(
+    //   res => {
+    //     this.commoditys = res.data.data;
+    //     console.log(this.commoditys);
+    //   },
+    //   res => {
+    //     console.log("请求无响应");
+    //   }
+    // );
   },
   computed: {
     ...mapGetters(['shoplist'])

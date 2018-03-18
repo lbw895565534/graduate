@@ -6,7 +6,7 @@
     <router-view></router-view>
 
     <div class="tabbarFooter" >
-      <Item txt="首页" mark="" :sel="selected" @change="getItem">
+      <Item txt="首页" mark="main" :sel="selected" @change="getItem">
         <img src="../../assets/img/1.png" alt="" slot="normalImg">
         <img src="../../assets/img/6.png" alt="" slot="activeImg">
       </Item>
