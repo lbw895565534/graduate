@@ -1,41 +1,40 @@
 <template>
-    <div class="program_box">
-      <div class="program_container" >
-        <img class="program_pic" src="../../assets/images/picture/1.jpg" alt="">
-        <div class="program_detail">
-          <span>本周</span><br>
-          <span>流行菜单</span>
-        </div>
-      </div>
-    </div>
+  <div class="box">
+    <router-link :to="{ name:'sort', params: {name: txt[0].name, kind: txt[0].kind , lastShow: false} }" class="program">
+      <Program :txt="txt[0]" @click="sortOfLike"></Program>
+    </router-link>
+    <router-link :to="{ name:'sort', params: {name: txt[0].name, kind: txt[0].kind , lastShow: false} }" class="program">
+      <Program :txt="txt[1]" @click="sortOfCollect"></Program>
+    </router-link>
+  </div>
 </template>
-<script type="text/ecmascript-6">
-export default {
-  props: []
-};
+<script>
+  import Program from "./program";
+  export default {
+    components: {
+      Program
+    },
+    data() {
+      return {
+        txt: ["最受喜欢", "最多收藏"]
+      }
+    },
+    methods: {
+      sortOfLike() {
+
+      },
+      sortOfCollect() {
+
+      }
+    }
+  };
+
 </script>
-<style>
-.program_box {
-  width: 160px;
-  height: 140px;
-  position: relative;
-  margin: 0 auto;
-}
-.program_container {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-.program_container .program_pic {
-}
-.program_container .program_detail {
-  width: 140px;
-  color: #fff;
-  font-family: "Microsoft YaHei";
-  font-size: 18px;
-  font-weight: 400;
-  position: absolute;
-  left: 10px;
-  bottom: 5px;
-}
+<style scoped>
+  .box {
+    display: flex;
+  }
+  .program {
+    flex: 1;
+  }
 </style>

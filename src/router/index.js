@@ -10,8 +10,6 @@ import Market from '@/pages/market/market'
 import Mine from '@/pages/cart/mine'
 import Sort from '@/pages/main/sort'
 
-import Search from '../pages/search/search'
-
 Vue.use(Router)
 
 export default new Router({

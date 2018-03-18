@@ -31,7 +31,7 @@
       </div>
     </div>
 </template>
-<script type="text/ecmascript-6">
+<script>
 import { mapGetters, mapActions } from "vuex";
 export default {
   props: ["cart"],
@@ -93,10 +93,13 @@ input[type="checkbox"] {
   padding-top: 9px;
 }
 .list_item_info {
-  height: 35%;
-  overflow: hidden;
+  height: 35%;  
   font-size: 12px;
   color: #888;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 .list_item_price {
   height: 30%;
@@ -116,17 +119,16 @@ input[type="checkbox"] {
   text-align: center;
 }
 .btn_del {
-  margin: 10px auto;
+  margin: 13px auto;
   width: 25px;
 }
 .item_total {
-  display: inline-block;
   width: 120px;
   height: 50%;
   position: relative;
   top: 15px;
-  display: flex;
   text-align: center;
+  margin: auto;
 }
 .add {
   flex: 3;

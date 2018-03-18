@@ -1,24 +1,24 @@
 <template>
   <div>
-    <router-link :to="{ name:'sort', params: {name: txt[0].name, type: txt[0].type} }" class="keep">
+    <router-link :to="{ name:'sort', params: {name: txt[0].name, kind: txt[0].kind , lastShow: true} }" class="keep">
       <div class="sort_box">
         <img class="sort_icon" src="../../assets/images/picture/rice.png" alt="">
         <span class="sort_name">{{ txt[0].name }}</span>
       </div>
     </router-link>
-    <router-link :to="{ name:'sort', params: {name: txt[1].name, type: txt[1].type} }" class="keep">
+    <router-link :to="{ name:'sort', params: {name: txt[1].name, kind: txt[1].kind , lastShow: true} }" class="keep">
       <div class="sort_box" @click="getItem(txt[1])">
         <img class="sort_icon" src="../../assets/images/picture/drink.png" alt="">
         <span class="sort_name">{{ txt[1].name }}</span>
       </div>
     </router-link>
-    <router-link :to="{ name:'sort', params: {name: txt[2].name, type: txt[2].type} }" class="keep">
+    <router-link :to="{ name:'sort', params: {name: txt[2].name, kind: txt[2].kind , lastShow: true} }" class="keep">
       <div class="sort_box" @click="getItem(txt[2])">
         <img class="sort_icon" src="../../assets/images/picture/pizza.png" alt="">
         <span class="sort_name">{{ txt[2].name }}</span>
       </div>
     </router-link>
-    <router-link :to="{ name:'sort', params: {name: txt[3].name, type: txt[3].type} }" class="keep">
+    <router-link :to="{ name:'sort', params: {name: txt[3].name, kind: txt[3].kind , lastShow: true} }" class="keep">
       <div class="sort_box" @click="getItem(txt[3])">
         <img class="sort_icon" src="../../assets/images/picture/cake.png" alt="">
         <span class="sort_name">{{ txt[3].name }}</span>
@@ -26,15 +26,15 @@
     </router-link>
   </div>
 </template>
-<script type="text/ecmascript-6">
+<script>
 export default {
   data: function() {
     return {
       txt: [
-      {name: "常菜", type: "homecook"}, 
-      {name: "饮料", type: "drink"}, 
-      {name: "比萨", type: "pizza"}, 
-      {name: "蛋糕", type: "cake"}]
+      {name: "常菜", kind: "homecook"}, 
+      {name: "饮料", kind: "drink"}, 
+      {name: "比萨", kind: "pizza"}, 
+      {name: "蛋糕", kind: "cake"}]
     };
   },
   methods: {

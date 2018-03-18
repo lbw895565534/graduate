@@ -1,5 +1,5 @@
 <template>
-  <div class="tabbar">
+  <div class="body">
     <div class="tabbarHeader">
       <Top :sel="selected"></Top>
     </div>
@@ -55,5 +55,5 @@
 
 <style>
   .tabbarFooter {width: 100%; height: 64px; position: fixed;left: 0px; bottom: 0px;
-    border-top: 1px solid #ccc; text-align: center;}
+    border-top: 1px solid #ccc; text-align: center;background: #fff;}
 </style>

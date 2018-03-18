@@ -1,28 +1,29 @@
 <template>
     <div>
       <div class="title-second">
-        <a class="last" @click="back">分类</a>
-        <span class="next">>{{ $route.params.name }}</span>
+        <a class="last" @click="back" v-if="lastShow">分类</a>
+        <span class="next">> {{ $route.params.name }}</span>
         </div>
       <div class="content">
-        <Cookbook></Cookbook>
+        <Cookbook @click="toDetail()" :kind="$route.params.kind"></Cookbook>
       </div>
     </div>
 </template>
-<script type="text/ecmascript-6">
+<script>
 import Cookbook from '@/components/list/cookbook'
 
 export default {
+  props: ['lastShow'],
   components: {
     Cookbook
   },
-  props: ['SortName'],
-  mounted: function() {
-    console.log(this.$route.params.txt);
-  },
+  props: ['SortName'],  
   methods: {
     back: function () {
       this.$router.push('/');
+    },
+    toDetail: function () {
+      
     }
   }
 };

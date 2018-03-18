@@ -1,5 +1,9 @@
+import axios from 'axios'
+
 //初始化数据
 const state = {
+  //美食列表
+  cookbook_list: [],
   //商品列表
   shop_list: [
     {
@@ -41,18 +45,19 @@ const state = {
   ],
 
   //添加到购物车的商品（已选商品）
-  added: []
+  added: [],
 }
 
 //getter 抛出去的数据
 const getters = {
+  //美食菜谱数据获取请求
+  cookbooklist: state => state.cookbook_list,
   //商品列表
   shoplist: state => state.shop_list,
   //购物车的列表
   cartProducts: state => {
     return state.added.map(({ id, num, checked }) => {
       let product = state.shop_list.find(n => n.id == id)
-      // console.info('product',product)
       return {
         ...product,
         num,
@@ -84,6 +89,21 @@ const getters = {
 
 //action 异步的操作
 const actions = {
+  getCookbook({ commit }) {
+    commit('getCookbook')
+  },
+  getHomecook({ commit }) {
+    commit('getHomecook')
+  },
+  getDrink({ commit }) {
+    commit('getDrink')
+  },
+  getPizza({ commit }) {
+    commit('getPizza')
+  },
+  getCake({ commit }) {
+    commit('getCake')
+  },
   //添加到购物车操作
   addToCart({ commit }, product) {
     commit('add', {
@@ -118,6 +138,42 @@ const actions = {
 
 //mutation
 const mutations = {
+  //获取菜谱
+  getCookbook(state) {
+    axios.get('/sort').then(
+      res => {
+        state.cookbook_list = res.data;
+      }
+    )
+  },
+  getHomecook(state) {
+    axios.get('/sort/homecook').then(
+      res => {
+        state.cookbook_list = res.data;
+      }
+    )
+  },
+  getDrink(state) {
+    axios.get('/sort/drink').then(
+      res => {
+        state.cookbook_list = res.data;
+      }
+    )
+  },
+  getPizza(state) {
+    axios.get('/sort/pizza').then(
+      res => {
+        state.cookbook_list = res.data;
+      }
+    )
+  },
+  getCake(state) {
+    axios.get('/sort/cake').then(
+      res => {
+        state.cookbook_list = res.data;
+      }
+    )
+  },
   //添加到购物车操作
   add(state, { id }) {
     let record = state.added.find(n => n.id == id);
