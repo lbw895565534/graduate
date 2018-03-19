@@ -1,13 +1,13 @@
 <template>
   <div>
-    <h1>shareHot</h1>
+      <Cookbook></Cookbook>
   </div>
 </template>
-<script type="text/ecmascript-6">
-
+<script>
+  import Cookbook from '../../components/list/cookbook'
   export default {
     components: {
-
+      Cookbook
     },
     props: []
   }

@@ -54,7 +54,7 @@ export default {
     toDetail(c) {
       var data = c;
       console.log(data);
-      this.$router.push({path:'/sort/detail',query:{param:c}});
+      this.$router.push({path:'/main/sort/detail',query:{param:c}});
     }
   },
   mounted() {

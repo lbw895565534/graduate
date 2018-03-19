@@ -1,19 +1,24 @@
 <template>
-    <div id="box">
-      <div class="search_box">
-        <div class="search_detail">
-          <img class="search_icon" src="../../assets/img/ic_search_gray.png" alt="">
-          <span class="search_text">搜索</span>
-        </div>
+  <div id="box" @click="toSearch()">
+    <div class="search_box">
+      <div class="search_detail">
+        <img class="search_icon" src="../../assets/img/ic_search_gray.png" alt="">
+        <span class="search_text">搜索</span>
       </div>
     </div>
+  </div>
 </template>
-<script type="text/ecmascript-6">
-    export default {
-        props: [ 'txt']
+<script>
+  export default {
+    props: ['txt'],
+    methods: {
+      toSearch() {
+        this.$router.push('/main/search');
+      }
     }
+  }
 </script>
-<style>
+<style scoped>
   #box {
     width: 100%;
     height: 44px;
@@ -21,6 +26,7 @@
     border-bottom: 1px solid #DADADA;
     text-align: center;
   }
+
   .search_box {
     width: 80%;
     height: 30px;
@@ -31,14 +37,13 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
-  .search_detail {
 
-  }
   .search_icon {
     width: 16px;
     position: relative;
     top: 5px;
   }
+
   .search_text {
     color: #fff;
     position: relative;
@@ -46,4 +51,5 @@
     font-size: 14px;
     top: 2px;
   }
+
 </style>

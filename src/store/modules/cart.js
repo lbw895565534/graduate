@@ -135,6 +135,11 @@ const actions = {
   }) {
     commit('sortOfDate')
   },
+  sortOfHot({
+    commit
+  }) {
+    commit('sortOfHot')
+  },
   addLike({
     commit
   }, cookbook) {
@@ -243,15 +248,6 @@ const mutations = {
   },
   //排序
   sortOfLikes(state) {
-    // axios.get('/sort').then(
-    //   res => {
-    //     state.cookbook_list = res.data;
-    //     state.cookbook_filter = state.cookbook_list;
-    //     state.cookbook_filter.sort(function (a, b) {
-    //       return a.likes - b.likes;
-    //     });
-    //   }
-    // );
     console.log(state.cookbook_list);
     state.cookbook_filter = state.cookbook_list;
     state.cookbook_filter.sort(function (a, b) {
@@ -270,6 +266,13 @@ const mutations = {
     state.cookbook_filter = state.cookbook_list;
     state.cookbook_filter.sort(function (a, b) {
       return b.date - a.date;
+    });
+  },
+  sortOfHot(state) {
+    console.log(state.cookbook_list);
+    state.cookbook_filter = state.cookbook_list;
+    state.cookbook_filter.sort(function (a, b) {
+      return (b.likes + b.collects) - (a.likes + a.collects);
     });
   },
   //点赞，收藏

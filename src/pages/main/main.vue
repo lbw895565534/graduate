@@ -25,7 +25,7 @@
   </div>
 </template>
 <script>
-  import Search from "../../components/search/index";
+  import Search from "../../components/search/search"
   import Banner from "../../components/banner/index";
   import Program from "../../components/program/index";
   import SortFood from "../../components/sort/sort_food";
@@ -44,8 +44,8 @@
       this.getCookbook();
     },
     components: {
-      Banner,
       Search,
+      Banner,
       Program,
       SortFood
     }

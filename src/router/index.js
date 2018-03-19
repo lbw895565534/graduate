@@ -3,13 +3,15 @@ import Router from 'vue-router'
 
 import Home from '@/pages/home/home'
 import Main from '@/pages/main/main'
-import Share from '@/pages/share/shareNew'
+import Sort from '@/pages/main/sort'
+import Detail from '@/pages/main/detail'
+import Search from '@/pages/main/search'
+import ShareNew from '@/pages/share/shareNew'
 import ShareHot from '@/pages/share/shareHot'
 import ShareMine from '@/pages/share/shareMine'
 import Market from '@/pages/market/market'
 import Mine from '@/pages/cart/mine'
-import Sort from '@/pages/main/sort'
-import Detail from '@/pages/main/detail'
+
 
 Vue.use(Router)
 
@@ -21,27 +23,32 @@ export default new Router({
     alias: '/'
   },
   {
-    path: '/sort',
+    path: '/main/sort',
     name: 'sort',
     component: Sort
   },
   {
-    path: '/sort/detail',
+    path: '/main/sort/detail',
     name: 'detail',
     component: Detail
   },
   {
-    path: '/share',
-    name: 'share',
-    component: Share
+    path: '/main/search',
+    name: 'search',
+    component: Search
   },
   {
-    path: '/shareHot',
+    path: '/share/ShareNew',
+    name: 'share',
+    component: ShareNew
+  },
+  {
+    path: '/share/shareHot',
     name: 'shareHot',
     component: ShareHot
   },
   {
-    path: '/shareMine',
+    path: '/share/shareMine',
     name: 'shareMine',
     component: ShareMine
   },

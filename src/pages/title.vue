@@ -19,6 +19,7 @@
   </div>
 </template>
 <script>
+  import { mapGetters, mapActions } from "vuex";
   export default {
     props: ['sel'],
     data: function () {
@@ -26,7 +27,7 @@
         option: 1,
         arr:[
           {name: 'main' , txt: '首页' },
-          {name: 'share' , txt: ['最新' , '最热' , '我的'] , pa: ['share' , 'shareHot' , 'shareMine'] },
+          {name: 'share/shareNew' , txt: ['最新' , '最热' , '我的'] , pa: ['shareNew' , 'shareHot' , 'shareMine'] },
           {name: 'market' , txt: '市集' },
           {name: 'mine' , txt: '我的' }
         ]
@@ -39,7 +40,6 @@
             return n;
           }
         }
-//          alert(typeof(this.arr[0].name));
       },
       boxNum: function () {
         if (this.num != 1 ){
@@ -50,11 +50,24 @@
       }
     },
     methods: {
+      ...mapActions(['sortOfDate']),
+      ...mapActions(['sortOfHot']),
       fn: function(val){
+        switch(val) {
+          case 1: {
+            this.sortOfDate();
+            break;
+          }
+          case 2: {
+            this.sortOfHot();
+            break;
+          }
+        }
         this.option = val;
+        this.sortOfHot();
       },
       getOptionUrl: function (num , op) {
-        this.$router.push('/' + this.arr[num].pa[op-1]);
+        this.$router.push('/share/' + this.arr[num].pa[op-1]);
       }
     },
     //  监听num值的变化（选项卡的切换），恢复option的默认值（标题栏默认第一个）

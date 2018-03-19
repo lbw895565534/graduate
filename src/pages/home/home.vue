@@ -12,7 +12,7 @@
         <img src="../../assets/img/1.png" alt="" slot="normalImg">
         <img src="../../assets/img/6.png" alt="" slot="activeImg">
       </Item>
-      <Item txt="分享" mark="share" :sel="selected" @change="getItem">
+      <Item txt="分享" mark="share/shareNew" :sel="selected" @change="getItem">
         <img src="../../assets/img/2.png" alt="" slot="normalImg">
         <img src="../../assets/img/7.png" alt="" slot="activeImg">
       </Item>
@@ -55,9 +55,10 @@
   }
 </script>
 
-<style>
-  .tabbarHeader {z-index: 5;width: 100%;height: 44px;position: fixed;top: 0px;}
-  .content {z-index: 4;margin-bottom: 64px;margin-top: 44px;}
+<style scoped>
+  .body {width: 100%; height: 100%;}
+  .tabbarHeader {z-index: 5;width: 100%;height: 44px;position: fixed;top: 0;left: 0;}
+  .content {width: 100%;height: 100%;z-index: 4;margin-bottom: 64px;margin-top: 44px;}
   .tabbarFooter {z-index: 5;width: 100%; height: 64px; position: fixed;bottom: 0px;
     border-top: 1px solid #ccc; text-align: center;background: #fff;}
 </style>

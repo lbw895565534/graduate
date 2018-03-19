@@ -1,5 +1,4 @@
 <template>
-
   <div class="itemWrap" @click="fn">
     <span v-show='!bol'><slot name="normalImg"></slot><br></span>
     <span v-show='bol'><slot name="activeImg"></slot><br></span>

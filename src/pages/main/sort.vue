@@ -6,7 +6,7 @@
         <span class="next">{{ $route.params.name }}</span>
       </div>
       <div class="content">
-        <Cookbook @click="toDetail()" :kind="$route.params.kind"></Cookbook>
+        <Cookbook :kind="$route.params.kind"></Cookbook>
       </div>
     </div>
 </template>
@@ -22,9 +22,6 @@ export default {
   methods: {
     back: function () {
       this.$router.push('/');
-    },
-    toDetail: function () {
-      
     }
   }
 };
@@ -63,5 +60,6 @@ i {
   z-index: 1;
   position: relative;
   top: 45px;
+  margin-bottom: 64px;
 }
 </style>
