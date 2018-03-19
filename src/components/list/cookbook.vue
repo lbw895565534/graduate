@@ -1,5 +1,5 @@
 <template>
-  <div class="list_box">
+  <div class="list_box" @click="show">
     <div class="list_item" v-for="cookbook in cookbooklist">
       <div class="left">
         <div class="list_item_picture">
@@ -32,149 +32,149 @@
   </div>
 </template>
 <script>
-  import {
-    mapGetters,
-    mapActions
-  } from "vuex";
-  export default {
-    props: ['kind'],
-    data() {
-      return {
-        foods: [],
-        params: ''
+import { mapGetters, mapActions } from "vuex";
+export default {
+  props: ["kind"],
+  data() {
+    return {
+      foods: [],
+      params: ""
+    };
+  },
+  computed: {
+    ...mapGetters(["cookbooklist"]),
+    sortItems: function() {
+      return this.cookbooklist.sort(sortNumber);
+    }
+  },
+  methods: {
+    ...mapActions(["getHomecook"]),
+    ...mapActions(["getDrink"]),
+    ...mapActions(["getPizza"]),
+    ...mapActions(["getCake"]),
+    numSort: function(a, b) {
+      return a - b;
+    },
+    show: function() {
+      console.log(this.cookbooklist);
+    }
+  },
+  mounted() {
+    switch (this.kind) {
+      case "homecook": {
+        this.getHomecook();
+        break;
       }
-    },
-    computed: {
-      ...mapGetters(["cookbooklist"])
-    },
-    methods: {
-      ...mapActions(["getHomecook"]),
-      ...mapActions(["getDrink"]),
-      ...mapActions(["getPizza"]),
-      ...mapActions(["getCake"])
-    },
-    mounted() {
-      switch (this.kind) {
-        case "homecook":
-          {
-            this.getHomecook();
-            break;
-          };
-        case "drink":
-          {
-            this.getDrink();
-            break;
-          };
-        case "pizza":
-          {
-            this.getPizza();
-            break;
-          };
-        case "cake":
-          {
-            this.getCake();
-            break;
-          }
+      case "drink": {
+        this.getDrink();
+        break;
+      }
+      case "pizza": {
+        this.getPizza();
+        break;
+      }
+      case "cake": {
+        this.getCake();
+        break;
       }
     }
-
-  };
-
+  }
+};
 </script>
 <style scoped>
-  * {
-    margin: 0;
-    padding: 0;
-  }
+* {
+  margin: 0;
+  padding: 0;
+}
 
-  .list_box {
-    overflow-y: hidden;
-  }
+.list_box {
+  overflow-y: hidden;
+}
 
-  .list_item {
-    border-bottom: 1px solid #555;
-    display: flex;
-  }
+.list_item {
+  border-bottom: 1px solid #555;
+  display: flex;
+}
 
-  .list_item {
-    width: 100%;
-    height: 100px;
-  }
-  .left {
-    flex: 2;
-  }
-  .right {
-    flex: 5;
-  }
-  .list_item_picture {
-    width: 98px;
-    height: 98px;
-    margin: auto;
-  }
+.list_item {
+  width: 100%;
+  height: 100px;
+}
+.left {
+  flex: 2;
+}
+.right {
+  flex: 5;
+}
+.list_item_picture {
+  width: 98px;
+  height: 98px;
+  margin: auto;
+}
 
-  .list_item_picture img {
-    width: 80px;
-    height: 80px;
-    margin: auto;
-    margin: 10px;
-  }
+.list_item_picture img {
+  width: 80px;
+  height: 80px;
+  margin: auto;
+  margin: 10px;
+}
 
-  .list_item_name {
-    height: 25%;
-    font-weight: bold;
-  }
+.list_item_name {
+  height: 25%;
+  font-weight: bold;
+}
 
-  .list_item_info {
-    height: 50%;
-  }
+.list_item_info {
+  height: 50%;
+}
 
-  .list_item_op {
-    height: 25%;
-  }
+.list_item_op {
+  height: 25%;
+}
 
-  .item_name {
-    margin-top: 5px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+.item_name {
+  margin-top: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
-  .item_info {
-    width: 98%;
-    height: 100%;
-    font-size: 12px;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-  }
+.item_info {
+  width: 98%;
+  height: 100%;
+  font-size: 12px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
 
-  .op_like {
-    float: left;
-    margin-right: 10px;
-  }
+.op_like {
+  float: left;
+  margin-right: 10px;
+}
 
-  .op_collect {
-    float: left;
-  }
+.op_collect {
+  float: left;
+}
 
-  .list_item_op {
-    padding-top: 2px;
-  }
+.list_item_op {
+  padding-top: 2px;
+}
 
-  .list_item_op span {
-    width: 40px;
-    height: 18px;
-    margin-left: -1px;
-    display: inline-block;
-    vertical-align: top;
-    color: rgb(180, 180, 180);
-  }
+.list_item_op span {
+  width: 40px;
+  height: 18px;
+  margin-left: -1px;
+  display: inline-block;
+  vertical-align: top;
+  color: rgb(180, 180, 180);
+}
 
-  span,
-  div {
-    font-family: Helvetica, Tahoma, Arial, '华文细黑', 'Microsoft YaHei', '微软雅黑', sans-serif;
-  }
-
+span,
+div {
+  font-family: Helvetica, Tahoma, Arial, "华文细黑", "Microsoft YaHei",
+    "微软雅黑", sans-serif;
+}
 </style>

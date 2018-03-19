@@ -37,8 +37,11 @@
     computed: {
       ...mapGetters(["cookbooklist"])
     },
+    methods: {
+      ...mapActions(["getCookbook"])
+    },
     mounted() {
-      this.getCookbook();      
+      this.getCookbook();
     },
     components: {
       Banner,
