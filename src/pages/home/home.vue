@@ -3,7 +3,9 @@
     <div class="tabbarHeader">
       <Top :sel="selected"></Top>
     </div>
-    <router-view></router-view>
+    <div class="content">
+      <router-view></router-view>
+    </div>
 
     <div class="tabbarFooter" >
       <Item txt="首页" mark="main" :sel="selected" @change="getItem">
@@ -54,6 +56,8 @@
 </script>
 
 <style>
-  .tabbarFooter {width: 100%; height: 64px; position: fixed;left: 0px; bottom: 0px;
+  .tabbarHeader {z-index: 5;width: 100%;height: 44px;position: fixed;top: 0px;}
+  .content {z-index: 4;margin-bottom: 64px;margin-top: 44px;}
+  .tabbarFooter {z-index: 5;width: 100%; height: 64px; position: fixed;bottom: 0px;
     border-top: 1px solid #ccc; text-align: center;background: #fff;}
 </style>

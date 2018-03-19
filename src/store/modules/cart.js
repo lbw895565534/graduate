@@ -4,9 +4,9 @@ import axios from 'axios'
 const state = {
   //美食列表
   cookbook_list: [],
+  cookbook_filter: [],
   //商品列表
-  shop_list: [
-    {
+  shop_list: [{
       id: 11,
       name: "香葱",
       img: "./src/mock/static/commodity/xiangcong.jpg",
@@ -52,11 +52,16 @@ const state = {
 const getters = {
   //美食菜谱数据获取请求
   cookbooklist: state => state.cookbook_list,
+  cookbookfilter: state => state.cookbook_filter,
   //商品列表
   shoplist: state => state.shop_list,
   //购物车的列表
   cartProducts: state => {
-    return state.added.map(({ id, num, checked }) => {
+    return state.added.map(({
+      id,
+      num,
+      checked
+    }) => {
       let product = state.shop_list.find(n => n.id == id)
       return {
         ...product,
@@ -89,49 +94,103 @@ const getters = {
 
 //action 异步的操作
 const actions = {
-  getCookbook({ commit }) {
+  getCookbook({
+    commit
+  }) {
     commit('getCookbook')
   },
-  getHomecook({ commit }) {
+  getHomecook({
+    commit
+  }) {
     commit('getHomecook')
   },
-  getDrink({ commit }) {
+  getDrink({
+    commit
+  }) {
     commit('getDrink')
   },
-  getPizza({ commit }) {
+  getPizza({
+    commit
+  }) {
     commit('getPizza')
   },
-  getCake({ commit }) {
+  getCake({
+    commit
+  }) {
     commit('getCake')
   },
+  //按照点赞数、收藏数排序
+  sortOfLikes({
+    commit
+  }) {
+    commit('sortOfLikes')
+  },
+  sortOfCollects({
+    commit
+  }) {
+    commit('sortOfCollects')
+  },
+  sortOfDate({
+    commit
+  }) {
+    commit('sortOfDate')
+  },
+  addLike({
+    commit
+  }, cookbook) {
+    commit('addLike', {
+      id: cookbook.id
+    })
+  },
+  addCollect({
+    commit
+  }, cookbook) {
+    commit('addCollect', {
+      id: cookbook.id
+    })
+  },
   //添加到购物车操作
-  addToCart({ commit }, product) {
+  addToCart({
+    commit
+  }, product) {
     commit('add', {
       id: product.id
     })
   },
   //清除购物车
-  clearAllCart({ commit }) {
+  clearAllCart({
+    commit
+  }) {
     commit('clearAll')
   },
   //删除购物车的指定的商品
-  delProduct({ commit }, product) {
+  delProduct({
+    commit
+  }, product) {
     commit('del', product)
   },
   //添加商品数量
-  addNum({ commit }, product) {
+  addNum({
+    commit
+  }, product) {
     commit('addNum', product)
   },
   //减少商品数量
-  reduceNum({ commit }, product) {
+  reduceNum({
+    commit
+  }, product) {
     commit('reduceNum', product)
   },
   //选中状态
-  shopChecked({ commit }, product) {
+  shopChecked({
+    commit
+  }, product) {
     commit('shopChecked', product)
   },
   //全选中状态
-  allChecked({ commit }) {
+  allChecked({
+    commit
+  }) {
     commit('allChecked')
   }
 }
@@ -143,39 +202,100 @@ const mutations = {
     axios.get('/sort').then(
       res => {
         state.cookbook_list = res.data;
+        state.cookbook_filter = state.cookbook_list;
+        state.cookbook_filter.sort(function (a, b) {
+          return b.date - a.date;
+        });
       }
-    )
+    ).catch(err => {
+      console.log(error)
+    })
   },
   getHomecook(state) {
     axios.get('/sort/homecook').then(
       res => {
-        state.cookbook_list = res.data;
+        state.cookbook_filter = res.data;
       }
-    )
+    ).catch(err => {
+      console.log(error)
+    })
   },
   getDrink(state) {
     axios.get('/sort/drink').then(
       res => {
-        state.cookbook_list = res.data;
+        state.cookbook_filter = res.data;
       }
     )
   },
   getPizza(state) {
     axios.get('/sort/pizza').then(
       res => {
-        state.cookbook_list = res.data;
+        state.cookbook_filter = res.data;
       }
     )
   },
   getCake(state) {
     axios.get('/sort/cake').then(
       res => {
-        state.cookbook_list = res.data;
+        state.cookbook_filter = res.data;
       }
     )
   },
+  //排序
+  sortOfLikes(state) {
+    // axios.get('/sort').then(
+    //   res => {
+    //     state.cookbook_list = res.data;
+    //     state.cookbook_filter = state.cookbook_list;
+    //     state.cookbook_filter.sort(function (a, b) {
+    //       return a.likes - b.likes;
+    //     });
+    //   }
+    // );
+    console.log(state.cookbook_list);
+    state.cookbook_filter = state.cookbook_list;
+    state.cookbook_filter.sort(function (a, b) {
+      return b.likes - a.likes;
+    });
+  },
+  sortOfCollects(state) {
+    console.log(state.cookbook_list);
+    state.cookbook_filter = state.cookbook_list;
+    state.cookbook_filter.sort(function (a, b) {
+      return b.collects - a.collects;
+    });
+  },
+  sortOfDate(state) {
+    console.log(state.cookbook_list);
+    state.cookbook_filter = state.cookbook_list;
+    state.cookbook_filter.sort(function (a, b) {
+      return b.date - a.date;
+    });
+  },
+  //点赞，收藏
+  addLike(state, {
+    id
+  }) {
+    state.cookbook_list.forEach((n, i) => {
+      if (n.id == cookbook.id) {
+        state.cookbook_list[i].likes++;
+      }
+    })
+    console.log(state.cookbook_list[i].likes);
+  },
+  addCollect(state, {
+    id
+  }) {
+    state.cookbook_list.forEach((n, i) => {
+      if (n.id == cookbook.id) {
+        state.cookbook_list[i].collects++;
+      }
+    })
+  },
   //添加到购物车操作
-  add(state, { id }) {
+  add(state, {
+    id
+  }) {
     let record = state.added.find(n => n.id == id);
     if (!record) {
       state.added.push({

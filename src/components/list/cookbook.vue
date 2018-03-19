@@ -1,6 +1,6 @@
 <template>
-  <div class="list_box" @click="show">
-    <div class="list_item" v-for="cookbook in cookbooklist">
+  <div class="list_box">
+    <div class="list_item" v-for="cookbook in cookbookfilter" @click="toDetail(cookbook)">
       <div class="left">
         <div class="list_item_picture">
           <img v-bind:src="cookbook.img" alt="">
@@ -42,21 +42,19 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["cookbooklist"]),
-    sortItems: function() {
-      return this.cookbooklist.sort(sortNumber);
-    }
+    ...mapGetters(["cookbookfilter"]),
   },
   methods: {
     ...mapActions(["getHomecook"]),
     ...mapActions(["getDrink"]),
     ...mapActions(["getPizza"]),
     ...mapActions(["getCake"]),
-    numSort: function(a, b) {
-      return a - b;
-    },
-    show: function() {
-      console.log(this.cookbooklist);
+    ...mapActions(["sortOfLikes"]),
+    ...mapActions(["sortOfCollects"]),
+    toDetail(c) {
+      var data = c;
+      console.log(data);
+      this.$router.push({path:'/sort/detail',query:{param:c}});
     }
   },
   mounted() {
@@ -75,6 +73,14 @@ export default {
       }
       case "cake": {
         this.getCake();
+        break;
+      }
+      case "like": {
+        this.sortOfLikes();
+        break;
+      }
+      case "collect": {
+        this.sortOfCollects();
         break;
       }
     }

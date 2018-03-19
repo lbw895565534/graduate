@@ -9,6 +9,7 @@ import ShareMine from '@/pages/share/shareMine'
 import Market from '@/pages/market/market'
 import Mine from '@/pages/cart/mine'
 import Sort from '@/pages/main/sort'
+import Detail from '@/pages/main/detail'
 
 Vue.use(Router)
 
@@ -23,6 +24,11 @@ export default new Router({
     path: '/sort',
     name: 'sort',
     component: Sort
+  },
+  {
+    path: '/sort/detail',
+    name: 'detail',
+    component: Detail
   },
   {
     path: '/share',

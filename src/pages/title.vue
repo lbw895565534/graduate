@@ -1,8 +1,5 @@
 <template>
   <div class="titleWrap">
-    <slot name="leftImg"></slot>
-    <slot name="rightImg"></slot>
-
     <div class="titleBox  titleBox1" v-show=" boxNum==1 ">
       <span>{{ arr[num].txt }}</span>
     </div>
@@ -21,7 +18,7 @@
     </div>
   </div>
 </template>
-<script type="text/ecmascript-6">
+<script>
   export default {
     props: ['sel'],
     data: function () {
@@ -71,13 +68,10 @@
   }
 </script>
 
-<style>
+<style scoped>
   *{ margin: 0; padding: 0;}
-  .titleWrap { width: 100%; height: 44px;  border-bottom: 1px solid #ccc;
+  .titleWrap { width: 100%; height: 100%;  border-bottom: 1px solid #ccc;
     background: #E6952D; position: relative;}
-  .titleWrap img { width: 40px; position: absolute; top: 5px; }
-  .titleWrap img:first-child { left: 10px;  }
-  .titleWrap img:nth-child(n+2) { right: 10px; }
 
   .titleBox { width: 182px; height: 30px; margin: auto; color: #fff; text-align: center; }
   .titleBox1 { font-size: 20px; line-height: 44px; }
