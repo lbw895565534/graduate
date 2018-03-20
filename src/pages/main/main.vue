@@ -29,20 +29,7 @@
   import Banner from "../../components/banner/index";
   import Program from "../../components/program/index";
   import SortFood from "../../components/sort/sort_food";
-  import {
-    mapGetters,
-    mapActions
-  } from "vuex";
   export default {
-    computed: {
-      ...mapGetters(["cookbooklist"])
-    },
-    methods: {
-      ...mapActions(["getCookbook"])
-    },
-    mounted() {
-      this.getCookbook();
-    },
     components: {
       Search,
       Banner,

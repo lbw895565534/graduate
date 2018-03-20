@@ -217,34 +217,36 @@ const mutations = {
     })
   },
   getHomecook(state) {
-    axios.get('/sort/homecook').then(
-      res => {
-        state.cookbook_filter = res.data;
+    state.cookbook_filter = [];
+    state.cookbook_list.forEach((n, i) => {
+      if (n.kind == "homecook") {
+        state.cookbook_filter.push(n);
       }
-    ).catch(err => {
-      console.log(error)
     })
   },
   getDrink(state) {
-    axios.get('/sort/drink').then(
-      res => {
-        state.cookbook_filter = res.data;
+    state.cookbook_filter = [];
+    state.cookbook_list.forEach((n, i) => {
+      if (n.kind == "drink") {
+        state.cookbook_filter.push(n);
       }
-    )
+    })
   },
   getPizza(state) {
-    axios.get('/sort/pizza').then(
-      res => {
-        state.cookbook_filter = res.data;
+    state.cookbook_filter = [];
+    state.cookbook_list.forEach((n, i) => {
+      if (n.kind == "pizza") {
+        state.cookbook_filter.push(n);
       }
-    )
+    })
   },
   getCake(state) {
-    axios.get('/sort/cake').then(
-      res => {
-        state.cookbook_filter = res.data;
+    state.cookbook_filter = [];
+    state.cookbook_list.forEach((n, i) => {
+      if (n.kind == "cake") {
+        state.cookbook_filter.push(n);
       }
-    )
+    })
   },
   //排序
   sortOfLikes(state) {

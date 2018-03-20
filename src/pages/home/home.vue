@@ -31,7 +31,7 @@
 <script>
   import Item from '../item'
   import Top from '../title'
-
+  import { mapGetters, mapActions } from "vuex";
   //  默认设置
   export default {
     //  子组件
@@ -44,13 +44,21 @@
         selected: 'main'
       }
     },
+    computed: {
+      // ...mapGetters(["cookbooklist"])
+    },
+    mounted() {
+
+      this.getCookbook();
+    },
     methods: {
+      //获取全部美食
+      ...mapActions(["getCookbook"]),
       //  获取选中的Item的mark值，并且实现Item路由跳转
       getItem: function (i) {
         this.selected = i;
         this.$router.push('/' + i);
       }
-      //  获取tabbarHeader中选中的的option值，并且实现Item路由跳转
     }
   }
 </script>
