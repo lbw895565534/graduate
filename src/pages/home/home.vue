@@ -66,7 +66,7 @@
 <style scoped>
   .body {width: 100%; height: 100%;}
   .tabbarHeader {z-index: 5;width: 100%;height: 44px;position: fixed;top: 0;left: 0;}
-  .content {width: 100%;height: 100%;z-index: 4;margin-bottom: 64px;margin-top: 44px;}
+  .content {width: 100%;height: 100%;z-index: 4;position: relative;top: 45px;margin-bottom:64px;}
   .tabbarFooter {z-index: 5;width: 100%; height: 64px; position: fixed;bottom: 0px;
     border-top: 1px solid #ccc; text-align: center;background: #fff;}
 </style>

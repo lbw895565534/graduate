@@ -1,14 +1,39 @@
 <template>
-  <div>
-    <h1>shareMine</h1>
+  <div class="box">
+    <div @click="toInput()">
+      <Publish></Publish>
+    </div>
+    <div class="cookbook">
+      <Cookbook></Cookbook>
+    </div>
   </div>
 </template>
-<script type="text/ecmascript-6">
-
+<script>
+  import Publish from '../../components/publish/publish'
+  import Cookbook from '../../components/list/cookbook'
   export default {
     components: {
-
+      Publish,
+      Cookbook
     },
-    props: []
+    methods: {
+      toInput() {
+        this.$router.push('/share/shareInput')
+      }
+    }
   }
+
 </script>
+<style scoped>
+  .box {
+    z-index: 5;
+    width: 100%;
+    height: 110%;
+  }
+
+  .cookbook {
+    position: relative;
+    top: 45px;
+  }
+
+</style>

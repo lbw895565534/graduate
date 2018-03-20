@@ -311,8 +311,6 @@ const mutations = {
     } else {
       record.num++
     }
-    // console.info(record)
-
   },
   //清除购物车
   clearAll(state) {
@@ -322,8 +320,6 @@ const mutations = {
   del(state, product) {
     state.added.forEach((n, i) => {
       if (n.id == product.id) {
-        //console.info(11,n)
-        //找到index的下标值
         state.added.splice(i, 1)
       }
     })

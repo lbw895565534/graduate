@@ -9,6 +9,7 @@ import Search from '@/pages/main/search'
 import ShareNew from '@/pages/share/shareNew'
 import ShareHot from '@/pages/share/shareHot'
 import ShareMine from '@/pages/share/shareMine'
+import ShareInput from '@/pages/share/shareInput'
 import Market from '@/pages/market/market'
 import Mine from '@/pages/cart/mine'
 
@@ -51,6 +52,11 @@ export default new Router({
     path: '/share/shareMine',
     name: 'shareMine',
     component: ShareMine
+  },
+  {
+    path: '/share/ShareInput',
+    name: 'shareInput',
+    component: ShareInput
   },
   {
     path: '/market',
