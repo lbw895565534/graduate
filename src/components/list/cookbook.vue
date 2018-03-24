@@ -58,6 +58,7 @@ export default {
     }
   },
   mounted() {
+    console.log(this.name);
     switch (this.kind) {
       case "homecook": {
         this.getHomecook();

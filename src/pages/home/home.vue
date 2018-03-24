@@ -6,7 +6,6 @@
     <div class="content">
       <router-view></router-view>
     </div>
-
     <div class="tabbarFooter" >
       <Item txt="首页" mark="main" :sel="selected" @change="getItem">
         <img src="../../assets/img/1.png" alt="" slot="normalImg">
@@ -48,7 +47,6 @@
       // ...mapGetters(["cookbooklist"])
     },
     mounted() {
-
       this.getCookbook();
     },
     methods: {

@@ -4,7 +4,7 @@
       <Publish></Publish>
     </div>
     <div class="cookbook">
-      <Cookbook></Cookbook>
+      <Cookbook :kind="$route.params.kind"></Cookbook>
     </div>
   </div>
 </template>

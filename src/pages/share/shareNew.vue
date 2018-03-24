@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Cookbook></Cookbook>
+    <Cookbook :kind="$route.params.kind"></Cookbook>
   </div>
 </template>
 <script>

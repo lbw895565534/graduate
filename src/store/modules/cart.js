@@ -206,14 +206,14 @@ const mutations = {
   getCookbook(state) {
     axios.get('/sort').then(
       res => {
-        state.cookbook_list = res.data;
-        state.cookbook_filter = state.cookbook_list;
-        state.cookbook_filter.sort(function (a, b) {
-          return b.date - a.date;
-        });
+        state.cookbook_list = res.data;                
       }
     ).catch(err => {
       console.log(error)
+    })
+    state.cookbook_filter = state.cookbook_list;
+    state.cookbook_filter.sort(function (a, b) {
+      return b.date - a.date;
     })
   },
   getHomecook(state) {

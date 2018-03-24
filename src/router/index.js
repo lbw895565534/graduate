@@ -39,8 +39,8 @@ export default new Router({
     component: Search
   },
   {
-    path: '/share/ShareNew',
-    name: 'share',
+    path: '/share/shareNew',
+    name: 'shareNew',
     component: ShareNew
   },
   {

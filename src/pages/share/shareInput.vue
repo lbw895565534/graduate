@@ -74,6 +74,9 @@
     overflow-x: hidden;
     outline: none;
   }
+  .container_shop {
+
+  }
   .conatiner_step{
     width: 100%;
     height: 
