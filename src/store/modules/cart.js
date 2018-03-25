@@ -206,7 +206,7 @@ const mutations = {
   getCookbook(state) {
     axios.get('/sort').then(
       res => {
-        state.cookbook_list = res.data;                
+        state.cookbook_list = res.data;
       }
     ).catch(err => {
       console.log(error)
@@ -263,15 +263,46 @@ const mutations = {
       return b.collects - a.collects;
     });
   },
+  quickSort(arr, name, snum) {
+    //如果数组<=1,则直接返回
+    if (arr.length <= 1) {
+      return arr;
+    }
+    var pivotIndex = Math.floor(arr.length / 2);
+    //找基准，并把基准从原数组删除
+    var pivot = arr.splice(pivotIndex, 1)[0];
+    var middleNum = pivot[name];
+    // 定义左右数组
+    var left = [];
+    var right = [];
+    //比基准小的放在left，比基准大的放在right
+    if (snum) {
+      for (var i = 0; i < arr.length; i++) {
+        if (Number(arr[i][name]) <= Number(middleNum)) {
+          left.push(arr[i]);
+        } else {
+          right.push(arr[i]);
+        }
+      }
+    } else {
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i][name] <= middleNum) {
+          left.push(arr[i]);
+        } else {
+          right.push(arr[i]);
+        }
+      }
+    }
+    //递归,返回所需数组
+    return quickSort(left, name, snum).concat([pivot], quickSort(right, name, snum));
+  },
   sortOfDate(state) {
-    console.log(state.cookbook_list);
     state.cookbook_filter = state.cookbook_list;
-    state.cookbook_filter.sort(function (a, b) {
-      return b.date - a.date;
-    });
+    state.cookbook_filter.sort(function(a,b){
+      return Date.parse(a.time) - Date.parse(b.time);//时间正序
+  });
   },
   sortOfHot(state) {
-    console.log(state.cookbook_list);
     state.cookbook_filter = state.cookbook_list;
     state.cookbook_filter.sort(function (a, b) {
       return (b.likes + b.collects) - (a.likes + a.collects);

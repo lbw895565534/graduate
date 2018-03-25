@@ -6,7 +6,7 @@
 
     <div class="titleBox  titleBox2" v-if=" boxNum==2 ">
         <div v-for="(t, index) in arr[num].txt" :class="{selected: option==index}" @click="fn(index)">
-            <router-link :to="{ name: t.kind, params: {name: t.name, kind: t.kind, lastShow: true} }">{{ t.name }}</router-link>
+            <router-link :class="{selected: option==index}" class="title" :to="{ name: t.kind, params: {name: t.name, kind: t.kind, lastShow: true} }">{{ t.name }}</router-link>
         </div>        
     </div>
   </div>
@@ -20,7 +20,7 @@
     props: ['sel'],
     data: function () {
       return {
-        option: 1,
+        option: 0,
         arr: [{
             name: 'main',
             txt: '首页'
@@ -70,7 +70,7 @@
       num(val, oldVal) {
         if (val != oldVal) {
           console.log()
-          this.option = 1;
+          this.option = 0;
         }
       }
     }
@@ -128,6 +128,10 @@
     border-right: 1px solid #fff;
   }
 
+  .title{
+    text-decoration: none;
+    color: #fff;
+  }
   .selected {
     background: #fff;
     color: #E6952D;

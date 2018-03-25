@@ -23,6 +23,9 @@ export default {
     back: function () {
       this.$router.push('/');
     }
+  },
+  mounted() {
+    console.log(this.$route);
   }
 };
 </script>

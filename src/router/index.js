@@ -44,9 +44,9 @@ export default new Router({
     component: ShareNew
   },
   {
-    path: '/share/shareHot',
+    path: '/share/:kind',
     name: 'shareHot',
-    component: ShareHot
+    component: ShareHot,
   },
   {
     path: '/share/shareMine',

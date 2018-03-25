@@ -51,6 +51,8 @@ export default {
     ...mapActions(["getCake"]),
     ...mapActions(["sortOfLikes"]),
     ...mapActions(["sortOfCollects"]),
+    ...mapActions(["sortOfDate"]),
+    ...mapActions(["sortOfHot"]),
     toDetail(c) {
       var data = c;
       console.log(data);
@@ -58,7 +60,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.name);
     switch (this.kind) {
       case "homecook": {
         this.getHomecook();
@@ -82,6 +83,19 @@ export default {
       }
       case "collect": {
         this.sortOfCollects();
+        break;
+      }
+      case "shareNew": {
+        this.sortOfDate();
+        console.log("new");
+        break;
+      }
+      case "shareHot": {
+        this.sortOfHot();
+        break;
+      }
+      case "shareMine": {
+        this.sortOfHot();
         break;
       }
     }

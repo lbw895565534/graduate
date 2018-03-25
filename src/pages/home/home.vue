@@ -43,19 +43,20 @@
         selected: 'main'
       }
     },
-    computed: {
-      // ...mapGetters(["cookbooklist"])
-    },
     mounted() {
       this.getCookbook();
     },
     methods: {
       //获取全部美食
       ...mapActions(["getCookbook"]),
+      ...mapActions(["sortOfDate"]),
       //  获取选中的Item的mark值，并且实现Item路由跳转
       getItem: function (i) {
         this.selected = i;
         this.$router.push('/' + i);
+        if( i == "share/shareNew" ){
+          this.sortOfDate();
+        }
       }
     }
   }
