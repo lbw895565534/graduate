@@ -9,8 +9,8 @@
   </div>
 </template>
 <script>
-  import Publish from '../../components/publish/publish'
-  import Cookbook from '../../components/list/cookbook'
+  import Publish from '@/components/share/publish'
+  import Cookbook from '@/components/sort/sort-cookbook/cookbook'
   export default {
     components: {
       Publish,

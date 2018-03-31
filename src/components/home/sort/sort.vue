@@ -2,25 +2,25 @@
   <div>
     <router-link :to="{ name:'sort', params: {name: txt[0].name, kind: txt[0].kind , lastShow: true} }" class="keep">
       <div class="sort_box">
-        <img class="sort_icon" src="../../assets/images/picture/rice.png" alt="">
+        <img class="sort_icon" src="@/assets/images/picture/rice.png" alt="">
         <span class="sort_name">{{ txt[0].name }}</span>
       </div>
     </router-link>
     <router-link :to="{ name:'sort', params: {name: txt[1].name, kind: txt[1].kind , lastShow: true} }" class="keep">
-      <div class="sort_box" @click="getItem(txt[1])">
-        <img class="sort_icon" src="../../assets/images/picture/drink.png" alt="">
+      <div class="sort_box">
+        <img class="sort_icon" src="@/assets/images/picture/drink.png" alt="">
         <span class="sort_name">{{ txt[1].name }}</span>
       </div>
     </router-link>
     <router-link :to="{ name:'sort', params: {name: txt[2].name, kind: txt[2].kind , lastShow: true} }" class="keep">
-      <div class="sort_box" @click="getItem(txt[2])">
-        <img class="sort_icon" src="../../assets/images/picture/pizza.png" alt="">
+      <div class="sort_box">
+        <img class="sort_icon" src="@/assets/images/picture/pizza.png" alt="">
         <span class="sort_name">{{ txt[2].name }}</span>
       </div>
     </router-link>
     <router-link :to="{ name:'sort', params: {name: txt[3].name, kind: txt[3].kind , lastShow: true} }" class="keep">
-      <div class="sort_box" @click="getItem(txt[3])">
-        <img class="sort_icon" src="../../assets/images/picture/cake.png" alt="">
+      <div class="sort_box">
+        <img class="sort_icon" src="@/assets/images/picture/cake.png" alt="">
         <span class="sort_name">{{ txt[3].name }}</span>
       </div>
     </router-link>
@@ -31,9 +31,9 @@ export default {
   data: function() {
     return {
       txt: [
-      {name: "常菜", kind: "homecook"}, 
-      {name: "饮料", kind: "drink"}, 
-      {name: "比萨", kind: "pizza"}, 
+      {name: "常菜", kind: "homecook"},
+      {name: "饮料", kind: "drink"},
+      {name: "比萨", kind: "pizza"},
       {name: "蛋糕", kind: "cake"}]
     };
   },

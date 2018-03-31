@@ -45,6 +45,7 @@
     mapGetters,
     mapActions
   } from "vuex";
+  import { Lazyload } from 'mint-ui';
   export default {
     data() {
       return {

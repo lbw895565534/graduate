@@ -5,11 +5,15 @@ import App from './App'
 import router from './router'
 import axios from 'axios'
 import store from './store'
+import MintUI from 'mint-ui'
+import '@/assets/style/font/iconfont.css';
+import 'mint-ui/lib/style.css'
 
 require("@/mock/mock.js")
 
 Vue.prototype.$http = axios
 Vue.config.productionTip = false
+Vue.use(MintUI)
 
 /* eslint-disable no-new */
 new Vue({

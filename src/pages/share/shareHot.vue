@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-  import Cookbook from '../../components/list/cookbook'
+  import Cookbook from '@/components/sort/sort-cookbook/cookbook'
   export default {
     components: {
       Cookbook

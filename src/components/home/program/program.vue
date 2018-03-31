@@ -1,7 +1,7 @@
 <template>
     <div class="program_box" >
       <div class="program_container" >
-        <img class="program_pic" src="../../assets/images/picture/1.jpg" alt="">
+        <img class="program_pic" src="@/assets/images/picture/1.jpg" alt="">
         <div class="program_detail">
           <span>本周</span><br>
           <span>{{ txt }}</span>

@@ -18,11 +18,11 @@
         <div class="item list_item_op">
           <div class="item_op">
             <div class="op_like">
-              <img src="../../assets/share/like.svg" width="16px">
+              <img src="@/assets/share/like.svg" width="16px">
               <span>{{ cookbook.likes }}</span>
             </div>
             <div class="op_collect">
-              <img src="../../assets/share/collect.svg" width="16px">
+              <img src="@/assets/share/collect.svg" width="16px">
               <span>{{ cookbook.collects }}</span>
             </div>
           </div>
@@ -56,7 +56,7 @@ export default {
     toDetail(c) {
       var data = c;
       console.log(data);
-      this.$router.push({path:'/main/sort/detail',query:{param:c}});
+      this.$router.push({name:'detail',query:{param:c}});
     }
   },
   mounted() {
@@ -106,6 +106,7 @@ export default {
 
 .list_box {
   position: relative;
+  top: 0;
   overflow-y: hidden;
 }
 

@@ -5,9 +5,17 @@
     </div>
 
     <div class="titleBox  titleBox2" v-if=" boxNum==2 ">
-        <div v-for="(t, index) in arr[num].txt" :class="{selected: option==index}" @click="fn(index)">
-            <router-link :class="{selected: option==index}" class="title" :to="{ name: t.kind, params: {name: t.name, kind: t.kind, lastShow: true} }">{{ t.name }}</router-link>
-        </div>        
+        <div :class="{selected: option==0}" @click="fn(0)">
+            <router-link :class="{selected: option==0}" class="title" :to="{ name: arr[1].txt[0].kind, params: {name: arr[1].txt[0].name, kind: arr[1].txt[0].kind, lastShow: true} }">{{ arr[1].txt[0].name }}</router-link>
+        </div>
+        <div :class="{selected: option==1}" @click="fn(1)">
+            <router-link :class="{selected: option==1}" class="title" :to="{ name: arr[1].txt[0].kind, params: {name: arr[1].txt[0].name, kind: arr[1].txt[0].kind, lastShow: true} }">{{ arr[1].txt[0].name }}</router-link>
+        </div>
+        <div :class="{selected: option==2}" @click="fn(2)">
+            <router-link :class="{selected: option==2}" class="title" :to="{ name: arr[1].txt[0].kind, params: {name: arr[1].txt[0].name, kind: arr[1].txt[0].kind, lastShow: true} }">{{ arr[1].txt[0].name }}</router-link>
+        </div>
+
+
     </div>
   </div>
 </template>
@@ -22,7 +30,7 @@
       return {
         option: 0,
         arr: [{
-            name: 'main',
+            name: 'home',
             txt: '首页'
           },
           {

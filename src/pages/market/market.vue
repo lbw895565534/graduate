@@ -1,13 +1,13 @@
 <template>
   <div>
-    <Commodity></Commodity>
+    <Stuff></Stuff>
   </div>
 </template>
-<script type="text/ecmascript-6">
-  import Commodity from  '../../components/list/commodity'
+<script>
+  import Stuff from  '@/components/sort/sort-stuff/stuff'
   export default {
     components: {
-      Commodity
+      Stuff
     },
     props: []
   }
