@@ -1,5 +1,5 @@
 <template>
-    <div class="list_box animated fadeInRight">
+    <div class="list_box">
       <div class="list_item" v-for="(shop,index) in shoplist">
         <div class="list_item_picture">
           <img :src="shop.img" alt="">

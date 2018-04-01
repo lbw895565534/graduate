@@ -29,12 +29,13 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login,
-      alias: '/'
+      
     },
     {
       path: '/main',
       name: 'main',
       component: Main,
+      alias: '/',
       children: [{
           path: 'home',
           name: 'home',

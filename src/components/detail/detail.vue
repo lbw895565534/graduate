@@ -1,5 +1,5 @@
 <template>
-  <div class="animated fadeInRight">
+  <div>
     <div class="title">
       <img :src="cookbook.img" alt="">
       <span>{{ cookbook.name }}</span><br>

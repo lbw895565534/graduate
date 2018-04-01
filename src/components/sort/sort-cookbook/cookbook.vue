@@ -1,5 +1,5 @@
 <template>
-  <div class="list_box animated fadeInRight">
+  <div class="list_box">
     <div class="list_item" v-for="cookbook in cookbookfilter" @click="toDetail(cookbook)">
       <div class="left">
         <div class="list_item_picture">
