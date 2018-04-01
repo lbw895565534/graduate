@@ -8,6 +8,8 @@ import store from './store'
 import MintUI from 'mint-ui'
 import '@/assets/style/font/iconfont.css';
 import 'mint-ui/lib/style.css'
+import $ from '@/assets/libs/jquery-3.3.1.min.js'
+import animate from 'animate.css'
 
 require("@/mock/mock.js")
 

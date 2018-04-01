@@ -8,20 +8,20 @@
     </div>
     <div class="tabbarFooter" >
       <Item txt="首页" mark="home" :sel="selected" @change="getItem">
-        <img src="@/assets/img/1.png" alt="" slot="normalImg">
-        <img src="@/assets/img/6.png" alt="" slot="activeImg">
+        <img src="@/assets/icon/home.png" alt="" slot="normalImg">
+        <img src="@/assets/icon/homered.png" alt="" slot="activeImg">
       </Item>
       <Item txt="分享" mark="share/shareNew" :sel="selected" @change="getItem">
-        <img src="@/assets/img/2.png" alt="" slot="normalImg">
-        <img src="@/assets/img/7.png" alt="" slot="activeImg">
+        <img src="@/assets/icon/share.png" alt="" slot="normalImg">
+        <img src="@/assets/icon/sharered.png" alt="" slot="activeImg">
       </Item>
       <Item txt="市集" mark="market" :sel="selected" @change="getItem">
-        <img src="@/assets/img/3.png" alt="" slot="normalImg">
-        <img src="@/assets/img/8.png" alt="" slot="activeImg">
+        <img src="@/assets/icon/market.png" alt="" slot="normalImg">
+        <img src="@/assets/icon/marketred.png" alt="" slot="activeImg">
       </Item>
       <Item txt="我的" mark="mine" :sel="selected" @change="getItem">
-        <img src="@/assets/img/4.png" alt="" slot="normalImg">
-        <img src="@/assets/img/9.png" alt="" slot="activeImg">
+        <img src="@/assets/icon/mine.png" alt="" slot="normalImg">
+        <img src="@/assets/icon/minered.png" alt="" slot="activeImg">
       </Item>
     </div>
   </div>

@@ -1,9 +1,9 @@
 <template>
   <div class="box">
     <div class="search_box">
-      <div class="searcher">  
+      <div class="searcher">
         <input class="input_searcher" v-model="searchVal">
-        <img class="icon_searcher" src="../../assets/img/search_big.svg" width="30px">
+        <img class="icon_searcher" src="@/assets/icon/search.png" width="30px">
       </div>
     </div>
   </div>
@@ -53,7 +53,7 @@
     height: 44px;
     border-bottom: 1px solid #ddd;
   }
-  
+
   .searcher {
     width: 80%;
     height: 30px;

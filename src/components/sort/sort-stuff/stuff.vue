@@ -1,5 +1,5 @@
 <template>
-    <div class="list_box">
+    <div class="list_box animated fadeInRight">
       <div class="list_item" v-for="(shop,index) in shoplist">
         <div class="list_item_picture">
           <img :src="shop.img" alt="">
@@ -19,13 +19,13 @@
         <div class="right">
           <div class="list_item_price">
             <div class="item_price">{{ shop.price }}.00/<small>{{ shop.unit }}</small></div>
-          </div>                    
+          </div>
           <div class="list_item_op">
             <div class="item_op">
-              <img src="@/assets/share/cart.svg" class="item_op_btn" @click="addToCart(shop)"></img>
+              <img src="@/assets/icon/cart.svg" class="item_op_btn" @click="addToCart(shop)"></img>
             </div>
           </div>
-        </div>        
+        </div>
       </div>
     </div>
 </template>

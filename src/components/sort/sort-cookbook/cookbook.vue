@@ -1,5 +1,5 @@
 <template>
-  <div class="list_box">
+  <div class="list_box animated fadeInRight">
     <div class="list_item" v-for="cookbook in cookbookfilter" @click="toDetail(cookbook)">
       <div class="left">
         <div class="list_item_picture">
@@ -18,11 +18,11 @@
         <div class="item list_item_op">
           <div class="item_op">
             <div class="op_like">
-              <img src="@/assets/share/like.svg" width="16px">
+              <img src="@/assets/icon/like.svg" width="16px">
               <span>{{ cookbook.likes }}</span>
             </div>
             <div class="op_collect">
-              <img src="@/assets/share/collect.svg" width="16px">
+              <img src="@/assets/icon/collect.svg" width="16px">
               <span>{{ cookbook.collects }}</span>
             </div>
           </div>

@@ -25,7 +25,7 @@
               <div class="reduce" @click="reduceNum(shop)">-</div>
             </div>
              <div class="del">
-            <img src="@/assets/share/del.svg" class="btn_del" @click='delProduct(shop)'>
+            <img src="@/assets/icon/del.svg" class="btn_del" @click='delProduct(shop)'>
           </div>
         </div>
       </div>
@@ -93,7 +93,7 @@ input[type="checkbox"] {
   padding-top: 9px;
 }
 .list_item_info {
-  height: 35%;  
+  height: 35%;
   font-size: 12px;
   color: #888;
   overflow: hidden;

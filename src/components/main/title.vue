@@ -9,10 +9,10 @@
             <router-link :class="{selected: option==0}" class="title" :to="{ name: arr[1].txt[0].kind, params: {name: arr[1].txt[0].name, kind: arr[1].txt[0].kind, lastShow: true} }">{{ arr[1].txt[0].name }}</router-link>
         </div>
         <div :class="{selected: option==1}" @click="fn(1)">
-            <router-link :class="{selected: option==1}" class="title" :to="{ name: arr[1].txt[0].kind, params: {name: arr[1].txt[0].name, kind: arr[1].txt[0].kind, lastShow: true} }">{{ arr[1].txt[0].name }}</router-link>
+            <router-link :class="{selected: option==1}" class="title" :to="{ name: arr[1].txt[1].kind, params: {name: arr[1].txt[1].name, kind: arr[1].txt[1].kind, lastShow: true} }">{{ arr[1].txt[1].name }}</router-link>
         </div>
         <div :class="{selected: option==2}" @click="fn(2)">
-            <router-link :class="{selected: option==2}" class="title" :to="{ name: arr[1].txt[0].kind, params: {name: arr[1].txt[0].name, kind: arr[1].txt[0].kind, lastShow: true} }">{{ arr[1].txt[0].name }}</router-link>
+            <router-link :class="{selected: option==2}" class="title" :to="{ name: arr[1].txt[2].kind, params: {name: arr[1].txt[2].name, kind: arr[1].txt[2].kind, lastShow: true} }">{{ arr[1].txt[2].name }}</router-link>
         </div>
 
 

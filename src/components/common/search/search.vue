@@ -2,7 +2,7 @@
   <div id="box" @click="toSearch()">
     <div class="search_box">
       <div class="search_detail">
-        <img class="search_icon" src="@/assets/img/ic_search_gray.png" alt="">
+        <img class="search_icon" src="@/assets/icon/search.png" alt="">
         <span class="search_text">搜索</span>
       </div>
     </div>
