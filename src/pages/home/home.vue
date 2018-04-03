@@ -7,20 +7,18 @@
     <div class="box_program">
       <Program></Program>
     </div>
-    <div class="box_banner">
-      <div class="banner">
+    <div class="box_banner">      
         <Banner swiperid="go">
           <div slot='swiper-con' class='swiper-slide'>
-            <img src='@/assets/images/banner/01.jpg' />
+            <img src='static/images/banner/01.jpg' />
           </div>
           <div slot='swiper-con' class='swiper-slide'>
-            <img src='@/assets/images/banner/02.jpg' />
+            <img src='static/images/banner/02.jpg' />
           </div>
           <div slot='swiper-con' class='swiper-slide'>
-            <img src='@/assets/images/banner/03.jpg' />
+            <img src='static/images/banner/03.jpg' />
           </div>
         </Banner>
-      </div>
     </div>
   </div>
 </template>
@@ -60,6 +58,7 @@
   .box_banner {
     width: 100%;
     height: 160px;
+    padding-top: 20px;
   }
 
 </style>

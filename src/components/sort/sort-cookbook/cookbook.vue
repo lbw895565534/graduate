@@ -104,20 +104,11 @@ export default {
 </script>
 <style scoped>
 
-.list_box {
-  position: relative;
-  top: 0;
-  overflow-y: hidden;
-}
-
-.list_item {
-  border-bottom: 1px solid #555;
-  display: flex;
-}
-
 .list_item {
   width: 100%;
   height: 100px;
+  border-bottom: 1px solid #555;
+  display: flex;
 }
 .left {
   flex: 2;

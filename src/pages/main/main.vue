@@ -6,24 +6,27 @@
     <div class="content">
       <router-view></router-view>
     </div>
-    <div class="tabbarFooter" >
-      <Item txt="首页" mark="home" :sel="selected" @change="getItem">
-        <img src="@/assets/icon/home.png" alt="" slot="normalImg">
-        <img src="@/assets/icon/homered.png" alt="" slot="activeImg">
-      </Item>
-      <Item txt="分享" mark="share/shareNew" :sel="selected" @change="getItem">
-        <img src="@/assets/icon/share.png" alt="" slot="normalImg">
-        <img src="@/assets/icon/sharered.png" alt="" slot="activeImg">
-      </Item>
-      <Item txt="市集" mark="market" :sel="selected" @change="getItem">
-        <img src="@/assets/icon/market.png" alt="" slot="normalImg">
-        <img src="@/assets/icon/marketred.png" alt="" slot="activeImg">
-      </Item>
-      <Item txt="我的" mark="mine" :sel="selected" @change="getItem">
-        <img src="@/assets/icon/mine.png" alt="" slot="normalImg">
-        <img src="@/assets/icon/minered.png" alt="" slot="activeImg">
-      </Item>
+    <div class="footer">
+        <div class="tabbarFooter" >
+            <Item txt="首页" mark="home" :sel="selected" @change="getItem">
+              <img src="@/assets/icon/home.png" alt="" slot="normalImg">
+              <img src="@/assets/icon/homered.png" alt="" slot="activeImg">
+            </Item>
+            <Item txt="分享" mark="share" :sel="selected" @change="getItem">
+              <img src="@/assets/icon/share.png" alt="" slot="normalImg">
+              <img src="@/assets/icon/sharered.png" alt="" slot="activeImg">
+            </Item>
+            <Item txt="市集" mark="market" :sel="selected" @change="getItem">
+              <img src="@/assets/icon/market.png" alt="" slot="normalImg">
+              <img src="@/assets/icon/marketred.png" alt="" slot="activeImg">
+            </Item>
+            <Item txt="我的" mark="mine" :sel="selected" @change="getItem">
+              <img src="@/assets/icon/mine.png" alt="" slot="normalImg">
+              <img src="@/assets/icon/minered.png" alt="" slot="activeImg">
+            </Item>
+          </div>
     </div>
+    
   </div>
 </template>
 
@@ -64,9 +67,10 @@
 </script>
 
 <style scoped>
-  .body {width: 100%; height: 100%;}
+  .body {width: 100%; height: 100%;position: relative;}
   .tabbarHeader {z-index: 5;width: 100%;height: 44px;position: fixed;top: 0;left: 0;}
-  .content {width: 100%;height: 100%;z-index: 4;position: relative;top: 45px;margin-bottom:64px;}
+  .content {width: 100%;z-index: 4;position: relative;top: 45px;margin-bottom: 64px; bottom: 64px;}
+  .footer {width: 100%;height: 64px;position: relative;bottom: 0;}
   .tabbarFooter {z-index: 5;width: 100%; height: 64px; position: fixed;bottom: 0px;
     border-top: 1px solid #ccc; text-align: center;background: #fff;}
 </style>

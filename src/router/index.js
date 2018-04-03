@@ -4,20 +4,17 @@ import Router from 'vue-router'
 
 //一级页面
 import Login from '@/pages/login/login'
-
 import Main from '@/pages/main/main'
 import Home from '@/pages/home/home'
 import Market from '@/pages/market/market'
 import Mine from '@/pages/mine/mine'
-import ShareNew from '@/pages/share/shareNew'
+import Share from '@/pages/share/share'
 //二级页面
 import Next from '@/pages/next/next'
 import Sort from '@/pages/sort/sort'
 import Detail from '@/pages/detail/detail'
 import Cart from '@/pages/market/cart'
 import Search from '@/pages/search/search'
-import ShareHot from '@/pages/share/shareHot'
-import ShareMine from '@/pages/share/shareMine'
 import ShareInput from '@/pages/share/shareInput'
 
 
@@ -29,7 +26,6 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login,
-      
     },
     {
       path: '/main',
@@ -43,19 +39,8 @@ export default new Router({
         },
         {
           path: 'share',
-          name: 'shareNew',
-          component: ShareNew,
-          alias: 'share/shareNew'
-        },
-        {
-          path: 'share/:kind',
-          name: 'shareHot',
-          component: ShareHot,
-        },
-        {
-          path: 'share/shareMine',
-          name: 'shareMine',
-          component: ShareMine
+          name: 'share',
+          component: Share,
         },
         {
           path: 'share/ShareInput',
@@ -74,7 +59,7 @@ export default new Router({
         }
       ]
     },
-    {
+    {    
       path: '/next',
       name: 'next',
       component: Next,
@@ -93,8 +78,13 @@ export default new Router({
           path: 'detail',
           name: 'detail',
           component: Detail
+        },
+        {
+          path: 'search',
+          name: 'search',
+          component: Search
         }
       ]
-    }
+    }    
   ]
 })

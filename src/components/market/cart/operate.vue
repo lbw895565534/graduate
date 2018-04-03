@@ -37,9 +37,10 @@ export default {
 <style scoped>
 .box_operate {
   width: 100%;
-  height: 50px;
+  height: 64px;
   position: fixed;
-  bottom: 65px;
+  bottom: 0;
+  background: #fffffd;
 }
 .item-wrapper {
   display: flex;

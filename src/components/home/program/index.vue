@@ -20,12 +20,12 @@
         txt: [{
             name: "最受喜欢",
             kind: "like",
-            src: "static/images/picture/1.jpg"
+            src: "static/images/picture/left.jpg"
           },
           {
             name: "最多收藏",
             kind: "collect",
-            src: "static/images/picture/1.jpg"
+            src: "static/images/picture/right.jpg"
           }
         ],
 

@@ -13,7 +13,7 @@
     props: ['txt'],
     methods: {
       toSearch() {
-        this.$router.push('/search/search');
+        this.$router.push({name:'search'});
       }
     }
   }
@@ -22,9 +22,9 @@
   #box {
     width: 100%;
     height: 44px;
-    position: relative;
     border-bottom: 1px solid #DADADA;
-    text-align: center;
+    position: relative;
+    top: 0;
   }
 
   .search_box {
@@ -32,10 +32,10 @@
     height: 30px;
     background: #DADADA;
     border-radius: 3px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin: auto;    
+    position: relative;
+    top: 7px;
+    text-align: center;
   }
 
   .search_icon {

@@ -1,11 +1,7 @@
 <template>
   <div class="box">
-    <div class="search_box">
-      <div class="searcher">
-        <input class="input_searcher" v-model="searchVal">
-        <img class="icon_searcher" src="@/assets/icon/search.png" width="30px">
-      </div>
-    </div>
+    <mt-search v-model="value" cancel-text="取消" placeholder="搜索">
+    </mt-search>
   </div>
 </template>
 <script>
@@ -13,6 +9,9 @@
     mapGetters,
     mapActions
   } from "vuex";
+  import {
+    Search
+  } from 'mint-ui';
   export default {
     data() {
       return {
@@ -46,38 +45,8 @@
   .box {
     width: 100%;
     height: 100%;
-  }
+    border-bottom: 1px solid #ddd;   
+  }  
+  
 
-  .search_box {
-    width: 100%;
-    height: 44px;
-    border-bottom: 1px solid #ddd;
-  }
-
-  .searcher {
-    width: 80%;
-    height: 30px;
-    position: relative;
-    top: 7px;
-    border: 1px solid #aaa;
-    border-radius: 3px;
-    margin: auto;
-  }
-
-  .input_searcher {
-    width: 90%;
-    height: 28px;
-    position: relative;
-    padding-left: 30px;
-    vertical-align: middle;
-    border: none;
-
-  }
-
-  .icon_searcher {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    vertical-align:middle
-  }
 </style>
