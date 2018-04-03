@@ -116,10 +116,6 @@ export default {
   color: #555;
   font-size: 14px;
 }
-.item_select—_btn {
-  height: 25px;
-  margin: 10px 0 0 10px;
-}
 .right {
   flex: 2;
 }
@@ -147,7 +143,7 @@ small {
 }
 .item_op_btn {
   width: 35px;
-  margin-top: 13px;
+  margin-top: 5px;
 }
 </style>
 

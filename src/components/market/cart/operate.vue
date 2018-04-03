@@ -8,7 +8,7 @@
                 合计：￥{{ totalPrice }}
             </div>
             <div class="item_pay">
-              <button class="btn_pay">结算({{ totalNum }})</button>
+              <button class="btn_pay" @click="indicator()">结算({{ totalNum }})</button>
             </div>
         </div>
     </div>
@@ -16,17 +16,37 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-
+import { Indicator } from "mint-ui";
+import { MessageBox } from "mint-ui";
+import { Toast } from "mint-ui";
 export default {
   name: "info",
   data() {
-    return {
-
-    };
+    return {};
   },
   methods: {
     ...mapActions(["clearAllCart"]),
-    ...mapActions(["allChecked"])
+    ...mapActions(["allChecked"]),
+    indicator() {
+      Indicator.open();
+      setTimeout(() => {
+        Indicator.close();
+        this.certainer();
+      }, 2000);
+    },
+    certainer() {
+      MessageBox.confirm(
+        "是否确定支付?",
+        "总金额为" + this.totalPrice + "元"
+      ).then(action => {
+        if (action == "confirm") {
+          Toast({
+            message: "操作成功",
+            iconClass: "mintui mintui-success"
+          });
+        }
+      });
+    }
   },
   computed: {
     ...mapGetters(["totalPrice", "totalNum"])

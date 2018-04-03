@@ -7,7 +7,7 @@
     <div class="box_program">
       <Program></Program>
     </div>
-    <div class="box_banner">      
+    <div class="box_banner">
         <Banner swiperid="go">
           <div slot='swiper-con' class='swiper-slide'>
             <img src='static/images/banner/01.jpg' />
@@ -57,7 +57,7 @@
 
   .box_banner {
     width: 100%;
-    height: 160px;
+    height: 240px;
     padding-top: 20px;
   }
 

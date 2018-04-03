@@ -64,7 +64,7 @@
 
 <style>
   @import '../../../assets/libs/swiper/css/swiper.css';
-  .banner {width: 96%; height: 128px; overflow: hidden; margin: 0 auto; }
+  .banner {width: 96%; height: 256px; overflow: hidden; margin: 0 auto; }
   .banner .swiper-container .swiper-slide img {width: 100%; height: 100%;}
   .swiper-pagination-bullet-active {background: white;}
 

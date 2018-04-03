@@ -1,5 +1,5 @@
 <template>
-  <div class="box-header">
+  <div class="box">
     <mt-header fixed :title="title">
       <mt-button icon="back" slot="left" @click="back()"></mt-button>
     </mt-header>
@@ -20,7 +20,7 @@
 
 </script>
 <style scoped>
-  .box-header {
+  .box {
     height: 45px;
     width: 100%;
     z-index: 5;

@@ -331,14 +331,18 @@ const mutations = {
   },
   reduceNum(state, product) {
     state.added.forEach((n, i) => {
-      if (state.added[i].num > 1) {
-        state.added[i].num--;
+      if (n.id == product.id) {
+        if (state.added[i].num > 1) {
+          state.added[i].num--;
+        }
       }
     })
   },
   shopChecked(state, product) {
     state.added.forEach((n, i) => {
+      if (n.id == product.id) {
       state.added[i].checked = !state.added[i].checked;
+      }
     })
   },
   allChecked(state) {
