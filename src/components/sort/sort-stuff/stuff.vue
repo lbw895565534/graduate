@@ -2,7 +2,7 @@
     <div class="list_box">
       <div class="list_item" v-for="(shop,index) in shoplist">
         <div class="list_item_picture">
-          <img :src="shop.img" alt="">
+          <img v-bind:src="shop.img">
         </div>
         <div class="center">
           <div class="item list_item_name">
@@ -36,10 +36,12 @@ export default {
   data() {
     name: "product";
     return {
-      commoditys: []
+      stuff: []
     };
   },
   mounted() {
+    this.stuff = this.shoplist;
+    console.log(this.stuff);
     // this.$http.get("/commodity").then(
     //   res => {
     //     this.commoditys = res.data.data;

@@ -44,6 +44,7 @@
       }
     },
     mounted() {
+      console.log(this.selected);
       this.getCookbook();
     },
     methods: {
