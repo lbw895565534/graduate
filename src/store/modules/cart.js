@@ -43,7 +43,7 @@ const state = {
       site: "广东江门",
     }
   ],
-
+  stuff_list: [],
   //添加到购物车的商品（已选商品）
   added: [],
 }
@@ -55,6 +55,8 @@ const getters = {
   cookbookfilter: state => state.cookbook_filter,
   //商品列表
   shoplist: state => state.shop_list,
+  //菜谱所需食材
+  stufflist: state => state.stuff_list,
   //购物车的列表
   cartProducts: state => {
     return state.added.map(({
@@ -118,6 +120,13 @@ const actions = {
     commit
   }) {
     commit('getCake')
+  },
+  getStuff({
+    commit
+  }, stuff) {
+    commit('getStuff', {
+      id: stuff
+    })
   },
   //按照点赞数、收藏数排序
   sortOfLikes({
@@ -247,6 +256,16 @@ const mutations = {
         state.cookbook_filter.push(n);
       }
     })
+  },
+  getStuff(state, {cookbook}) {
+    state.stuff_list = [];
+    for ( i in cookbook) {
+      for ( n in state.shop_list) {
+        if ( i.stuff.id == n.id){
+          state.stuff_list.push(n);
+        }
+      }
+    }
   },
   //排序
   sortOfLikes(state) {

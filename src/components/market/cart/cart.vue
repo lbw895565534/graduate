@@ -21,7 +21,9 @@
         <div class="right">
           <div class="item_total">
               <div class="add" @click="addNum(shop)">+</div>
-              <div class="total">{{ shop.num }}</div>
+              <div class="total">
+                <span class="total_num">{{ shop.num }}</span>
+              </div>
               <div class="reduce" @click="reduceNum(shop)">-</div>
             </div>
              <div class="del">
@@ -35,9 +37,7 @@
 import { mapGetters, mapActions } from "vuex";
 export default {
   props: ["cart"],
-  mounted() {
-
-  },
+  mounted() {},
   computed: {
     ...mapGetters(["cartProducts"])
   },
@@ -129,6 +129,7 @@ input[type="checkbox"] {
   top: 15px;
   text-align: center;
   margin: auto;
+  display: flex;
 }
 .add {
   flex: 3;
@@ -136,7 +137,6 @@ input[type="checkbox"] {
   height: 30px;
   display: inline-block;
   font-size: 20px;
-  text-align: center;
 }
 .reduce {
   flex: 3;
@@ -144,18 +144,19 @@ input[type="checkbox"] {
   height: 30px;
   display: inline-block;
   font-size: 20px;
-  text-align: center;
 }
 .total {
   flex: 5;
-  display: inline-block;
   width: 50px;
-  height: 25px;
+  height: 28px;
   font-size: 18px;
-  position: relative;
-  top: 2px;
-  text-align: center;
   border: 1px solid #999;
+  display:table-cell;
+  vertical-align:middle;
+}
+.total_num {
+  display: block;
+  line-height: 28px;
 }
 </style>
 

@@ -22,7 +22,10 @@ import ShareInput from '@/pages/share/shareInput'
 Vue.use(Router)
 
 export default new Router({
-  routes: [{
+  routes: [
+    //重定向到main/home
+    {path: '/', redirect: 'main/home'},
+    {
       path: '/login',
       name: 'login',
       component: Login,
@@ -31,7 +34,6 @@ export default new Router({
       path: '/main',
       name: 'main',
       component: Main,
-      alias: '/',
       children: [{
           path: 'home',
           name: 'home',
@@ -59,7 +61,7 @@ export default new Router({
         }
       ]
     },
-    {    
+    {
       path: '/next',
       name: 'next',
       component: Next,
@@ -85,6 +87,6 @@ export default new Router({
           component: Search
         }
       ]
-    }    
+    }
   ]
 })

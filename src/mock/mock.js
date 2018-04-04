@@ -16,11 +16,9 @@ const state = {
       date: Mock.Random.date('yyyy-MM-dd'),
       shoplist: [{
         id: 11,
-        name: "香葱",
         num: "1"
       }, {
         id: 13,
-        name: "食盐",
         num: "半勺"
       }]
     },

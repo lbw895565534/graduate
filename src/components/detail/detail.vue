@@ -24,10 +24,10 @@
       <table>
         <tr>
           <th>原料</th>
-          <th class="addAll" @click="openConfirm()">全部加入</th>
+          <th class="addAll" @click="allAdd()">全部加入</th>
         </tr>
         <tr v-for="shop in cookbook.shoplist">
-          <td @click="addToCart(shop)">{{ shop.name }}</td>
+          <td @click="addOne(shop)">{{ shop.name }}</td>
           <td>{{ shop.num }}</td>
         </tr>
       </table>
@@ -42,41 +42,53 @@
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
-import { MessageBox } from "mint-ui";
 import { Indicator } from "mint-ui";
+import { MessageBox } from "mint-ui";
+import { Toast } from "mint-ui";
 export default {
   data() {
     return {
-      cookbook: ""
+      cookbook: "",
+      stuffId: []
     };
   },
+  computed: {
+    ...mapGetters(["stufflist"])
+  },
   methods: {
+    ...mapActions(["getStuff"]),
     ...mapActions(["addLike"]),
     ...mapActions(["addCollect"]),
     ...mapActions(["addToCart"]),
-    openConfirm() {
-      MessageBox.confirm("确定执行此操作?", "提示").then(action => {
+    allAdd() {
+      MessageBox.confirm("是否将食材全部加入购物车?", "提示").then(action => {
         if (action == "confirm") {
-          this.openIndicator();
+          Indicator.open();
+          setTimeout(() => Indicator.close(), 2000);
+          setTimeout(() => {
+            MessageBox.confirm("是否进入购物车?", "操作成功").then(action => {
+              if (action == "confirm") {
+                this.$router.push({ name: "cart" });
+              }
+            });
+          }, 2000);
         }
       });
     },
-    openIndicator() {
-      Indicator.open();
-      setTimeout(() => Indicator.close(), 2000);
-      setTimeout(() => this.reConfirm(), 2000);
-    },
-    reConfirm() {
-      MessageBox.confirm("是否进入购物车?", "操作成功").then(action => {
-        if (action == "confirm") {
-          this.$router.push({name: 'cart'});
-        }
+    addOne(shop) {
+      this.addToCart(shop);
+      Toast({
+        message: "加入购物车成功",
+        iconClass: "mintui mintui-success"
       });
     }
   },
   mounted() {
     this.cookbook = this.$route.query.param;
+    this.stuffId = this.cookbook.shoplist;
     console.log(this.cookbook);
+    console.log(this.stuffId);
+    this.getStuff(this.stuffId);
   }
 };
 </script>

@@ -26,7 +26,7 @@
             </Item>
           </div>
     </div>
-    
+
   </div>
 </template>
 
@@ -68,7 +68,7 @@
 
 <style scoped>
   .body {width: 100%; height: 100%;position: relative;}
-  .tabbarHeader {z-index: 5;width: 100%;height: 44px;position: fixed;top: 0;left: 0;}
+  .tabbarHeader {z-index: 5;width: 100%;height: 44px;}
   .content {width: 100%;z-index: 4;position: relative;top: 45px;margin-bottom: 64px; bottom: 64px;}
   .footer {width: 100%;height: 64px;position: relative;bottom: 0;}
   .tabbarFooter {z-index: 5;width: 100%; height: 64px; position: fixed;bottom: 0px;
