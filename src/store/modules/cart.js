@@ -303,7 +303,6 @@ const mutations = {
         state.cookbook_list[i].likes++;
       }
     })
-    console.log(state.cookbook_list[i].likes);
   },
   addCollect(state, {
     id

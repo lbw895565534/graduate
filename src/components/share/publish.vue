@@ -1,6 +1,6 @@
 <template>
   <div class="box" @click="toInput()">
-    <img src="@/assets/icon/publish.svg" width="36px">
+    <img src="@/assets/img/icon/publish.svg" width="36px">
   </div>
 </template>
 <script>

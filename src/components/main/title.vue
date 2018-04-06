@@ -59,6 +59,7 @@ export default {
   height: 45px;
   font-size: 20px;
   background: #e6952d;
+  z-index: 5;
 }
 
 </style>

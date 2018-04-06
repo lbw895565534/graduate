@@ -7,15 +7,10 @@
     </mt-navbar>
 
     <mt-tab-container v-model="active">
-      <mt-tab-container-item id="1">
-        <Cookbook></Cookbook>
+      <mt-tab-container-item :key="k" id="1" v-for="k in kind">
+        <Cookbook :kind="k"></Cookbook>
       </mt-tab-container-item>
-      <mt-tab-container-item id="2">
 
-      </mt-tab-container-item>
-      <mt-tab-container-item id="3">
-
-      </mt-tab-container-item>
     </mt-tab-container>
   </div>
 </template>
@@ -44,6 +39,18 @@ export default {
   height: 100%;
   position: relative;
   bottom: 64px;
+}
+.mint-navbar {
+  height: 45px;
+}
+.mint-tab-item-label {
+    color: inherit;
+    font-size: 14px;
+    line-height: 1;
+}
+.mint-navbar .mint-tab-item.is-selected {
+    border-bottom: 3px solid #e5173a;
+    color: #e5173aff;
 }
 .mint-navbar.is-fixed {
   margin-top: 45px;

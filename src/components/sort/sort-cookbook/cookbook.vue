@@ -18,11 +18,11 @@
         <div class="item list_item_op">
           <div class="item_op">
             <div class="op_like">
-              <img src="@/assets/icon/like.svg" width="16px">
+              <img src="@/assets/img/icon/like.svg" width="16px">
               <span>{{ cookbook.likes }}</span>
             </div>
             <div class="op_collect">
-              <img src="@/assets/icon/collect.svg" width="16px">
+              <img src="@/assets/img/icon/collect.svg" width="16px">
               <span>{{ cookbook.collects }}</span>
             </div>
           </div>

@@ -9,12 +9,12 @@
     <div class="introduce">
       <div class="op">
         <div class="op_like">
-          <img src="@/assets/icon/like.svg" width="16px" @click="addLike(cookbook)">
+          <img src="@/assets/img/icon/like.svg" width="16px" @click="addLike(cookbook)">
           <span>{{ cookbook.likes }}</span>
         </div>
         <div class="blank"></div>
         <div class="op_collect">
-          <img src="@/assets/icon/collect.svg" width="16px" @click="addCollect(cookbook)">
+          <img src="@/assets/img/icon/collect.svg" width="16px" @click="addCollect(cookbook)">
           <span>{{ cookbook.collects }}</span>
         </div>
       </div>

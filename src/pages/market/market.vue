@@ -3,7 +3,7 @@
     <div>
       <Stuff></Stuff>
     </div>
-    <img class="toCart" src="@/assets/icon/tocart.svg" @click="toCart()" >
+    <img class="toCart" src="@/assets/img/icon/tocart.svg" @click="toCart()" >
   </div>
 </template>
 <script>

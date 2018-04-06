@@ -22,7 +22,7 @@
           </div>
           <div class="list_item_op">
             <div class="item_op">
-              <img src="@/assets/icon/cart.svg" class="item_op_btn" @click="addToCart(shop)"></img>
+              <img src="@/assets/img/icon/cart.svg" class="item_op_btn" @click="addToCart(shop)"></img>
             </div>
           </div>
         </div>

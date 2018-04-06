@@ -27,7 +27,7 @@
               <div class="reduce" @click="reduceNum(shop)">-</div>
             </div>
              <div class="del">
-            <img src="@/assets/icon/del.svg" class="btn_del" @click='delProduct(shop)'>
+            <img src="@/assets/img/icon/del.svg" class="btn_del" @click='delProduct(shop)'>
           </div>
         </div>
       </div>

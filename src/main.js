@@ -8,7 +8,7 @@ import store from './store'
 import MintUI from 'mint-ui'
 import { MessageBox } from "mint-ui";
 import { Indicator } from "mint-ui";
-import '@/assets/style/font/iconfont.css';
+import '@/assets/libs/font/iconfont.css';
 import 'mint-ui/lib/style.css'
 import $ from '@/assets/libs/jquery-3.3.1.min.js'
 

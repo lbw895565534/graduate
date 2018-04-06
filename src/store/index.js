@@ -2,13 +2,14 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import cart from './modules/cart'
+import Cart from './modules/cart'
+import Page from './modules/page'
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
-    cart,
+    Cart, Page
   },
   strict: process.env.NODE_ENV !== 'production', // 严格模式
 });
