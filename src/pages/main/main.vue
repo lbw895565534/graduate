@@ -47,7 +47,7 @@
       }
     },
     computed: {
-      ...mapGetters(["getPage"])      
+      ...mapGetters(["getPage"])
     },
     watch: {
       getPage() {
@@ -64,7 +64,7 @@
       ...mapActions(["sortOfDate"]),
       ...mapActions(["changePage"]),
       //  获取选中的Item的mark值，并且实现Item路由跳转
-      getItem: function (i) {      
+      getItem: function (i) {
         this.changePage(i);
       }
     }
@@ -74,7 +74,7 @@
 <style scoped>
   .body {width: 100%; height: 100%;position: relative;}
   .tabbarHeader {width: 100%;height: 44px;}
-  .content {width: 100%;z-index: 1;position: relative;top: 0;margin-bottom: 64px; bottom: 64px;}
+  .content {width: 100%;z-index: 1;position: relative;top: 0;}
   .footer {width: 100%;height: 64px;position: relative;bottom: 0;}
   .tabbarFooter {z-index: 5;width: 100%; height: 64px; position: fixed;bottom: 0px;
     border-top: 1px solid #ccc; text-align: center;background: #fff;}

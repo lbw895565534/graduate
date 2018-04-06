@@ -1,6 +1,8 @@
 <template>
-  <div>
-    <Search></Search>
+  <div class="box">
+    <div class="box_search">
+      <Search></Search>
+    </div>
     <div class="box_sort">
       <Sort></Sort>
     </div>
@@ -39,10 +41,15 @@
 
 </script>
 
-<style>
-  * {
-    padding: 0;
-    margin: 0;
+<style scoped>
+
+  .box_search {
+    position: relative;
+    top: 0;
+    width: 100%;
+    height: 45px;
+    background: #fff;
+    z-index: 1;
   }
 
   .box_sort {

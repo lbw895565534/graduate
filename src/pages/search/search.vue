@@ -45,8 +45,9 @@
   .box {
     width: 100%;
     height: 100%;
-    border-bottom: 1px solid #ddd;   
-  }  
-  
+    border-bottom: 1px solid #ddd;
+    position: fixed;
+  }
+
 
 </style>

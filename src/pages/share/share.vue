@@ -1,6 +1,7 @@
 <template>
   <div class="box">
-    <mt-navbar fixed v-model="selected">
+    <div class="box_navbar">
+      <mt-navbar fixed v-model="selected">
       <mt-tab-item id="1">
         <span class="nav">最新</span>
       </mt-tab-item>
@@ -11,7 +12,9 @@
         <span class="nav">我的</span>
       </mt-tab-item>
     </mt-navbar>
-    <mt-tab-container  v-model="selected" swipeable="true">
+    </div>
+
+    <mt-tab-container  v-model="selected" :swipeable="true">
       <mt-tab-container-item :key="kind[0]" id="1">
         <Cookbook :kind="kind[0]"></Cookbook>
       </mt-tab-container-item>
@@ -40,7 +43,6 @@
       return {
         selected: "1",
         kind: ["shareNew", "shareHot", "shareMine"],
-        selected: "",
         active: "",
       };
     },
@@ -48,7 +50,7 @@
       Cookbook
     },
     mounted() {
-      $('.mint-tab-item:first').trigger("click");
+      $(".mint-navbar>a:first").trigger("click");
     }
   };
 
@@ -58,17 +60,23 @@
     width: 100%;
     height: 100%;
     position: relative;
+    top: 0;
     bottom: 64px;
+  }
+
+  .box_navbar {
+    width: 100%;
+    height: 45px;
   }
 
   .mint-navbar {
     height: 45px;
+    border-bottom: 2px solid #E7E9E8;
+    margin-top: 45px;
   }
 
-  .mint-tab-item-label {
-    color: inherit;
-    font-size: 14px;
-    line-height: 1;
+  .nav {
+    /* font-size: 16px; */
   }
 
   .mint-navbar .mint-tab-item.is-selected {
@@ -76,16 +84,8 @@
     color: #e5173aff;
   }
 
-  .mint-navbar.is-fixed {
-    margin-top: 45px;
+  .mint-tab-container {
+    position: relative;
+    top: 0;
   }
-
-  .nav {
-    font-size: 16px;
-  }
-
-  .mint-navbar {
-    border-bottom: 2px solid #E7E9E8;
-  }
-
 </style>

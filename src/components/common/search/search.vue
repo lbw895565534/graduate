@@ -23,8 +23,8 @@
     width: 100%;
     height: 44px;
     border-bottom: 1px solid #DADADA;
-    position: relative;
-    top: 0;
+    position: fixed;
+    background: #fff;
   }
 
   .search_box {
