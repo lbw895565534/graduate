@@ -40,17 +40,7 @@ export default {
     };
   },
   mounted() {
-    this.stuff = this.shoplist;
-    console.log(this.stuff);
-    // this.$http.get("/commodity").then(
-    //   res => {
-    //     this.commoditys = res.data.data;
-    //     console.log(this.commoditys);
-    //   },
-    //   res => {
-    //     console.log("请求无响应");
-    //   }
-    // );
+    this.stuff = this.shoplist;     
   },
   computed: {
     ...mapGetters(['shoplist'])

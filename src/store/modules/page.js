@@ -6,23 +6,24 @@ const state = {
 }
 
 const getters = {
-  item: page => {
-    return page;
-  }
+  getPage: state => state.page,
+  cookbookfilter: state => state.cookbook_filter,
 }
 
 const actions = {
   changePage({
     commit
   }, page) {
-    commit('changePage', page)
+    commit('changePage', {
+      page: page
+    })
   }
 }
 
 const mutations = {
   changePage(state, page) {
     state.page = page;
-    console.log(state.page);
+    console.log(page);
   }
 }
 

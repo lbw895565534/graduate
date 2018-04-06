@@ -55,7 +55,7 @@ export default {
     ...mapActions(["sortOfHot"]),
     toDetail(c) {
       var data = c;
-      console.log(data);
+      // console.log(data);
       this.$router.push({name:'detail',query:{param:c}});
     }
   },
@@ -86,8 +86,7 @@ export default {
         break;
       }
       case "shareNew": {
-        this.sortOfDate();
-        console.log("new");
+        this.sortOfDate();        
         break;
       }
       case "shareHot": {

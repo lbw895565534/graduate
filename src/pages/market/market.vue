@@ -7,7 +7,7 @@
   </div>
 </template>
 <script>
-  import Stuff from "@/components/sort/sort-stuff/stuff";
+  import Stuff from "@/components/market/sort-stuff/stuff";
   export default {
     components: {
       Stuff

@@ -43,7 +43,16 @@
     data: function () {
       return {
         // selected记录选中的Item，高亮显示
-        selected: 'home'
+        selected: "home"
+      }
+    },
+    computed: {
+      ...mapGetters(["getPage"])      
+    },
+    watch: {
+      getPage() {
+        this.selected = this.getPage.page;
+        this.$router.push(this.selected);
       }
     },
     mounted() {
@@ -55,14 +64,7 @@
       ...mapActions(["sortOfDate"]),
       ...mapActions(["changePage"]),
       //  获取选中的Item的mark值，并且实现Item路由跳转
-      getItem: function (i) {
-        this.selected = i;
-        this.$router.push('/main/' + i);
-        console.log(i)
-        if( i == "share" ){
-          this.sortOfDate();
-        }
-
+      getItem: function (i) {      
         this.changePage(i);
       }
     }
