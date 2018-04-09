@@ -48,6 +48,8 @@
     border-bottom: 1px solid #ddd;
     position: fixed;
   }
-
+  .mint-searchbar-cancel {
+    color: #fff;
+  }
 
 </style>

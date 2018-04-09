@@ -1,7 +1,7 @@
 <template>
-  <div id="box" @click="toSearch()">
+  <div id="box">
     <div class="search_box">
-      <div class="search_detail">
+      <div class="search_detail"  @click="toSearch()">
         <img class="search_icon" src="@/assets/img/icon/search.png" alt="">
         <span class="search_text">搜索</span>
       </div>
