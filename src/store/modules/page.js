@@ -1,8 +1,7 @@
 import axios from 'axios'
 
 const state = {
-  page: "home",
-  kind: "new"
+  page: "home"
 }
 
 const getters = {

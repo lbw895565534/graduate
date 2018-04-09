@@ -52,7 +52,7 @@
     watch: {
       getPage() {
         this.selected = this.getPage.page;
-        this.$router.push(this.selected);
+        this.$router.push({name: this.selected});
       }
     },
     mounted() {

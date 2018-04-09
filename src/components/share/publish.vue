@@ -7,7 +7,7 @@
   export default {
     methods: {
       toInput() {
-        this.$router.push('/share/shareInput')
+        this.$router.push({name: 'shareInput'})
       }
     }
   }
@@ -19,7 +19,11 @@
     border-bottom: 1px solid #DADADA;
     text-align: center;
     position: fixed;
+    top: 90px;
     background: #fff;
+  }
+  .box:active {
+    background: #ddd;
   }
   img {
     display: inline-block;

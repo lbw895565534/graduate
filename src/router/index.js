@@ -45,11 +45,6 @@ export default new Router({
           component: Share,
         },
         {
-          path: 'share/ShareInput',
-          name: 'shareInput',
-          component: ShareInput
-        },
-        {
           path: 'market',
           name: 'market',
           component: Market
@@ -85,7 +80,12 @@ export default new Router({
           path: 'search',
           name: 'search',
           component: Search
-        }
+        },
+        {
+          path: 'share/ShareInput',
+          name: 'shareInput',
+          component: ShareInput
+        },
       ]
     }
   ]

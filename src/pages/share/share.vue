@@ -22,6 +22,9 @@
         <Cookbook :kind="kind[1]"></Cookbook>
       </mt-tab-container-item>
       <mt-tab-container-item :key="kind[2]" id="3">
+        <div class="box_publish">
+          <Publish></Publish>
+        </div>
         <Cookbook :kind="kind[2]"></Cookbook>
       </mt-tab-container-item>
 
@@ -30,6 +33,7 @@
 </template>
 <script>
   import Cookbook from "@/components/sort/sort-cookbook/cookbook";
+  import Publish from "@/components/share/publish";
   import {
     Navbar,
     TabItem
@@ -47,7 +51,7 @@
       };
     },
     components: {
-      Cookbook
+      Cookbook, Publish
     },
     mounted() {
       $(".mint-navbar>a:first").trigger("click");
@@ -75,10 +79,6 @@
     margin-top: 45px;
   }
 
-  .nav {
-    /* font-size: 16px; */
-  }
-
   .mint-navbar .mint-tab-item.is-selected {
     border-bottom: 3px solid #e5173a;
     color: #e5173aff;
@@ -87,5 +87,11 @@
   .mint-tab-container {
     position: relative;
     top: 0;
+  }
+
+  .box_publish {
+    width: 100%;
+    height: 45px;
+    position: relative;
   }
 </style>
