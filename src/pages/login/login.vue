@@ -1,6 +1,6 @@
 <template>
   <div class="box" >
-    <img src="@/assets/img/bg_login.jpg" alt="" class="bg">
+    <img src="static/images/background/bg_login.jpg" alt="" class="bg">
     <transition-group enter-active-class="zoomInLeft" leave-active-class="zoomOutRight">
       <Login :key="1" :status="status" ref="login"></Login>
       <Regist :key="2" :status="status"></Regist>

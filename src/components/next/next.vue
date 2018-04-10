@@ -29,7 +29,7 @@
 
   .mint-header {
     height: 45px;
-    background: #E6952D;
+    background: #E9A144;
     font-size: 20px;
   }
 
