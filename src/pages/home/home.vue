@@ -1,5 +1,5 @@
 <template>
-  <div class="box" @click="$router.push({name: 'login'})">
+  <div class="box">
     <div class="box_search">
       <Search></Search>
     </div>
