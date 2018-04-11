@@ -5,19 +5,19 @@
         </div>
         <div class="input input2">
           <div class="column">
-             <input :class={focus:form[0].focus} type="text" name="" id="" @click="focus(0)" @blur="unFocus(0)">
+             <input :class={focus:form[0].focus} type="text" placeholder="用户名" @click="focus(0)" @blur="unFocus(0)">
           </div>
         </div>
         <div class="input input2">
           <div class="column">
-            <input :class={focus:form[1].focus} type="text" name="" id="" @click="focus(1)" @blur="unFocus(1)">
+            <input :class={focus:form[1].focus} type="text" placeholder="密码" @click="focus(1)" @blur="unFocus(1)">
           </div>
 
         </div>
 
         <div class="input input2">
           <div class="column">
-            <input :class={focus:form[2].focus} type="text"  id="" @click="focus(2)" @blur="unFocus(2)">
+            <input :class={focus:form[2].focus} type="text" placeholder="手机号码" @click="focus(2)" @blur="unFocus(2)">
           </div>
         </div>
          <div class="input input2">
@@ -60,9 +60,9 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 .box_regist {
-  width: 90%;
+  width: 85%;
   height: 70%;
   margin: auto;
   position: fixed;
@@ -74,6 +74,7 @@ export default {
   display: flex;
   flex-direction: column;
   background: #fff;
+  border-radius: 5px;
 }
 .input {
   width: 100%;
@@ -117,16 +118,16 @@ input[type="text"] {
   box-shadow: 0px 0px 5px 0 #999;
 }
 .sexbox {
-  width: 50%;
-  height: 36px;
+  width: 40%;
+  height: 32px;
   /* border: 2px solid #F95754; */
-  box-shadow: 0px 0px 5px 1px #F95754;
+  box-shadow: 0px 0px 2px 1px #F95754;
   display: flex;
 }
 .sex {
   flex: 1;
   text-align: center;
-  line-height: 36px;
+  line-height: 32px;
   color: #F95754;
 }
 .sel {

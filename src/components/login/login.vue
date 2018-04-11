@@ -62,7 +62,7 @@
 </script>
 <style scoped>
   .box_login {
-    width: 90%;
+    width: 85%;
     height: 50%;
     margin: auto;
     position: fixed;
@@ -74,6 +74,7 @@
     display: flex;
     flex-direction: column;
     background: #fff;
+    border-radius: 5px;
   }
 
   .input {
@@ -112,11 +113,12 @@
     height: 45px;
     border-radius: 30px;
     background: #fff;
-    border: 1px solid #999;
+    box-shadow: 0 0 2px 0 #999;
   }
 
   .focus {
     border: 2px solid #f8a227;
+    box-shadow: 0 0 5px 0 #f8a227;
   }
 
   .box_icon {
