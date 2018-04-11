@@ -72,10 +72,10 @@
 </script>
 
 <style scoped>
-  .body {width: 100%; height: 100%;position: relative;}
+  .body {width: 100%; height: 100%;position: absolute;}
   .tabbarHeader {width: 100%;height: 44px;}
-  .content {width: 100%;z-index: 1;position: relative;top: 0;}
-  .footer {width: 100%;height: 64px;position: relative;bottom: 0;}
+  .content {width: 100%;height: 100%;z-index: 1;position: absolute;bottom: 64px;}
+  .footer {width: 100%;height: 64px;position: absolute;bottom: 0;}
   .tabbarFooter {z-index: 5;width: 100%; height: 64px; position: fixed;bottom: 0px;
     border-top: 1px solid #ccc; text-align: center;background: #fff;}
 </style>
