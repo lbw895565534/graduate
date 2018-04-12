@@ -20,14 +20,18 @@
     text-align: center;
     position: fixed;
     top: 90px;
+    /* flex布局居中 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: #fff;
   }
   .box:active {
     background: #ddd;
   }
   img {
-    display: inline-block;
     position: relative;
-    top: 4px;
+    width: 32px;
+    height: 32px;
   }
 </style>
