@@ -12,7 +12,6 @@
           <div class="column">
             <input :class={focus:form[1].focus} type="text" placeholder="密码" @click="focus(1)" @blur="unFocus(1)">
           </div>
-
         </div>
 
         <div class="input input2">
@@ -22,9 +21,14 @@
         </div>
          <div class="input input2">
           <div class="column">
+            <input :class={focus:form[3].focus} type="text" placeholder="支付密码" @click="focus(2)" @blur="unFocus(2)">
+          </div>
+        </div>
+         <div class="input input2">
+          <div class="column">
             <div class="sexbox">
-              <div class="sex" :class="{sel:form[3].sel==1}" @click="form[3].sel=1">男</div>
-              <div class="sex" :class="{sel:form[3].sel==2}" @click="form[3].sel=2">女</div>
+              <div class="sex" :class="{sel:form[4].sel==1}" @click="form[4].sel=1">男</div>
+              <div class="sex" :class="{sel:form[4].sel==2}" @click="form[4].sel=2">女</div>
             </div>
           </div>
         </div>
@@ -43,6 +47,7 @@ export default {
   data() {
     return {
       form: [
+        { focus: false },
         { focus: false },
         { focus: false },
         { focus: false },

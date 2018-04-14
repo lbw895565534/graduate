@@ -18,7 +18,7 @@ import Regist from "@/components/login/regist";
 export default {
   data() {
     return {
-      status: "regist"
+      status: "login"
     };
   },
   components: {
