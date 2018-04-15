@@ -7,39 +7,44 @@
       <div class="column_core">
         <div class="core">
           <img class="icon" src="static/images/icon/mine/shareMine.svg" alt="">
-          <span class="record">发布：</span>
+          <span class="record">发布：{{ record.shareMine }}</span>
         </div>
         <div class="core core_middle">
           <img class="icon" src="static/images/icon/mine/collect.svg" alt="">
-          <span class="record">发布：</span>
+          <span class="record">收藏：{{ record.collect }}</span>
         </div>
         <div class="core">
           <img class="icon" src="static/images/icon/mine/cart.svg" alt="">
-          <span class="record">发布：</span>
+          <span class="record">购物：{{ record.cart }}</span>
         </div>
       </div>
     </div>
     <div class="box_cell">
-      <div class="cell">
-
-      </div>
-      <div class="cell">
-
-      </div>
-      <div class="cell">
-
-      </div>
+        <mt-tab-container-item id="tab-container1">
+          <mt-cell v-for="cell in cells" title="cell.name" :key="cell.name"></mt-cell>
+        </mt-tab-container-item>
     </div>
   </div>
 </template>
 <script>
+import { TabContainer, TabContainerItem } from 'mint-ui';
 export default {
   data() {
     return {
       backgroundImage: {
         background:
           "url('static/images/background/bg_mine.jpg') no-repeat fixed top"
-      }
+      },
+      record: {
+        shareMine: 0,
+        collect: 0,
+        cart: 0
+      },
+      cells: [
+        {name: '资料修改', src: ''},
+        {name: '设置', src: ''},
+        {name: '好评鼓励', src: ''},
+      ]
     };
   }
 };
@@ -59,6 +64,7 @@ export default {
 }
 .box_cell {
   width: 100%;
+  height: 100%;
   flex: 1;
 }
 
@@ -74,7 +80,7 @@ export default {
   /* 不设置height: 100%; 子元素将无法获取父元素的高度 */
   height: 100%;
   flex: 2;
-  border-top: 2px solid #ffd40059;
+  border-top: 1px solid #fafafa;
   display: flex;
 }
 
@@ -107,7 +113,7 @@ export default {
 
 .record {
   flex: 2;
-  color: #fff;
+  color: #000;
 }
 
 </style>

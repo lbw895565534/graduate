@@ -1,45 +1,45 @@
 <template>
-  <div class="box_regist box_input2 animated" v-show="status=='regist'" :key="2">
-        <div class="input input1">
-          <span class="title">用户注册</span>
-        </div>
-        <div class="input input2">
-          <div class="column">
-             <input :class={focus:form[0].focus} type="text" placeholder="用户名" @click="focus(0)" @blur="unFocus(0)">
-          </div>
-        </div>
-        <div class="input input2">
-          <div class="column">
-            <input :class={focus:form[1].focus} type="text" placeholder="密码" @click="focus(1)" @blur="unFocus(1)">
-          </div>
-        </div>
+  <div class="box_regist box_input2 animated" :key="2">
+    <div class="input input1">
+      <span class="title">用户注册</span>
+    </div>
+    <div class="input input2">
+      <div class="column">
+          <input :class={focus:form[0].focus} type="text" placeholder="用户名" @click="focus(0)" @blur="unFocus(0)">
+      </div>
+    </div>
+    <div class="input input2">
+      <div class="column">
+        <input :class={focus:form[1].focus} type="text" placeholder="密码" @click="focus(1)" @blur="unFocus(1)">
+      </div>
+    </div>
 
-        <div class="input input2">
-          <div class="column">
-            <input :class={focus:form[2].focus} type="text" placeholder="手机号码" @click="focus(2)" @blur="unFocus(2)">
-          </div>
-        </div>
-         <div class="input input2">
-          <div class="column">
-            <input :class={focus:form[3].focus} type="text" placeholder="支付密码" @click="focus(2)" @blur="unFocus(2)">
-          </div>
-        </div>
-         <div class="input input2">
-          <div class="column">
-            <div class="sexbox">
-              <div class="sex" :class="{sel:form[4].sel==1}" @click="form[4].sel=1">男</div>
-              <div class="sex" :class="{sel:form[4].sel==2}" @click="form[4].sel=2">女</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="input input3">
-          <button class="regist">立即注册</button>
-        </div>
-        <div class="input input4">
-          <span class="jump" @click="toRegist()">已经注册，立即登录</span>
+    <div class="input input2">
+      <div class="column">
+        <input :class={focus:form[2].focus} type="text" placeholder="手机号码" @click="focus(2)" @blur="unFocus(2)">
+      </div>
+    </div>
+      <div class="input input2">
+      <div class="column">
+        <input :class={focus:form[3].focus} type="text" placeholder="支付密码" @click="focus(3)" @blur="unFocus(3)">
+      </div>
+    </div>
+      <div class="input input2">
+      <div class="column">
+        <div class="sexbox">
+          <div class="sex" :class="{sel:form[4].sel==1}" @click="form[4].sel=1">男</div>
+          <div class="sex" :class="{sel:form[4].sel==2}" @click="form[4].sel=2">女</div>
         </div>
       </div>
+    </div>
+
+    <div class="input input3">
+      <button class="regist">立即注册</button>
+    </div>
+    <div class="input input4">
+      <span class="jump" @click="toLogin()">已经注册，立即登录</span>
+    </div>
+  </div>
 </template>
 <script>
 export default {
@@ -61,6 +61,9 @@ export default {
     },
     unFocus(i) {
       this.form[i].focus = false;
+    },
+    toLogin() {
+      this.$emit("turn", "login");
     }
   }
 };
