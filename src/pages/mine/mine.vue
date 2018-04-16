@@ -20,9 +20,7 @@
       </div>
     </div>
     <div class="box_cell">
-        <mt-tab-container-item id="tab-container1">
-          <mt-cell v-for="cell in cells" title="cell.name" :key="cell.name"></mt-cell>
-        </mt-tab-container-item>
+      <div></div>
     </div>
   </div>
 </template>
