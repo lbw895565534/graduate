@@ -58,7 +58,7 @@ export default {
 .mint-header {
   height: 45px;
   font-size: 20px;
-  background: #E9A144;
+  background: #efa341;
   z-index: 5;
 }
 
