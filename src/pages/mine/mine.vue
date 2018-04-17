@@ -2,7 +2,7 @@
   <div class="box">
     <div class="box_headshot" :style="backgroundImage">
       <div class="column_headshot">
-        <img class="headshot" src="static/images/picture/mine.png" alt="" >
+        <img class="headshot" src="static/images/picture/mine.png" alt="" @click="toLogin()">
       </div>
       <div class="column_core">
         <div class="core">
@@ -44,6 +44,11 @@ export default {
         {name: '好评鼓励', src: ''},
       ]
     };
+  },
+  methods: {
+    toLogin() {
+      this.$router.push({name: 'login'});
+    }
   }
 };
 </script>
