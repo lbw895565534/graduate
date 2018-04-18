@@ -58,7 +58,7 @@ export default {
 .list_item {
   width: 100%;
   height: 100px;
-  border-bottom: 1px solid #555;
+  border-bottom: 1px solid #d9d9d9;
   display: flex;
 }
 .list_item_picture {
