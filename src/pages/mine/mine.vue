@@ -2,11 +2,7 @@
   <div class="box">
     <div class="box_headshot" :style="backgroundImage">
       <div class="column_headshot">
-<<<<<<< HEAD
         <img class="headshot" src="static/images/picture/mine.png" alt="" @click="toLogin()">
-=======
-        <img class="headshot" src="static/images/picture/mine.png" alt="">                
->>>>>>> be8a520d1f375ff8d7e97dc3284b709c476e36f5
       </div>
 
       <div class="column_core">
@@ -40,7 +36,6 @@
   </div>
 </template>
 <script>
-<<<<<<< HEAD
 import { TabContainer, TabContainerItem } from 'mint-ui';
 export default {
   data() {
@@ -67,40 +62,6 @@ export default {
     }
   }
 };
-=======
-  import {
-    TabContainer,
-    TabContainerItem
-  } from 'mint-ui';
-  export default {
-    data() {
-      return {
-        backgroundImage: {
-          background: "url('static/images/background/bg_mine.jpg') no-repeat fixed top"
-        },
-        record: {
-          shareMine: 0,
-          collect: 0,
-          cart: 0
-        },
-        cells: [{
-            name: '资料修改',
-            src: 'static/images/icon/mine/alter.svg'
-          },
-          {
-            name: '设置',
-            src: 'static/images/icon/mine/setting.svg'
-          },
-          {
-            name: '好评鼓励',
-            src: 'static/images/icon/mine/encourage.svg'
-          },
-        ],
-      };
-    }
-  };
-
->>>>>>> be8a520d1f375ff8d7e97dc3284b709c476e36f5
 </script>
 <style scoped>
   .box {
