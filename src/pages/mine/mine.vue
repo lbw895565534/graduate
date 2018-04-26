@@ -36,32 +36,43 @@
   </div>
 </template>
 <script>
-import { TabContainer, TabContainerItem } from 'mint-ui';
-export default {
-  data() {
-    return {
-      backgroundImage: {
-        background:
-          "url('static/images/background/bg_mine.jpg') no-repeat fixed top"
-      },
-      record: {
-        shareMine: 0,
-        collect: 0,
-        cart: 0
-      },
-      cells: [
-        {name: '资料修改', src: ''},
-        {name: '设置', src: ''},
-        {name: '好评鼓励', src: ''},
-      ]
-    };
-  },
-  methods: {
+  import {
+    TabContainer,
+    TabContainerItem
+  } from 'mint-ui';
+  export default {
+    data() {
+      return {
+        backgroundImage: {
+          background: "url('static/images/background/bg_mine.jpg') no-repeat fixed top"
+        },
+        record: {
+          shareMine: 0,
+          collect: 0,
+          cart: 0
+        },
+        cells: [{
+            name: '资料修改',
+            src: 'static/images/icon/mine/alter.svg'
+          },
+          {
+            name: '设置',
+            src: 'static/images/icon/mine/setting.svg'
+          },
+          {
+            name: '好评鼓励',
+            src: 'static/images/icon/mine/encourage.svg'
+          },
+        ],
+      };
+    },
+    methods: {
     toLogin() {
       this.$router.push({name: 'login'});
     }
   }
-};
+  };
+
 </script>
 <style scoped>
   .box {

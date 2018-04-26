@@ -292,6 +292,38 @@ const state = {
         num: "半勺"
       }]
     }
+  ],
+  user: [
+    {
+      id: 1,
+      username: "xiaoming",
+      password: "123456",
+      sex: "男",
+      telnumber: "18819492932",
+      cart: [
+
+      ]
+    },
+    {
+      id: 2,
+      username: "liming",
+      password: "1234567",
+      sex: "男",
+      telnumber: "18819492932",
+      cart: [
+        
+      ]
+    },
+    {
+      id: 3,
+      username: "zhongyijun",
+      password: "12345678",
+      sex: "女",
+      telnumber: "18819492932",
+      cart: [
+        
+      ]
+    }
   ]
 }
 /* 获取全部菜谱 */
