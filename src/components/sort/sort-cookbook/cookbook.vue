@@ -42,7 +42,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["cookbookfilter"]),
+    ...mapGetters(["cookbookfilter"])
   },
   methods: {
     ...mapActions(["getHomecook"]),
@@ -86,7 +86,8 @@ export default {
         break;
       }
       case "shareNew": {
-        this.sortOfDate();        
+        this.sortOfDate();
+        console.log(this.kind);
         break;
       }
       case "shareHot": {

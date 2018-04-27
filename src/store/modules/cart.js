@@ -7,41 +7,41 @@ const state = {
   cookbook_filter: [],
   //商品列表
   shop_list: [{
-      id: 11,
-      name: "香葱",
-      img: "static/images/stuff/xiangcong.jpg",
-      price: 15,
-      unit: "斤",
-      info: "",
-      site: "",
-    },
-    {
-      id: 12,
-      name: "白砂糖",
-      img: "static/images/stuff/baishatang.jpg",
-      price: 5,
-      unit: "斤",
-      info: "",
-      site: "广东广州",
-    },
-    {
-      id: 13,
-      name: "食盐",
-      img: "static/images/stuff/shiyan.jpg",
-      price: 20,
-      unit: "包",
-      info: "粤盐自然食用盐250g*10袋天然海盐加碘精制盐巴调味料品食盐批发",
-      site: "广东广州",
-    },
-    {
-      id: 14,
-      name: "酱油",
-      img: "static/images/stuff/jiangyou.jpg",
-      price: 13,
-      unit: "瓶",
-      info: " 李锦记蒸鱼豉油，豉香浓郁，味道鲜甜，使用方法简单，可轻易带吃蒸鱼的鲜美本质，也可用于蒸食和烹饪海鲜，味道媲美酒家出品。",
-      site: "广东江门",
-    }
+    id: 11,
+    name: "香葱",
+    img: "static/images/stuff/xiangcong.jpg",
+    price: 15,
+    unit: "斤",
+    info: "",
+    site: "",
+  },
+  {
+    id: 12,
+    name: "白砂糖",
+    img: "static/images/stuff/baishatang.jpg",
+    price: 5,
+    unit: "斤",
+    info: "",
+    site: "广东广州",
+  },
+  {
+    id: 13,
+    name: "食盐",
+    img: "static/images/stuff/shiyan.jpg",
+    price: 20,
+    unit: "包",
+    info: "粤盐自然食用盐250g*10袋天然海盐加碘精制盐巴调味料品食盐批发",
+    site: "广东广州",
+  },
+  {
+    id: 14,
+    name: "酱油",
+    img: "static/images/stuff/jiangyou.jpg",
+    price: 13,
+    unit: "瓶",
+    info: " 李锦记蒸鱼豉油，豉香浓郁，味道鲜甜，使用方法简单，可轻易带吃蒸鱼的鲜美本质，也可用于蒸食和烹饪海鲜，味道媲美酒家出品。",
+    site: "广东江门",
+  }
   ],
   stuff_list: [],
   //添加到购物车的商品（已选商品）
@@ -257,17 +257,17 @@ const mutations = {
       }
     })
   },
-  getStuff(state, {cookbook}) {
+  getStuff(state, { cookbook }) {
     state.stuff_list = [];
-    for ( i in cookbook) {
-      for ( n in state.shop_list) {
-        if ( i.stuff.id == n.id){
+    for (i in cookbook) {
+      for (n in state.shop_list) {
+        if (i.stuff.id == n.id) {
           state.stuff_list.push(n);
         }
       }
     }
   },
-  //排序
+  //点赞排序
   sortOfLikes(state) {
     console.log(state.cookbook_list);
     state.cookbook_filter = state.cookbook_list;
@@ -275,6 +275,7 @@ const mutations = {
       return b.likes - a.likes;
     });
   },
+  //收藏排序
   sortOfCollects(state) {
     console.log(state.cookbook_list);
     state.cookbook_filter = state.cookbook_list;
@@ -282,17 +283,59 @@ const mutations = {
       return b.collects - a.collects;
     });
   },
+  //时间排序
   sortOfDate(state) {
     state.cookbook_filter = state.cookbook_list;
-    state.cookbook_filter.sort(function(a,b){
-      return Date.parse(a.time) - Date.parse(b.time);//时间正序
-  });
+    for (var i = 0; i < state.cookbook_filter.length - 1; i++) {
+      for (var j = i + 1; j < state.cookbook_filter.length; j++) {
+        date1 = state.cookbook_filter[i].date.replace(/\-/gi, "/");
+        date2 = state.cookbook_filter[j].date.replace(/\-/gi, "/");
+        var time1 = new Date(date1).getTime();
+        var time2 = new Date(date2).getTime();
+        if (time1 < time2) {
+          state.cookbook_filter[i] = state.cookbook_filter[j];
+          state.cookbook_filter[j] = temp;
+        }
+      }
+    }
+    console.log(state.cookbook_filter);
   },
+  //热度排序
   sortOfHot(state) {
     state.cookbook_filter = state.cookbook_list;
-    state.cookbook_filter.sort(function (a, b) {
-      return (b.likes + b.collects) - (a.likes + a.collects);
-    });
+    var left = 0;
+    var right = state.cookbook_filter.length - 1;
+    while (left < right) {
+      for (var i = 0; i < right; i++) {
+        if ((state.cookbook_filter[i].likes + state.cookbook_filter[i].collects) < (state.cookbook_filter[i+1].likes + state.cookbook_filter[i+1].collects)) {
+          var temp = state.cookbook_filter[i];
+          state.cookbook_filter[i] = state.cookbook_filter[i+1];
+          state.cookbook_filter[i+1] = temp;
+        }
+      }
+      right--;
+      for (var i = right; i > left; i--) {
+        if ((state.cookbook_filter[i-1].likes + state.cookbook_filter[i-1].collects) < (state.cookbook_filter[i].likes + state.cookbook_filter[i].collects)) {
+          var temp = state.cookbook_filter[i];
+          state.cookbook_filter[i] = state.cookbook_filter[i-1];
+          state.cookbook_filter[i-1] = temp;
+        }
+      }
+      left++;
+    }
+
+
+
+
+    // for (var i = 0; i < state.cookbook_filter.length - 1; i++) {
+    //   for (var j = i + 1; j < state.cookbook_filter.length; j++) {
+    //     if ((state.cookbook_filter[i].likes + state.cookbook_filter[i].collects) < (state.cookbook_filter[j].likes + state.cookbook_filter[j].collects)) {
+    //       var temp = state.cookbook_filter[i];
+    //       state.cookbook_filter[i] = state.cookbook_filter[j];
+    //       state.cookbook_filter[j] = temp;
+    //     }
+    //   }
+    // }
   },
   //点赞，收藏
   addLike(state, {
@@ -359,7 +402,7 @@ const mutations = {
   shopChecked(state, product) {
     state.added.forEach((n, i) => {
       if (n.id == product.id) {
-      state.added[i].checked = !state.added[i].checked;
+        state.added[i].checked = !state.added[i].checked;
       }
     })
   },
