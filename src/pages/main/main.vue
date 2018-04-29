@@ -62,6 +62,7 @@
     },
     mounted() {
       this.getCookbook();
+      this.changePage("home");
     },
     methods: {
       //获取全部美食

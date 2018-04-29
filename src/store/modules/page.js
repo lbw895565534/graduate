@@ -6,7 +6,7 @@ const state = {
 
 const getters = {
   getPage: state => state.page,
-  cookbookfilter: state => state.cookbook_filter,
+  
 }
 
 const actions = {

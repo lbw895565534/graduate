@@ -4,7 +4,6 @@ import Router from 'vue-router'
 
 //一级页面
 import Login from '@/pages/login/login'
-import Regist from '@/pages/login/regist'
 import Main from '@/pages/main/main'
 import Home from '@/pages/home/home'
 import Market from '@/pages/market/market'
@@ -30,11 +29,6 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login,
-    },
-    {
-      path: '/regist',
-      name: 'regist',
-      component: Regist,
     },
     {
       path: '/main',

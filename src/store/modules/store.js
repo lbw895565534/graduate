@@ -2,47 +2,14 @@ import axios from 'axios'
 
 //初始化数据
 const state = {
+  //用户状态
+  user_list: [],
+  user_status: 400,
   //美食列表
   cookbook_list: [],
   cookbook_filter: [],
   //商品列表
-  shop_list: [{
-    id: 11,
-    name: "香葱",
-    img: "static/images/stuff/xiangcong.jpg",
-    price: 15,
-    unit: "斤",
-    info: "",
-    site: "",
-  },
-  {
-    id: 12,
-    name: "白砂糖",
-    img: "static/images/stuff/baishatang.jpg",
-    price: 5,
-    unit: "斤",
-    info: "",
-    site: "广东广州",
-  },
-  {
-    id: 13,
-    name: "食盐",
-    img: "static/images/stuff/shiyan.jpg",
-    price: 20,
-    unit: "包",
-    info: "粤盐自然食用盐250g*10袋天然海盐加碘精制盐巴调味料品食盐批发",
-    site: "广东广州",
-  },
-  {
-    id: 14,
-    name: "酱油",
-    img: "static/images/stuff/jiangyou.jpg",
-    price: 13,
-    unit: "瓶",
-    info: " 李锦记蒸鱼豉油，豉香浓郁，味道鲜甜，使用方法简单，可轻易带吃蒸鱼的鲜美本质，也可用于蒸食和烹饪海鲜，味道媲美酒家出品。",
-    site: "广东江门",
-  }
-  ],
+  shop_list: [],
   stuff_list: [],
   //添加到购物车的商品（已选商品）
   added: [],
@@ -50,6 +17,9 @@ const state = {
 
 //getter 抛出去的数据
 const getters = {
+  //用户列表获取
+  userlist: state => state.user_list,
+  userstatus: state => state.user_status,
   //美食菜谱数据获取请求
   cookbooklist: state => state.cookbook_list,
   cookbookfilter: state => state.cookbook_filter,
@@ -96,6 +66,13 @@ const getters = {
 
 //action 异步的操作
 const actions = {
+  login({
+    commit
+  }, user) {
+    commit('login', {
+      user: user
+    })
+  },
   getCookbook({
     commit
   }) {
@@ -211,6 +188,16 @@ const actions = {
 
 //mutation
 const mutations = {
+  //登录
+  login(state, user) {    
+    axios.post('/user/login', user).then(
+      res => {
+        state.user_status = res.data;        
+      }
+    ).catch(err => {
+      console.log(error);
+    })
+  },
   //获取菜谱
   getCookbook(state) {
     axios.get('/sort').then(
@@ -371,11 +358,11 @@ const mutations = {
       record.num++
     }
   },
-  //清除购物车
+  //清除购物车所有项
   clearAll(state) {
     state.added = []
   },
-  //删除购物车的指定的商品
+  //删除购物车的指定项
   del(state, product) {
     state.added.forEach((n, i) => {
       if (n.id == product.id) {
@@ -383,6 +370,7 @@ const mutations = {
       }
     })
   },
+  //商品数目增加
   addNum(state, product) {
     state.added.forEach((n, i) => {
       if (n.id == product.id) {
@@ -390,6 +378,7 @@ const mutations = {
       }
     })
   },
+  //商品数目减少
   reduceNum(state, product) {
     state.added.forEach((n, i) => {
       if (n.id == product.id) {
