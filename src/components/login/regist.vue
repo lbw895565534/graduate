@@ -5,36 +5,36 @@
     </div>
     <div class="input input2">
       <div class="column">
-          <input :class={focus:form[0].focus} type="text" placeholder="用户名" @click="focus(0)" @blur="unFocus(0)">
+          <input :class={focus:form[0].focus} type="text" placeholder="用户名" v-model="username" @click="focus(0)" @blur="unFocus(0)">
       </div>
     </div>
     <div class="input input2">
       <div class="column">
-        <input :class={focus:form[1].focus} type="text" placeholder="密码" @click="focus(1)" @blur="unFocus(1)">
+        <input :class={focus:form[1].focus} type="text" placeholder="密码" v-model="password" @click="focus(1)" @blur="unFocus(1)">
       </div>
     </div>
 
     <div class="input input2">
       <div class="column">
-        <input :class={focus:form[2].focus} type="text" placeholder="手机号码" @click="focus(2)" @blur="unFocus(2)">
+        <input :class={focus:form[2].focus} type="text" placeholder="手机号码" v-model="telnumber" @click="focus(2)" @blur="unFocus(2)">
       </div>
     </div>
       <div class="input input2">
       <div class="column">
-        <input :class={focus:form[3].focus} type="text" placeholder="支付密码" @click="focus(3)" @blur="unFocus(3)">
+        <input :class={focus:form[3].focus} type="text" placeholder="支付密码" v-model="paynumber" @click="focus(3)" @blur="unFocus(3)">
       </div>
     </div>
       <div class="input input2">
       <div class="column">
         <div class="sexbox">
-          <div class="sex" :class="{sel:form[4].sel==1}" @click="form[4].sel=1">男</div>
-          <div class="sex" :class="{sel:form[4].sel==2}" @click="form[4].sel=2">女</div>
+          <div class="sex" :class="{sel:sex=='男'}" @click="sex='男'">男</div>
+          <div class="sex" :class="{sel:sex=='女'}" @click="sex='女'">女</div>
         </div>
       </div>
     </div>
 
     <div class="input input3">
-      <button class="regist">立即注册</button>
+      <button class="regist" @click=submit()>立即注册</button>
     </div>
     <div class="input input4">
       <span class="jump" @click="toLogin()">已经注册，立即登录</span>
@@ -42,6 +42,7 @@
   </div>
 </template>
 <script>
+import axios from "axios"
 export default {
   props: ["status"],
   data() {
@@ -51,9 +52,13 @@ export default {
         { focus: false },
         { focus: false },
         { focus: false },
-        { sel: 1}
-      ]
-    }
+      ],
+      username: "",
+      password: "",
+      sex: "男",
+      telnumber: "",
+      paynumber: ""
+    };
   },
   methods: {
     focus(i) {
@@ -64,6 +69,21 @@ export default {
     },
     toLogin() {
       this.$emit("turn", "login");
+    },
+    submit() {
+      var newUser = new Object();
+      newUser.username = this.username;
+      newUser.password = this.password;
+      newUser.sex = this.sex;
+      newUser.telnumber = this.telnumber;
+      newUser.paynumber = this.paynumber;
+      console.log(newUser);
+      axios.post("/user/regist", newUser).then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.log(error);
+        });
     }
   }
 };
@@ -129,17 +149,17 @@ input[type="text"] {
   width: 40%;
   height: 32px;
   /* border: 2px solid #F95754; */
-  box-shadow: 0px 0px 2px 1px #F95754;
+  box-shadow: 0px 0px 2px 1px #f95754;
   display: flex;
 }
 .sex {
   flex: 1;
   text-align: center;
   line-height: 32px;
-  color: #F95754;
+  color: #f95754;
 }
 .sel {
-  background: #F95754;
+  background: #f95754;
   color: #fff;
 }
 input[type="radio"] {
@@ -151,8 +171,8 @@ input[type="radio"] {
 }
 
 .focus {
-  border: 2px solid #ffc107!important;
-  box-shadow: 0px 0px 10px 0 #ffc107!important;
+  border: 2px solid #ffc107 !important;
+  box-shadow: 0px 0px 10px 0 #ffc107 !important;
 }
 
 .regist {
@@ -165,6 +185,9 @@ input[type="radio"] {
   font-size: 18px;
   outline: none;
   box-shadow: 1px 1px 5px 0 #999;
+}
+.regist:active {
+  box-shadow: -1px -1px 5px 0 #999 inset;
 }
 </style>
 

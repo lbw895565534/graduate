@@ -92,10 +92,12 @@ export default {
       }
       case "shareHot": {
         this.sortOfHot();
+        console.log(this.kind);
         break;
       }
       case "shareMine": {
         this.sortOfHot();
+        console.log(this.kind);
         break;
       }
     }

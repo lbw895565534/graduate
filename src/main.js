@@ -13,12 +13,17 @@ import '@/assets/libs/font/iconfont.css';
 import 'mint-ui/lib/style.css'
 import $ from '@/assets/libs/jquery-3.3.1.min.js'
 import animate from 'animate.css'
+import ElementUI from 'element-ui';
+import '@/assets/css/my-element.css';
+import 'element-ui/lib/theme-chalk/index.css';
+
 
 require("@/mock/mock.js")
 
 Vue.prototype.$http = axios
 Vue.config.productionTip = false
 Vue.use(MintUI)
+Vue.use(ElementUI)
 
 /* eslint-disable no-new */
 new Vue({

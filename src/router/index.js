@@ -16,6 +16,7 @@ import Detail from '@/pages/detail/detail'
 import Cart from '@/pages/market/cart'
 import Search from '@/pages/search/search'
 import ShareInput from '@/pages/share/shareInput'
+import Profile from '@/pages/mine/profile'
 
 
 
@@ -86,6 +87,11 @@ export default new Router({
           name: 'shareInput',
           component: ShareInput
         },
+        {
+          path: 'mine/profile',
+          name: 'profile',
+          components: Profile
+        }
       ]
     }
   ]

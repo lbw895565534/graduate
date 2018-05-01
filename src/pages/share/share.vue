@@ -54,7 +54,9 @@
       Cookbook, Publish
     },
     mounted() {
-      $(".mint-navbar>a:first").trigger("click");
+      if(this.$route.params.selected) {
+        this.selected = this.$route.params.selected;
+      }
     }
   };
 

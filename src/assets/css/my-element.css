@@ -1,0 +1,16 @@
+.el-select {
+  width: 100px;
+  height: 34px;
+}
+.el-input__inner {
+  height: 34px!important;
+}
+.el-input__inner:hover {
+  border-color: #f95754;
+}
+.el-input__inner:focus {
+  border-color: #f95754;
+}
+.el-icon-remove {
+  color: red;
+}

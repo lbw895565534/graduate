@@ -189,23 +189,22 @@ const actions = {
 //mutation
 const mutations = {
   //登录
-  login(state, user) {    
+  login(state, user) {
     axios.post('/user/login', user).then(
       res => {
-        state.user_status = res.data;        
+        state.user_status = res.data;
       }
     ).catch(err => {
       console.log(error);
     })
   },
-  //获取菜谱
-  getCookbook(state) {
-    axios.get('/sort').then(
+  getCookbook(state,apiCookbook) {
+    axios.get('/cookbook/getCookbook').then(
       res => {
         state.cookbook_list = res.data;
       }
     ).catch(err => {
-      console.log(error)
+      console.log(err)
     })
     state.cookbook_filter = state.cookbook_list;
     state.cookbook_filter.sort(function (a, b) {
@@ -275,17 +274,17 @@ const mutations = {
     state.cookbook_filter = state.cookbook_list;
     for (var i = 0; i < state.cookbook_filter.length - 1; i++) {
       for (var j = i + 1; j < state.cookbook_filter.length; j++) {
-        date1 = state.cookbook_filter[i].date.replace(/\-/gi, "/");
-        date2 = state.cookbook_filter[j].date.replace(/\-/gi, "/");
+        var date1 = state.cookbook_filter[i].date.replace(/\-/gi, "/");
+        var date2 = state.cookbook_filter[j].date.replace(/\-/gi, "/");
         var time1 = new Date(date1).getTime();
         var time2 = new Date(date2).getTime();
         if (time1 < time2) {
+          var temp = state.cookbook_filter[i];
           state.cookbook_filter[i] = state.cookbook_filter[j];
           state.cookbook_filter[j] = temp;
         }
       }
     }
-    console.log(state.cookbook_filter);
   },
   //热度排序
   sortOfHot(state) {
@@ -311,18 +310,6 @@ const mutations = {
       left++;
     }
 
-
-
-
-    // for (var i = 0; i < state.cookbook_filter.length - 1; i++) {
-    //   for (var j = i + 1; j < state.cookbook_filter.length; j++) {
-    //     if ((state.cookbook_filter[i].likes + state.cookbook_filter[i].collects) < (state.cookbook_filter[j].likes + state.cookbook_filter[j].collects)) {
-    //       var temp = state.cookbook_filter[i];
-    //       state.cookbook_filter[i] = state.cookbook_filter[j];
-    //       state.cookbook_filter[j] = temp;
-    //     }
-    //   }
-    // }
   },
   //点赞，收藏
   addLike(state, {
@@ -388,6 +375,7 @@ const mutations = {
       }
     })
   },
+  //商品选择
   shopChecked(state, product) {
     state.added.forEach((n, i) => {
       if (n.id == product.id) {
@@ -395,6 +383,7 @@ const mutations = {
       }
     })
   },
+  //商品全选
   allChecked(state) {
     state.added.forEach(n => {
       n.checked = !n.checked;

@@ -376,12 +376,31 @@ Mock.mock('/user/login', (req, res) => {
   });
   return status;
 })
+/* 注册 */
+Mock.mock('/user/regist', (req, res) => {
+  //string转换json
+  var newUser = JSON.parse(req.body);
+  //状态码
+  var status = 200;
+  //验证用户名和密码
+  state.user.forEach(n => {
+    if (n.username == newUser.username) {
+      status = 400;
+    }
+  });
+  if (status == 200) {
+    console.log(newUser);
+    state.user.push(newUser);
+  }
+  console.log(state.user);
+  return status;
+})
 /* 获取全部菜谱 */
-Mock.mock('/sort', (req, res) => {
+Mock.mock('/cookbook/getCookbook', (req, res) => {
   return state.cookbooks;
 })
 /* 常菜菜谱 */
-Mock.mock('/sort/homecook', (req, res) => {
+Mock.mock('/cookbook/homecook', (req, res) => {
   let homecooks = [];
   state.cookbooks.forEach((n, i) => {
     if (n.kind == "homecook") {
@@ -391,7 +410,7 @@ Mock.mock('/sort/homecook', (req, res) => {
   return homecooks;
 })
 /* 饮料菜谱 */
-Mock.mock('/sort/drink', (req, res) => {
+Mock.mock('/cookbook/drink', (req, res) => {
   let drink = [];
   state.cookbooks.forEach((n, i) => {
     if (n.kind == "drink") {
@@ -401,7 +420,7 @@ Mock.mock('/sort/drink', (req, res) => {
   return drink;
 })
 /* 比萨菜谱 */
-Mock.mock('/sort/pizza', (req, res) => {
+Mock.mock('/cookbook/pizza', (req, res) => {
   let pizza = [];
   state.cookbooks.forEach((n, i) => {
     if (n.kind == "pizza") {
@@ -411,7 +430,7 @@ Mock.mock('/sort/pizza', (req, res) => {
   return pizza;
 })
 /* 蛋糕菜谱 */
-Mock.mock('/sort/cake', (req, res) => {
+Mock.mock('/cookbook/cake', (req, res) => {
   let cake = [];
   state.cookbooks.forEach((n, i) => {
     if (n.kind == "cake") {
@@ -419,4 +438,9 @@ Mock.mock('/sort/cake', (req, res) => {
     }
   })
   return cake;
+})
+/* 图片上传 */
+Mock.mock('/shareInput/img', (req, res) => {
+
+  return true;
 })
