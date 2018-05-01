@@ -13,6 +13,8 @@ const state = {
   stuff_list: [],
   //添加到购物车的商品（已选商品）
   added: [],
+  //搜索的结果
+  cookbook_search: []
 }
 
 //getter 抛出去的数据
@@ -27,6 +29,8 @@ const getters = {
   shoplist: state => state.shop_list,
   //菜谱所需食材
   stufflist: state => state.stuff_list,
+  //搜索食谱
+  cookbookSearch: state => state.cookbook_search,
   //购物车的列表
   cartProducts: state => {
     return state.added.map(({
@@ -61,7 +65,7 @@ const getters = {
       }
     })
     return total;
-  },
+  },  
 }
 
 //action 异步的操作
@@ -104,6 +108,17 @@ const actions = {
     commit('getStuff', {
       id: stuff
     })
+  },
+  clearCookbookFilter({
+    commit
+  }, stuff) {
+    commit('clearCookbookFilter')
+  },
+  //搜索
+  search({
+    commit
+  }, value) {
+    commit('search', value)
   },
   //按照点赞数、收藏数排序
   sortOfLikes({
@@ -252,6 +267,20 @@ const mutations = {
         }
       }
     }
+  },
+  //搜索
+  search(state, value) {
+    var result = [];
+    for (var i = 0;i < state.cookbook_list.length;i++) {
+      if (state.cookbook_list[i].name.search(value) != -1 || state.cookbook_list[i].info.search(value) != -1) {
+        result.push(state.cookbook_list[i]);
+      }
+    }
+    state.cookbook_filter = result;
+  },
+  clearCookbookFilter(state) {
+    state.cookbook_filter = [];
+    console.log(state.cookbook_filter);
   },
   //点赞排序
   sortOfLikes(state) {

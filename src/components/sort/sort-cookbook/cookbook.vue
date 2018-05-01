@@ -53,6 +53,7 @@ export default {
     ...mapActions(["sortOfCollects"]),
     ...mapActions(["sortOfDate"]),
     ...mapActions(["sortOfHot"]),
+    ...mapActions(["clearCookbookFilter"]),
     toDetail(c) {
       var data = c;
       // console.log(data);
@@ -83,6 +84,10 @@ export default {
       }
       case "collect": {
         this.sortOfCollects();
+        break;
+      }
+      case "search": {
+        this.clearCookbookFilter();
         break;
       }
       case "shareNew": {
