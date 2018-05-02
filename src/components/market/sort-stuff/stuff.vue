@@ -39,13 +39,17 @@ export default {
       stuff: []
     };
   },
+  created() {
+    this.getShop();
+  },
   mounted() {
-    this.stuff = this.shoplist;     
+    this.stuff = this.shoplist;
   },
   computed: {
     ...mapGetters(['shoplist'])
   },
   methods: {
+    ...mapActions(['getShop']),
     ...mapActions(['addToCart'])
   }
 };

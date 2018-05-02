@@ -65,7 +65,7 @@ const getters = {
       }
     })
     return total;
-  },  
+  },
 }
 
 //action 异步的操作
@@ -154,6 +154,12 @@ const actions = {
     commit('addCollect', {
       id: cookbook.id
     })
+  },
+  //获取食材
+  getShop({
+    commit
+  }) {
+    commit('getShop')
   },
   //添加到购物车操作
   addToCart({
@@ -358,6 +364,18 @@ const mutations = {
         state.cookbook_list[i].collects++;
       }
     })
+  },
+  //获取食材
+  getShop(state) {
+    axios.get('/stuff/getStuff').then(
+      res => {
+        console.log(res.data);
+        state.shop_list = res.data;
+      }
+    ).catch(err => {
+      console.log(err)
+    })
+    console.log(state.shop_list);
   },
   //添加到购物车操作
   add(state, {

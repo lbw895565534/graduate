@@ -444,3 +444,7 @@ Mock.mock('/shareInput/img', (req, res) => {
 
   return true;
 })
+/* 食材 */
+Mock.mock('/stuff/getStuff', (req, res) => {
+  return state.stuff;
+})
