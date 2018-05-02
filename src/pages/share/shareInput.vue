@@ -41,14 +41,14 @@
             <el-select v-model="placeholder.name" placeholder="食材名称">
               <el-option
                 v-for="o in options"
-                :key="o"
-                :label="o"
-                :value="o">
+                :key="o.name"
+                :label="o.name"
+                :value="o.name">
               </el-option>
             </el-select>
           </div>
           <div style="text-align:right">
-            <el-select v-model="placeholder.dosage" placeholder="用量">
+            <el-select v-model="placeholder.num" placeholder="用量">
               <el-option
                 v-for="i in 5"
                 :key="i"
@@ -62,7 +62,7 @@
       <div class="tableStuff">
         <div v-for="s in stuff">
           <span>{{ s.name }}</span>
-          <span>{{ s.dosage }}</span>
+          <span>{{ s.num }}</span>
         </div>
       </div>
     </div>
@@ -100,8 +100,13 @@ export default {
     return {
       img: "",
       showImg: false,
-      options: ["食盐", "酱油", "香葱"],
-      placeholder: { name: "名称", dosage: "用量" },
+      options: [
+        {name: "香葱", id: 11},
+        {name: "白砂糖", id: 12},
+        {name: "食盐", id: 13},
+        {name: "酱油", id: 14},
+      ],
+      placeholder: { name: "名称", num: "用量" },
       //发送的信息数据
       imageUrl: "",
       title: "",
@@ -138,9 +143,10 @@ export default {
     },
     addStuff() {
       var name = this.placeholder.name;
-      var dosage = this.placeholder.dosage;
+      var num = this.placeholder.num;
+      var id = "";
       var isAdd = false;
-      if (name == "名称" || dosage == "用量") {
+      if (name == "名称" || num == "用量") {
         isAdd = true;
       }
       this.stuff.forEach(n => {
@@ -149,10 +155,15 @@ export default {
         }
       });
       if (!isAdd) {
-        this.stuff.push({
-          name: this.placeholder.name,
-          dosage: this.placeholder.dosage
-        });
+        this.options.forEach(n => {
+          if (n.name == name) {
+            this.stuff.push({
+              id: n.id,
+              name: n.name,
+              num: this.placeholder.num,             
+            })
+          }
+        })
       }
     },
     addStep() {
@@ -237,7 +248,6 @@ hr {
   height: 34px;
   width: 80%;
   line-height: 48px;
-  border: 1px solid #ddd;
   margin: 0 auto;
   position: relative;
   top: 6px;
@@ -321,7 +331,8 @@ hr {
   padding-left: 15px;
 }
 .tableStuff div span:last-child {
-  text-align: center;
+  text-align: right;
+  margin-right: 75px;
 }
 .conatiner_step {
   width: 100%;
@@ -385,7 +396,7 @@ hr {
 }
 .container_kind {
   width: 100%;
-  height: 96px;
+  height: 116px;
 }
 .inputKind {
   width: 90%;
