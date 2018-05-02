@@ -4,6 +4,7 @@
 }
 .el-input__inner {
   height: 34px!important;
+  line-height: 34px!important;
 }
 .el-input__inner:hover {
   border-color: #f95754;
