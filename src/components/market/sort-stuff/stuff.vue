@@ -5,20 +5,24 @@
           <img v-bind:src="shop.img">
         </div>
         <div class="center">
-          <div class="item list_item_name">
-            <div class="item_name">{{ shop.name }}</div>
-          </div>
-          <div class="item list_item_info">
-            <div class="item_name">{{ shop.info }}</div>
-          </div>
-          <div class="blank"></div>
-          <div class="item list_item_site">
-            <div class="item_site">{{ shop.site }}</div>
+          <div class="msg">
+            <div class="item list_item_name">
+              <div class="item_name">{{ shop.name }}</div>
+            </div>
+            <div class="item list_item_info">
+              <div class="item_name">{{ shop.info }}</div>
+            </div>
+            <div class="item list_item_site">
+              <div class="item_site">{{ shop.site }}</div>
+            </div>
           </div>
         </div>
         <div class="right">
           <div class="list_item_price">
-            <div class="item_price">{{ shop.price }}.00/<small>{{ shop.unit }}</small></div>
+            <div class="item_price">
+              <span class="red">{{ shop.price }}.00/</span>
+              <span class="small">{{ shop.unit }}</span>
+            </div>
           </div>
           <div class="list_item_op">
             <div class="item_op">
@@ -82,61 +86,65 @@ export default {
   flex: 4;
   height: 100%;
 }
-.list_item_name {
-  height: 25%;
+.msg {
+  margin: 10px 0;
+  width: 100%;
+  height: 80px;
 }
-.item_name {
+.list_item_name {
+  width: 100%;
+  height: 22px;
   position: relative;
-  top: 4px;
 }
 .list_item_info {
   width: 100%;
-  height: 35%;
+  height: 35px;
   font-size: 12px;
+  position: relative;
+  margin-bottom: 5px;
   color: #888;
   overflow: hidden;
-  display: -webkit-box;
+  display: -webkit-box !important; 
+  word-break: break-all; 
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
-.blank {
-  width: 100%;
-  height: 15%;
-}
 .list_item_site {
-  height: 25%;
-}
-.item_site {
+  position: relative;
+  height: 18px;
+  bottom: 0;
   color: #555;
   font-size: 14px;
 }
 .right {
   flex: 2;
-  display: flex;
-  flex-direction: column;  
 }
 .list_item_price {
-  height: 50%;
+  height: 40px;
   width: 100%;
+  padding-top: 10px;
+  text-align: center;
+  flex: 3;  
+  /* 去除行内元素的换行导致的间隔 */
+  font-size: 0;
+}
+.red {
   color: red;
   font-size: 24px;
-  text-align: center;
-  flex: 3;
 }
-.item_price {
-  position: relative;
-  top: 4px;
-}
-small {
+.small {
   font-size: 14px !important;
-  color: #555;
+  color: #555; 
+  position: relative;
+  left: 0;
+  bottom: 0;
 }
 .list_item_op  {
-  height: 50%;
+  height: 50px;
   width: 100%;
-  flex: 1;
 }
 .item_op {
+  height: 100%;
   text-align: center;
 }
 .item_op_btn {

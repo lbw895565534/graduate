@@ -123,11 +123,14 @@
       };
     },
     methods: {
+      //上传图片
       handleAvatarSuccess(res, file) {
         this.imageUrl = URL.createObjectURL(file.raw);
       },
+      //验证文件格式
       beforeAvatarUpload(file) {
         const isJPG = file.type === "image/jpeg";
+        //是否小于2M
         const isLt2M = file.size / 1024 / 1024 < 2;
 
         if (!isJPG) {
@@ -147,12 +150,15 @@
           console.log(this.src);
         };
       },
+      //添加食材
       addStuff() {
         //正则表达式去除括号
         var name = this.placeholder.name.replace(/\([^\)]*\)/g,"");
         var num = this.placeholder.num;
         var id = "";
+        //字段记录判断是否已经添加了该食材
         var isAdd = false;
+        //判断条件
         if (name == "名称" || num == "用量") {
           isAdd = true;
         }
@@ -161,6 +167,7 @@
             isAdd = true;
           }
         });
+        //根据isAdd的值执行相应操作
         if (!isAdd) {
           this.options.forEach(n => {
             if (n.name == name) {
@@ -171,8 +178,17 @@
               })
             }
           })
-        }
+        };
+        //若已添加，修改用量
+        if (isAdd) {
+          this.stuff.forEach(n => {
+            if (n.name == name) {
+              n.num = this.placeholder.num;
+            }
+          })
+        };
       },
+      //添加步骤
       addStep() {
         var n = this.step.length;
         this.step.push({
@@ -181,6 +197,7 @@
         });
         console.log(this.step);
       },
+      //删除步骤
       delStep(n) {
         if (n != 0) {
           this.step.splice(n, 1);
@@ -189,6 +206,7 @@
           }
         }
       },
+      //提交
       submit() {
         var share = {};
         share.kind = this.kind;
