@@ -112,6 +112,8 @@ export default {
 }
 .right {
   flex: 2;
+  display: flex;
+  flex-direction: column;  
 }
 .list_item_price {
   height: 50%;
@@ -119,6 +121,7 @@ export default {
   color: red;
   font-size: 24px;
   text-align: center;
+  flex: 3;
 }
 .item_price {
   position: relative;
@@ -131,6 +134,7 @@ small {
 .list_item_op  {
   height: 50%;
   width: 100%;
+  flex: 1;
 }
 .item_op {
   text-align: center;

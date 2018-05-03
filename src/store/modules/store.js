@@ -204,7 +204,12 @@ const actions = {
     commit
   }) {
     commit('allChecked')
-  }
+  },
+  delPayed({
+    commit
+  }) {
+    commit('delPayed')
+  },
 }
 
 //mutation
@@ -432,9 +437,21 @@ const mutations = {
   },
   //商品全选
   allChecked(state) {
-    state.added.forEach(n => {
-      n.checked = !n.checked;
-    })
+    let n = false;
+    if (!n) {
+      state.added.forEach(n => {
+        n.checked = !n.checked;
+      });
+      n = true;
+    }
+  },
+  //支付成功删除商品
+  delPayed(state) {
+    state.added.forEach((n,i) => {
+      if (n.checked) {
+        state.added.splice(i, 1);
+      }
+    });
   }
 }
 
