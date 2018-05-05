@@ -90,7 +90,7 @@ export default new Router({
         {
           path: 'mine/profile',
           name: 'profile',
-          components: Profile
+          component: Profile
         }
       ]
     }

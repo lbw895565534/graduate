@@ -22,7 +22,7 @@
     z-index: 4;
     position: absolute;
     top: 45px;
-    bottom: 64px;
+    bottom: 0;
   }
 
 </style>

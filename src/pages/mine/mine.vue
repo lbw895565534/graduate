@@ -118,17 +118,20 @@
       },
       toProfile() {
         this.$router.push({
-          name: "profile"
+          name: "profile",
+          params: {name: "修改个人资料"}
         });
       },
       toSetting() {
         this.$router.push({
-          name: "setting"
+          name: "setting",
+          params: {name: "设置"}
         });
       },
       toEncourage() {
         this.$router.push({
-          name: "encourage"
+          name: "encourage",
+          params: {name: "鼓励好评"}
         });
       }
     }

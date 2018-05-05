@@ -6,8 +6,12 @@ const state = {
       id: 1,
       username: "Xiaoming",
       password: "123456",
+      name: "",
       sex: "男",
+      birth: Mock.Random.date('yyyy-MM-dd'),
       telnumber: "18819492932",
+      info: "",
+      paynumber: 123456,
       cart: [
 
       ]
@@ -16,8 +20,12 @@ const state = {
       id: 2,
       username: "Liming",
       password: "1234567",
+      name: "",
       sex: "男",
+      birth: Mock.Random.date('yyyy-MM-dd'),
       telnumber: "18819492932",
+      info: "",
+      paynumber: 123456,
       cart: [
 
       ]
@@ -26,8 +34,12 @@ const state = {
       id: 3,
       username: "Alice",
       password: "12345678",
+      name: "",
       sex: "女",
+      birth: Mock.Random.date('yyyy-MM-dd'),
       telnumber: "18819492932",
+      info: "",
+      paynumber: 123456,
       cart: [
 
       ]
@@ -441,10 +453,15 @@ Mock.mock('/cookbook/cake', (req, res) => {
 })
 /* 图片上传 */
 Mock.mock('/shareInput/img', (req, res) => {
-
+  console.log(req);
   return true;
 })
 /* 食材 */
 Mock.mock('/stuff/getStuff', (req, res) => {
   return state.stuff;
+})
+/* 修改信息 */
+Mock.mock('/mine/profile', (req, res) => {
+  console.log(req);
+  return true;
 })

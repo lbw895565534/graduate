@@ -211,7 +211,7 @@
         var share = {};
         share.kind = this.kind;
         share.name = this.title;
-        share.img = this.img;        
+        share.img = this.imageUrl;        
         share.info = this.info;
         share.content = this.step;
         share.shoplist = this.stuff;
@@ -247,7 +247,7 @@
   }
 
   .el-upload {
-    width: 100% !;
+    width: 100%;
     height: 100%;
     border: 1px dashed #ddd;
     border-radius: 6px;
