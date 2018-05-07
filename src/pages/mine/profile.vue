@@ -16,13 +16,13 @@
       <div class="container">
         <div class="item">
           <span>昵称</span>
-          <input type="text" id="name" v-model="name">
+          <input type="text" id="name" v-model="name" :placeholder="loginUser.name">
         </div>
       </div>
       <div class="container">
         <div class="item">
           <span>性别</span>
-          <input ref="sex" type="text" id="sex" @click="popup = true" readonly v-bind:value="sex">
+          <input ref="sex" type="text" id="sex" @click="popup = true" readonly v-bind:value="sex" :placeholder="loginUser.sex">
           <img src="static/images/icon/mine/advance.svg"></img>
         </div>
         <mt-popup v-model="popup" position="bottom" class="popup">
@@ -32,7 +32,7 @@
       <div class="container">
         <div class="item">
           <span>生日</span>
-          <input type="text" id="birth" @click="selectBirth()" readonly v-bind:value="birth">
+          <input type="text" id="birth" @click="selectBirth()" readonly v-bind:value="birth" :placeholder="loginUser.birth">
           <img src="static/images/icon/mine/advance.svg"></img>
           <mt-datetime-picker @confirm="confirmBirth" @cancel="closeBirth" ref="birth" type="date" yearFormat="{value} 年" monthFormat="{value} 月"
             dateFormat="{value} 日">
@@ -42,14 +42,14 @@
       <div class="container">
         <div class="item">
           <span>电话</span>
-          <input type="text" id="telnumber" v-model="telnumber">
+          <input type="text" id="telnumber" v-model="telnumber" :placeholder="loginUser.telnumber">
         </div>
       </div>
       <div class="container">
         <div class="item item-last">
           <span>简介</span>
           <div class="input">
-            <textarea ref="info" v-model="info" type="text" id="info" @change="limitText()" @keyup="limitText()"></textarea>
+            <textarea ref="info" v-model="info" type="text" id="info" @change="limitText()" @keyup="limitText()" :placeholder="loginUser.info"></textarea>
             <div class="tip">还能输入{{ textlen }}个字</div>
           </div>
         </div>
@@ -68,6 +68,7 @@
     Poppup,
     Toast
   } from 'mint-ui'
+  import { mapGetters, mapActions } from "vuex";
   export default {
     data() {
       return {
@@ -85,6 +86,9 @@
         telnumber: "",
         info: "",
       }
+    },
+    computed: {
+      ...mapGetters(["loginUser"])
     },
     watch: {
       info(val, oldVal) {
@@ -122,7 +126,6 @@
       //性别选择器
       onValueChange(picker, values) {
         this.sex = values;
-        console.log(this.sex)
       },
       selectSex() {
         this.$refs.sex.open();
@@ -241,6 +244,11 @@
     flex-direction: row;
     justify-content: center;
     background: #fff;
+  }
+  .container img {
+    position: absolute;
+    right: 10px;
+    margin-top: 14px;
   }
 
   .item {

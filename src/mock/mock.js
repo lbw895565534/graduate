@@ -12,9 +12,8 @@ const state = {
       telnumber: "18819492932",
       info: "",
       paynumber: 123456,
-      cart: [
-
-      ]
+      cookbook: [],
+      cart: []
     },
     {
       id: 2,
@@ -26,9 +25,8 @@ const state = {
       telnumber: "18819492932",
       info: "",
       paynumber: 123456,
-      cart: [
-
-      ]
+      cookbook: [],
+      cart: []
     },
     {
       id: 3,
@@ -40,9 +38,8 @@ const state = {
       telnumber: "18819492932",
       info: "",
       paynumber: 123456,
-      cart: [
-
-      ]
+      cookbook: [],
+      cart: []
     }
   ],
   cookbooks: [{
@@ -380,13 +377,16 @@ Mock.mock('/user/login', (req, res) => {
   var user = JSON.parse(req.body).user;
   //状态码
   var status = 400;
+  //返回对象
+  var loginUser = null; 
   //验证用户名和密码
   state.user.forEach(n => {
     if (n.username == user.username && n.password == user.password) {
       status = 200;
+      loginUser = n;
     }
   });
-  return status;
+  return loginUser;
 })
 /* 注册 */
 Mock.mock('/user/regist', (req, res) => {

@@ -2,9 +2,9 @@ import axios from 'axios'
 
 //初始化数据
 const state = {
-  //用户状态
-  user_list: [],
+  //用户状态  
   user_status: 400,
+  loginUser: null,
   //美食列表
   cookbook_list: [],
   cookbook_filter: [],
@@ -20,7 +20,7 @@ const state = {
 //getter 抛出去的数据
 const getters = {
   //用户列表获取
-  userlist: state => state.user_list,
+  loginUser: state => state.loginUser,
   userstatus: state => state.user_status,
   //美食菜谱数据获取请求
   cookbooklist: state => state.cookbook_list,
@@ -113,6 +113,13 @@ const actions = {
     commit
   }, stuff) {
     commit('clearCookbookFilter')
+  },
+  shareCookbook({
+    commit
+  }, share) {
+    commit('shareCookbook', {
+      cookbook: share
+    })
   },
   //搜索
   search({
@@ -218,13 +225,18 @@ const mutations = {
   login(state, user) {
     axios.post('/user/login', user).then(
       res => {
-        state.user_status = res.data;
+        console.log(res);
+        state.loginUser = res.data;        
       }
     ).catch(err => {
       console.log(error);
     })
+    if (state.loginUser != null) {
+      state.user_status = 200;
+    }
   },
-  getCookbook(state,apiCookbook) {
+  //获取食谱
+  getCookbook(state) {
     axios.get('/cookbook/getCookbook').then(
       res => {
         state.cookbook_list = res.data;
@@ -278,6 +290,15 @@ const mutations = {
         }
       }
     }
+  },
+  //发布食谱
+  shareCookbook(state, { cookbook }) {
+    var d = new Date();
+    var date = d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate();
+    cookbook.likes = 0;
+    cookbook.collects = 0;
+    cookbook.date = date;   
+    console.log(cookbook);
   },
   //搜索
   search(state, value) {

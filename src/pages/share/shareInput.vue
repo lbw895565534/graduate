@@ -80,6 +80,7 @@
 </template>
 <script>
   import axios from "axios"
+  import { mapGetters, mapActions } from "vuex";
   export default {
     data() {
       return {
@@ -207,6 +208,7 @@
         }
       },
       //提交
+      ...mapActions(["shareCookbook"]),
       submit() {
         var share = {};
         share.kind = this.kind;
@@ -215,7 +217,7 @@
         share.info = this.info;
         share.content = this.step;
         share.shoplist = this.stuff;
-        console.log(share);
+        this.shareCookbook(share);
         // axios.post("/share/shareInput", share).then(res => {
         //     state.user_status = res.data;
         //   })

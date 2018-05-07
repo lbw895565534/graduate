@@ -58,11 +58,13 @@
 <script>
   import {
     TabContainer,
-    TabContainerItem
+    TabContainerItem,
+    Toast
   } from "mint-ui";
   import {
     mapGetters,
-    mapActions
+    mapActions,
+    mapState
   } from "vuex";
   export default {
     data() {
@@ -90,8 +92,23 @@
         ]
       };
     },
+    computed: {
+      ...mapGetters(["loginUser"])
+    },
     methods: {
       ...mapActions(["changePage"]),
+      isLogin() {
+        console.log(this.loginUser);
+        if (this.loginUser == null) {
+          Toast({
+            message: '请先登录',
+            position: 'bottom',
+            duration: 2000
+          });
+          return false;
+        }
+        return true;
+      },
       toLogin() {
         this.$router.push({
           name: "login"
@@ -107,35 +124,52 @@
         });
       },
       toCollect() {
-        this.$router.push({
-          name: "collect"
-        });
+        if (this.isLogin()) {
+          this.$router.push({
+            name: "collect"
+          });
+        }
       },
       toCart() {
-        this.$router.push({
-          name: "cart"
-        });
+        if (this.isLogin()) {
+          this.$router.push({
+            name: "cart"
+          });
+        }
       },
       toProfile() {
-        this.$router.push({
-          name: "profile",
-          params: {name: "修改个人资料"}
-        });
+        if (this.isLogin()) {
+          this.$router.push({
+            name: "profile",
+            params: {
+              name: "修改个人资料"
+            }
+          });
+        }
       },
       toSetting() {
-        this.$router.push({
-          name: "setting",
-          params: {name: "设置"}
-        });
+        if (this.isLogin()) {
+          this.$router.push({
+            name: "setting",
+            params: {
+              name: "设置"
+            }
+          });
+        }
       },
       toEncourage() {
-        this.$router.push({
-          name: "encourage",
-          params: {name: "鼓励好评"}
-        });
+        if (this.isLogin()) {
+          this.$router.push({
+            name: "encourage",
+            params: {
+              name: "鼓励好评"
+            }
+          });
+        }
       }
     }
   };
+
 </script>
 <style scoped>
   .box {
@@ -144,19 +178,23 @@
     display: flex;
     flex-direction: column;
   }
+
   /** 上半部分 **/
+
   .box_headshot {
     width: 100%;
     flex: 1;
     display: flex;
     flex-direction: column;
   }
+
   .column_headshot {
     width: 100%;
     height: 100%;
     flex: 3;
     position: relative;
   }
+
   .column_headshot span {
     width: 100%;
     height: 100%;
@@ -165,10 +203,12 @@
     align-items: center;
     justify-content: center;
   }
+
   .headshot {
     width: 100px;
     height: 100px;
   }
+
   .column_core {
     width: 100%;
     /* 不设置height: 100%; 子元素将无法获取父元素的高度 */
@@ -176,6 +216,7 @@
     flex: 2;
     display: flex;
   }
+
   .core {
     width: 100%;
     height: 0;
@@ -183,10 +224,12 @@
     justify-content: center;
     text-align: center;
   }
+
   .core_middle {
     border-left: 1px solid #fff;
     border-right: 1px solid #999;
   }
+
   .icon {
     width: 50px;
     height: 50px;
@@ -195,51 +238,62 @@
     margin-top: 20px;
     margin-bottom: 5px;
   }
+
   .record {
     flex: 2;
     color: #fff;
   }
+
   /** 下半部分 **/
+
   .box_cell {
     width: 100%;
     height: 100%;
     flex: 1;
     position: relative;
   }
+
   .container {
     width: 100%;
     height: 100%;
     flex: 1;
     position: absolute;
   }
+
   .blank {
     width: 100%;
     height: 15px;
     background: #fff;
   }
+
   .cell {
     width: 100%;
     height: 50px;
     display: flex;
     flex-direction: row;
   }
+
   .left {
     width: 50px;
     height: 100%;
   }
+
   .icon_cell {
     display: inline-block;
     margin: 9px;
   }
+
   .right {
     height: 100%;
     width: 100%;
     border-bottom: 1px solid #d9d9d9;
   }
+
   .title_cell {
     line-height: 50px;
     font-size: 16px;
   }
+
   .arrows {
     height: 21px;
     float: right;
@@ -247,4 +301,5 @@
     top: 15px;
     right: 10px;
   }
+
 </style>

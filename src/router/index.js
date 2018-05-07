@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-
 //一级页面
 import Login from '@/pages/login/login'
 import Main from '@/pages/main/main'
@@ -17,8 +16,6 @@ import Cart from '@/pages/market/cart'
 import Search from '@/pages/search/search'
 import ShareInput from '@/pages/share/shareInput'
 import Profile from '@/pages/mine/profile'
-
-
 
 Vue.use(Router)
 

@@ -28,7 +28,6 @@ export default {
   methods: {
     changeStatus(val) {
       this.status = val;
-      console.log(val);
     }
   }
 };
