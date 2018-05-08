@@ -27,8 +27,10 @@ const actions = {
 const mutations = {
   changePage(state, page) {
     state.page = page;
+    localStorage.setItem("page", state.page);
   },
   toMain(state) {
+    console.log(window.localStorage.getItem("page"));
     state.page = localStorage.getItem("page");
   }
 }

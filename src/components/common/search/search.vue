@@ -20,7 +20,7 @@
     },
     methods: {
       toSearch() {
-        localStorage.setItem("page", this.getPage);
+        console.log(this.getPage.page);
         this.$router.push({name:'search'});
       }
     }
