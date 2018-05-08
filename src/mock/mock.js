@@ -50,9 +50,7 @@ const state = {
       likes: Mock.Random.natural(1, 100),
       collects: Mock.Random.natural(1, 100),
       info: "凉拌菜是餐桌不可忽视美味。即使是素菜，凉拌一下也很美味，凉拌茄子是最喜欢的凉拌菜之一。简单、美味、开胃，多吃也不怕长肉。",
-      content: [
-
-      ],
+      content: [],
       date: Mock.Random.date('yyyy-MM-dd'),
       shoplist: [{
         id: 11,
@@ -60,7 +58,9 @@ const state = {
       }, {
         id: 13,
         num: "半勺"
-      }]
+      }],
+      likeUser: ["Liming"],
+      collectUser: []
     },
     {
       id: 12,
@@ -78,7 +78,9 @@ const state = {
         id: 13,
         name: "食盐",
         num: "半勺"
-      }]
+      }],
+      likeUser: [],
+      collectUser: []
     },
     {
       id: 13,
@@ -96,7 +98,9 @@ const state = {
         id: 13,
         name: "食盐",
         num: "半勺"
-      }]
+      }],
+      likeUser: [],
+      collectUser: []
     },
     {
       id: 14,
@@ -114,7 +118,9 @@ const state = {
         id: 13,
         name: "食盐",
         num: "半勺"
-      }]
+      }],
+      likeUser: [],
+      collectUser: []
     },
     {
       id: 21,
@@ -132,7 +138,9 @@ const state = {
         id: 13,
         name: "食盐",
         num: "半勺"
-      }]
+      }],
+      likeUser: [],
+      collectUser: []
     },
     {
       id: 22,
@@ -150,7 +158,9 @@ const state = {
         id: 13,
         name: "食盐",
         num: "半勺"
-      }]
+      }],
+      likeUser: [],
+      collectUser: []
     },
     {
       id: 23,
@@ -168,7 +178,9 @@ const state = {
         id: 13,
         name: "食盐",
         num: "半勺"
-      }]
+      }],
+      likeUser: [],
+      collectUser: []
     },
     {
       id: 24,
@@ -186,7 +198,9 @@ const state = {
         id: 13,
         name: "食盐",
         num: "半勺"
-      }]
+      }],
+      likeUser: [],
+      collectUser: []
     },
     {
       id: 31,
@@ -204,7 +218,9 @@ const state = {
         id: 13,
         name: "食盐",
         num: "半勺"
-      }]
+      }],
+      likeUser: [],
+      collectUser: []
     },
     {
       id: 32,
@@ -222,7 +238,9 @@ const state = {
         id: 13,
         name: "食盐",
         num: "半勺"
-      }]
+      }],
+      likeUser: [],
+      collectUser: []
     },
     {
       id: 33,
@@ -240,7 +258,9 @@ const state = {
         id: 13,
         name: "食盐",
         num: "半勺"
-      }]
+      }],
+      likeUser: [],
+      collectUser: []
     },
     {
       id: 34,
@@ -258,7 +278,9 @@ const state = {
         id: 13,
         name: "食盐",
         num: "半勺"
-      }]
+      }],
+      likeUser: [],
+      collectUser: []
     },
     {
       id: 41,
@@ -276,7 +298,9 @@ const state = {
         id: 13,
         name: "食盐",
         num: "半勺"
-      }]
+      }],
+      likeUser: [],
+      collectUser: []
     },
     {
       id: 42,
@@ -294,7 +318,9 @@ const state = {
         id: 13,
         name: "食盐",
         num: "半勺"
-      }]
+      }],
+      likeUser: [],
+      collectUser: []
     },
     {
       id: 43,
@@ -312,7 +338,9 @@ const state = {
         id: 13,
         name: "食盐",
         num: "半勺"
-      }]
+      }],
+      likeUser: [],
+      collectUser: []
     },
     {
       id: 44,
@@ -330,7 +358,9 @@ const state = {
         id: 13,
         name: "食盐",
         num: "半勺"
-      }]
+      }],
+      likeUser: [],
+      collectUser: []
     }
   ],
   stuff: [{
@@ -378,7 +408,7 @@ Mock.mock('/user/login', (req, res) => {
   //状态码
   var status = 400;
   //返回对象
-  var loginUser = null; 
+  var loginUser = null;
   //验证用户名和密码
   state.user.forEach(n => {
     if (n.username == user.username && n.password == user.password) {

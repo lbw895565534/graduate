@@ -9,12 +9,14 @@
     <div class="introduce">
       <div class="op">
         <div class="op_like">
-          <img src="@/assets/img/icon/like.svg" width="16px" @click="addLike(cookbook)">
+          <img src="@/assets/img/icon/like.svg" width="16px" @click="addLike(cookbook)" v-if="!liked">
+          <img src="@/assets/img/icon/liked.svg" width="16px" @click="addLike(cookbook)" v-if="liked">
           <span>{{ cookbook.likes }}</span>
         </div>
         <div class="blank"></div>
         <div class="op_collect">
-          <img src="@/assets/img/icon/collect.svg" width="16px" @click="addCollect(cookbook)">
+          <img src="@/assets/img/icon/collect.svg" width="16px" @click="addCollect(cookbook)" v-if="!collected">
+          <img src="@/assets/img/icon/collected.svg" width="16px" @click="addCollect(cookbook)" v-if="collected">
           <span>{{ cookbook.collects }}</span>
         </div>
       </div>
@@ -49,17 +51,34 @@ export default {
   data() {
     return {
       cookbook: "",
-      stuffId: []
+      stuffId: [],
+      liked: false,
+      collected: false
     };
   },
   computed: {
-    ...mapGetters(["stufflist"])
+    ...mapGetters(["stufflist"]),
+    ...mapGetters(["loginUser"]),
   },
   methods: {
     ...mapActions(["getStuff"]),
     ...mapActions(["addLike"]),
     ...mapActions(["addCollect"]),
     ...mapActions(["addToCart"]),
+    isLiked(arr, value) {
+      for (var i = 0;i<arr.length;i++) {
+        if (arr[i] == value) {
+          this.liked = true;
+        }
+      }
+    },
+    isCollected(arr, value) {
+      for (var i = 0;i<arr.length;i++) {
+        if (arr[i] == value) {
+          this.collected = true;
+        }
+      }
+    },
     allAdd() {
       MessageBox.confirm("是否将食材全部加入购物车?", "提示").then(action => {
         if (action == "confirm") {
@@ -86,9 +105,9 @@ export default {
   mounted() {
     this.cookbook = this.$route.query.param;
     this.stuffId = this.cookbook.shoplist;
-    console.log(this.cookbook);
-    console.log(this.stuffId);
     this.getStuff(this.stuffId);
+    this.isLiked(this.cookbook.likeUser, this.loginUser);
+    this.isCollected(this.cookbook.collectUser, this.loginUser);
   }
 };
 </script>
