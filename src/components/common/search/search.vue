@@ -9,10 +9,18 @@
   </div>
 </template>
 <script>
+  import {
+    mapGetters,
+    mapActions
+  } from "vuex";
   export default {
     props: ['txt'],
+    computed: {
+      ...mapGetters(["getPage"])
+    },
     methods: {
       toSearch() {
+        localStorage.setItem("page", this.getPage);
         this.$router.push({name:'search'});
       }
     }

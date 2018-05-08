@@ -29,13 +29,20 @@
   import Search from "@/components/common/search/search"
   import Banner from "@/components/common/banner/index";
   import Program from "@/components/home/program/index";
-
+  import { mapGetters, mapActions } from "vuex";
   export default {
     components: {
       Search,
       Banner,
       Program,
       Sort
+    },
+    mounted() {
+      this.getCookbook();
+    },
+    methods: {
+      //获取全部美食
+      ...mapActions(["getCookbook"]),
     }
   };
 

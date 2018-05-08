@@ -63,8 +63,7 @@
   } from "mint-ui";
   import {
     mapGetters,
-    mapActions,
-    mapState
+    mapActions
   } from "vuex";
   export default {
     data() {
@@ -109,11 +108,13 @@
         }
         return true;
       },
+      //是否已经登录
       toLogin() {
         this.$router.push({
           name: "login"
         });
       },
+      //跳转页面
       toShare() {
         this.changePage("share");
         this.$router.push({

@@ -6,7 +6,7 @@ const state = {
 
 const getters = {
   getPage: state => state.page,
-  
+
 }
 
 const actions = {
@@ -16,13 +16,20 @@ const actions = {
     commit('changePage', {
       page: page
     })
-  }
+  },
+  toMain({
+    commit
+  }) {
+    commit('toMain')
+  },
 }
 
 const mutations = {
   changePage(state, page) {
     state.page = page;
-    console.log(page);
+  },
+  toMain(state) {
+    state.page = localStorage.getItem("page");
   }
 }
 

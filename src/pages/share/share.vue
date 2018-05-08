@@ -16,84 +16,92 @@
 
     <mt-tab-container  v-model="selected" :swipeable="true">
       <mt-tab-container-item :key="kind[0]" id="1">
-        <Cookbook :kind="kind[0]"></Cookbook>
+        <Cookbook :cookbook="cookbooknew"></Cookbook>
       </mt-tab-container-item>
       <mt-tab-container-item :key="kind[1]" id="2">
-        <Cookbook :kind="kind[1]"></Cookbook>
+        <Cookbook :cookbook="cookbookhot"></Cookbook>
       </mt-tab-container-item>
       <mt-tab-container-item :key="kind[2]" id="3">
         <div class="box_publish">
           <Publish></Publish>
         </div>
-        <Cookbook :kind="kind[2]"></Cookbook>
+        <Cookbook :cookbook="cookbookmine"></Cookbook>
       </mt-tab-container-item>
-
     </mt-tab-container>
   </div>
 </template>
 <script>
-  import Cookbook from "@/components/sort/sort-cookbook/cookbook";
-  import Publish from "@/components/share/publish";
-  import {
-    Navbar,
-    TabItem
-  } from "mint-ui";
-  import {
-    TabContainer,
-    TabContainerItem
-  } from "mint-ui";
-  export default {
-    data() {
-      return {
-        selected: "1",
-        kind: ["shareNew", "shareHot", "shareMine"],
-        active: "",
-      };
-    },
-    components: {
-      Cookbook, Publish
-    },
-    mounted() {
-      if(this.$route.params.selected) {
-        this.selected = this.$route.params.selected;
-      }
+import Cookbook from "@/components/sort/sort-cookbook/shareCookbook";
+import Publish from "@/components/share/publish";
+import { Navbar, TabItem } from "mint-ui";
+import { TabContainer, TabContainerItem } from "mint-ui";
+import { mapGetters, mapActions } from "vuex";
+export default {
+  data() {
+    return {
+      selected: "1",
+      kind: ["shareNew", "shareHot", "shareMine"],
+      active: ""
+    };
+  },
+  components: {
+    Cookbook,
+    Publish
+  },
+  computed: {
+    ...mapGetters(["cookbooknew"]),
+    ...mapGetters(["cookbookhot"]),
+    ...mapGetters(["cookbookmine"])
+  },
+  methods: {
+    ...mapActions(["sortOfDate"]),
+    ...mapActions(["sortOfHot"]),
+    ...mapActions(["sortOfMine"]),
+  },
+  mounted() {
+    this.sortOfDate();
+    this.sortOfHot();
+    this.sortOfMine();
+    console.log(this.cookbooknew);
+    if (this.$route.params.selected) {
+      this.selected = this.$route.params.selected;
     }
-  };
-
+  }
+};
 </script>
 <style scoped>
-  .box {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    top: 0;
-    bottom: 64px;
-  }
+.box {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  top: 0;
+  bottom: 64px;
+}
 
-  .box_navbar {
-    width: 100%;
-    height: 45px;
-  }
+.box_navbar {
+  width: 100%;
+  height: 45px;
+}
 
-  .mint-navbar {
-    height: 45px;
-    border-bottom: 2px solid #E7E9E8;
-    margin-top: 45px;
-  }
+.mint-navbar {
+  height: 45px;
+  border-bottom: 2px solid #e7e9e8;
+  margin-top: 45px;
+}
 
-  .mint-navbar .mint-tab-item.is-selected {
-    border-bottom: 3px solid #e5173a;
-    color: #e5173aff;
-  }
+.mint-navbar .mint-tab-item.is-selected {
+  border-bottom: 3px solid #e5173a;
+  color: #e5173aff;
+}
 
-  .mint-tab-container {
-    position: relative;
-    top: 0;
-  }
+.mint-tab-container {
+  position: relative;
+  top: 0;
+}
 
-  .box_publish {
-    width: 100%;
-    height: 45px;
-    position: relative;
-  }
+.box_publish {
+  width: 100%;
+  height: 45px;
+  position: relative;
+}
 </style>

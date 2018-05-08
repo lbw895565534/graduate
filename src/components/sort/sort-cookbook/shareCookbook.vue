@@ -1,29 +1,29 @@
 <template>
   <div class="list_box">
-    <div class="list_item" v-for="cookbook in cookbookfilter" @click="toDetail(cookbook)">
+    <div class="list_item" v-for="c in cookbook" @click="toDetail(c)">
       <div class="left">
         <div class="list_item_picture">
-          <img v-bind:src="cookbook.img" alt="">
+          <img v-bind:src="c.img" alt="">
         </div>
       </div>
       <div class="right">
         <div class="item list_item_name">
-          <div class="item_name">{{ cookbook.name }}</div>
+          <div class="item_name">{{ c.name }}</div>
         </div>
         <div class="item list_item_info">
           <div class="item_info">
-            {{ cookbook.info }}
+            {{ c.info }}
           </div>
         </div>
         <div class="item list_item_op">
           <div class="item_op">
             <div class="op_like">
               <img src="@/assets/img/icon/like.svg" width="16px">
-              <span>{{ cookbook.likes }}</span>
+              <span>{{ c.likes }}</span>
             </div>
             <div class="op_collect">
               <img src="@/assets/img/icon/collect.svg" width="16px">
-              <span>{{ cookbook.collects }}</span>
+              <span>{{ c.collects }}</span>
             </div>
           </div>
         </div>
@@ -34,65 +34,17 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 export default {
-  props: ["kind"],
-  data() {
-    return {
-      params: ""
-    };
-  },
-  computed: {
-    ...mapGetters(["cookbookfilter"])
-  },
+  props: ["cookbook"],
   methods: {
-    ...mapActions(["getHomecook"]),
-    ...mapActions(["getDrink"]),
-    ...mapActions(["getPizza"]),
-    ...mapActions(["getCake"]),
-    ...mapActions(["sortOfLikes"]),
-    ...mapActions(["sortOfCollects"]),
-    ...mapActions(["clearCookbookFilter"]),
     toDetail(c) {
       var data = c;
       // console.log(data);
-      this.$router.push({name:'detail',query:{param:c}});
-    }
-  },
-  mounted() {
-    switch (this.kind) {
-      case "homecook": {
-        this.getHomecook();
-        break;
-      }
-      case "drink": {
-        this.getDrink();
-        break;
-      }
-      case "pizza": {
-        this.getPizza();
-        break;
-      }
-      case "cake": {
-        this.getCake();
-        break;
-      }
-      case "like": {
-        this.sortOfLikes();
-        break;
-      }
-      case "collect": {
-        this.sortOfCollects();
-        break;
-      }
-      case "search": {
-        this.clearCookbookFilter();
-        break;
-      }
+      this.$router.push({ name: "detail", query: { param: c } });
     }
   }
 };
 </script>
 <style scoped>
-
 .list_item {
   width: 100%;
   height: 100px;

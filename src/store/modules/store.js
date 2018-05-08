@@ -2,12 +2,15 @@ import axios from 'axios'
 
 //初始化数据
 const state = {
-  //用户状态  
+  //用户状态
   user_status: 400,
   loginUser: null,
   //美食列表
   cookbook_list: [],
   cookbook_filter: [],
+  cookbook_new: [],
+  cookbook_hot: [],
+  cookbook_mine: [],
   //商品列表
   shop_list: [],
   stuff_list: [],
@@ -25,6 +28,9 @@ const getters = {
   //美食菜谱数据获取请求
   cookbooklist: state => state.cookbook_list,
   cookbookfilter: state => state.cookbook_filter,
+  cookbooknew: state => state.cookbook_new,
+  cookbookhot: state => state.cookbook_hot,
+  cookbookmine: state => state.cookbook_mine,
   //商品列表
   shoplist: state => state.shop_list,
   //菜谱所需食材
@@ -148,6 +154,11 @@ const actions = {
   }) {
     commit('sortOfHot')
   },
+  sortOfMine({
+    commit
+  }) {
+    commit('sortOfMine')
+  },
   addLike({
     commit
   }, cookbook) {
@@ -217,6 +228,13 @@ const actions = {
   }) {
     commit('delPayed')
   },
+  pay({
+    commit
+  }, paynumber) {
+    commit('delPayed', {
+      paynumber: paynumber
+    })
+  },
 }
 
 //mutation
@@ -226,27 +244,25 @@ const mutations = {
     axios.post('/user/login', user).then(
       res => {
         console.log(res);
-        state.loginUser = res.data;        
+        state.loginUser = res.data;
+        if (state.loginUser != null) {
+          state.user_status = 200;
+        }
       }
     ).catch(err => {
       console.log(error);
     })
-    if (state.loginUser != null) {
-      state.user_status = 200;
-    }
+
   },
   //获取食谱
   getCookbook(state) {
     axios.get('/cookbook/getCookbook').then(
       res => {
         state.cookbook_list = res.data;
+        console.log(state.cookbook_list);
       }
     ).catch(err => {
       console.log(err)
-    })
-    state.cookbook_filter = state.cookbook_list;
-    state.cookbook_filter.sort(function (a, b) {
-      return b.date - a.date;
     })
   },
   getHomecook(state) {
@@ -297,7 +313,7 @@ const mutations = {
     var date = d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate();
     cookbook.likes = 0;
     cookbook.collects = 0;
-    cookbook.date = date;   
+    cookbook.date = date;
     console.log(cookbook);
   },
   //搜索
@@ -332,45 +348,41 @@ const mutations = {
   },
   //时间排序
   sortOfDate(state) {
-    state.cookbook_filter = state.cookbook_list;
-    for (var i = 0; i < state.cookbook_filter.length - 1; i++) {
-      for (var j = i + 1; j < state.cookbook_filter.length; j++) {
-        var date1 = state.cookbook_filter[i].date.replace(/\-/gi, "/");
-        var date2 = state.cookbook_filter[j].date.replace(/\-/gi, "/");
-        var time1 = new Date(date1).getTime();
-        var time2 = new Date(date2).getTime();
-        if (time1 < time2) {
-          var temp = state.cookbook_filter[i];
-          state.cookbook_filter[i] = state.cookbook_filter[j];
-          state.cookbook_filter[j] = temp;
-        }
-      }
-    }
+    state.cookbook_new = state.cookbook_list;
+    console.log(state.cookbook_new);
+    state.cookbook_new.sort((a, b) => new Date(b).getTime() - new Date(a).getTime())
   },
   //热度排序
   sortOfHot(state) {
-    state.cookbook_filter = state.cookbook_list;
+    state.cookbook_hot = state.cookbook_list;
     var left = 0;
-    var right = state.cookbook_filter.length - 1;
+    var right = state.cookbook_hot.length - 1;
     while (left < right) {
       for (var i = 0; i < right; i++) {
-        if ((state.cookbook_filter[i].likes + state.cookbook_filter[i].collects) < (state.cookbook_filter[i+1].likes + state.cookbook_filter[i+1].collects)) {
-          var temp = state.cookbook_filter[i];
-          state.cookbook_filter[i] = state.cookbook_filter[i+1];
-          state.cookbook_filter[i+1] = temp;
+        if ((state.cookbook_hot[i].likes + state.cookbook_hot[i].collects) < (state.cookbook_hot[i+1].likes + state.cookbook_hot[i+1].collects)) {
+          var temp = state.cookbook_hot[i];
+          state.cookbook_hot[i] = state.cookbook_hot[i+1];
+          state.cookbook_hot[i+1] = temp;
         }
       }
       right--;
       for (var i = right; i > left; i--) {
-        if ((state.cookbook_filter[i-1].likes + state.cookbook_filter[i-1].collects) < (state.cookbook_filter[i].likes + state.cookbook_filter[i].collects)) {
-          var temp = state.cookbook_filter[i];
-          state.cookbook_filter[i] = state.cookbook_filter[i-1];
-          state.cookbook_filter[i-1] = temp;
+        if ((state.cookbook_hot[i-1].likes + state.cookbook_hot[i-1].collects) < (state.cookbook_hot[i].likes + state.cookbook_hot[i].collects)) {
+          var temp = state.cookbook_hot[i];
+          state.cookbook_hot[i] = state.cookbook_hot[i-1];
+          state.cookbook_hot[i-1] = temp;
         }
       }
       left++;
     }
-
+  },
+  //用户发布的食谱
+  sortOfMine(state) {
+    if (state.loginUser != null) {
+      state.cookbook_mine = state.loginUser.cookbook;
+    }else {
+      state.cookbook_mine = "";
+    }
   },
   //点赞，收藏
   addLike(state, {
@@ -473,6 +485,14 @@ const mutations = {
         state.added.splice(i, 1);
       }
     });
+  },
+  //判断支付密码
+  pay(state, paynumber) {
+    if (paynumber == loginUser.paynumber) {
+      return true;
+    }else {
+      return false;
+    }
   }
 }
 

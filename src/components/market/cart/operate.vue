@@ -15,101 +15,100 @@
 </template>
 
 <script>
-  import {
-    mapGetters,
-    mapActions
-  } from "vuex";
-  import {
-    Indicator,
-    MessageBox,
-    Toast
-  } from "mint-ui";
-  export default {
-    name: "info",
-    data() {
-      return {};
+import { mapGetters, mapActions } from "vuex";
+import { Indicator, MessageBox, Toast } from "mint-ui";
+export default {
+  methods: {
+    ...mapActions(["clearAllCart"]),
+    ...mapActions(["allChecked"]),
+    ...mapActions(["delPayed"]),
+    ...mapActions(["pay"]),
+    indicator() {
+      Indicator.open();
+      setTimeout(() => {
+        Indicator.close();
+        this.certainer();
+      }, 2000);
     },
-    methods: {
-      ...mapActions(["clearAllCart"]),
-      ...mapActions(["allChecked"]),
-      ...mapActions(["delPayed"]),
-      indicator() {
-        Indicator.open();
-        setTimeout(() => {
-          Indicator.close();
-          this.certainer();
-        }, 2000);
-      },
-      certainer() {
-        if (this.totalPrice == 0) {
-          Toast({
-            message: '您未选择任何商品',
-            position: 'bottom',
-            duration: 5000
-          });
-        }else {
-          MessageBox.confirm(
+    certainer() {
+      if (this.totalPrice == 0) {
+        Toast({
+          message: "您未选择任何商品",
+          position: "bottom",
+          duration: 5000
+        });
+      } else {
+        MessageBox.confirm(
           "是否确定支付?",
           "总金额为" + this.totalPrice + "元"
         ).then(action => {
           if (action == "confirm") {
-            Toast({
-              message: "操作成功",
-              iconClass: "mintui mintui-success"
-            });            
+            MessageBox.prompt("请输入支付密码").then(({ value, action }) => {
+              if (action == "confirm") {
+                if (this.pay(value)) {
+                  Toast({
+                    message: "操作成功",
+                    iconClass: "mintui mintui-success"
+                  });
+                }else {
+                  Toast({
+                    message: "密码错误",
+                    iconClass: "mintui .mintui-field-error"
+                  });
+                }
+              }
+            });
           }
           this.delPayed();
         });
-        }        
       }
-    },
-    computed: {
-      ...mapGetters(["totalPrice", "totalNum"])
     }
-  };
-
+  },
+  computed: {
+    ...mapGetters(["totalPrice", "totalNum"])
+  }
+};
 </script>
 
 <style scoped>
-  .box_operate {
-    width: 100%;
-    height: 64px;
-    position: fixed;
-    bottom: 0;
-    background: #fffffd;
-  }
+.box_operate {
+  width: 100%;
+  height: 64px;
+  position: fixed;
+  bottom: 0;
+  background: #fffffd;
+}
 
-  .item-wrapper {
-    display: flex;
-    height: 100%;
-    align-items: center;
-    border-top: 1px solid #ddd;
-    justify-content: center;
-  }
+.item-wrapper {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  border-top: 1px solid #ddd;
+  justify-content: center;
+}
 
-  .item_sel {
-    flex: 2;
-    height: 100%;
-    text-align: center;
-    line-height: 64px;
-  }
+.item_sel {
+  flex: 2;
+  height: 100%;
+  text-align: center;
+  line-height: 64px;
+}
 
-  .item_total {
-    flex: 4;
-    color: #f55263;
-    text-align: center;
-  }
+.item_total {
+  flex: 4;
+  color: #f55263;
+  text-align: center;
+}
 
-  .item_pay {
-    flex: 2;
-  }
+.item_pay {
+  flex: 2;
+}
 
-  .btn_pay {
-    width: 90px;
-    height: 40px;
-    background: #f55263;
-    border: none;
-    color: white;
-  }
-
+.btn_pay {
+  width: 90px;
+  height: 40px;
+  background: #f55263;
+  border: none;
+  color: white;
+}
 </style>

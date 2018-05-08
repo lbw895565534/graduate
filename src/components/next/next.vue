@@ -9,10 +9,16 @@
   import {
     Header
   } from "mint-ui";
+  import {
+    mapGetters,
+    mapActions
+  } from "vuex";
   export default {
     props: ['title'],
     methods: {
+      ...mapActions(["toMain"]),
       back() {
+        this.toMain();
         this.$router.go(-1);
       }
     }
