@@ -32,22 +32,22 @@
         <div class="stuff">
           <div>
             <el-select v-model="placeholder.name" placeholder="食材名称">
-              <el-option v-for="o in options" :key="o.name" :value="o.name+'('+o.tool+')'">
+              <el-option v-for="o in options" :key="o.name" :value="o.name">
               </el-option>
             </el-select>
           </div>
           <div style="text-align:right">
-            <el-select v-model="placeholder.num" placeholder="用量">
-              <el-option v-for="i in 5" :key="i" :value="i">
-              </el-option>
-            </el-select>
+            <input v-model="placeholder.num" placeholder="用量" class="stuffNum" ref="stuffNum">
           </div>
         </div>
       </div>
       <div class="tableStuff">
-        <div v-for="s in stuff">
-          <span>{{ s.name }}</span>
-          <span>{{ s.num }}</span>
+        <div v-for="s in stuff" class="showStuff">
+          <span class="showStuffName">{{ s.name }}</span>
+          <div class="showStuffNum">
+            <span>{{ s.num }}</span>
+            <img src="static/images/icon/shareInput/cancel.svg" @click="delStuff(s.name)">
+          </div>
         </div>
       </div>
     </div>
@@ -80,7 +80,10 @@
 </template>
 <script>
   import axios from "axios"
-  import { mapGetters, mapActions } from "vuex";
+  import {
+    mapGetters,
+    mapActions
+  } from "vuex";
   export default {
     data() {
       return {
@@ -89,22 +92,18 @@
         options: [{
             name: "香葱",
             id: 11,
-            tool: "勺"
           },
           {
             name: "白砂糖",
             id: 12,
-            tool: "勺"
           },
           {
             name: "食盐",
             id: 13,
-            tool: "勺"
           },
           {
             name: "酱油",
             id: 14,
-            tool: "勺"
           },
         ],
         placeholder: {
@@ -151,10 +150,14 @@
           console.log(this.src);
         };
       },
+      //限制字数
+      limitText() {
+        this.$refs.stuffNum.value = this.$refs.stuffNum.value.substring(0, 5);
+      },
       //添加食材
       addStuff() {
         //正则表达式去除括号
-        var name = this.placeholder.name.replace(/\([^\)]*\)/g,"");
+        var name = this.placeholder.name.replace(/\([^\)]*\)/g, "");
         var num = this.placeholder.num;
         var id = "";
         //字段记录判断是否已经添加了该食材
@@ -189,6 +192,14 @@
           })
         };
       },
+      //删除食材
+      delStuff(name) {
+        this.stuff.forEach((n,i) => {
+          if (n.name == name) {
+            this.stuff.splice(i,1);
+          }
+        })
+      },
       //添加步骤
       addStep() {
         var n = this.step.length;
@@ -213,7 +224,7 @@
         var share = {};
         share.kind = this.kind;
         share.name = this.title;
-        share.img = this.imageUrl;        
+        share.img = this.imageUrl;
         share.info = this.info;
         share.content = this.step;
         share.shoplist = this.stuff;
@@ -342,6 +353,24 @@
     margin: 0 auto;
   }
 
+  .stuffNum {
+    width: 118px;
+    height: 32px;
+    line-height: 34px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #606266;
+    border-radius: 4px;
+    outline: none;
+    background: #fff;
+    background-image: none;
+    border: 1px solid #dcdfe6;
+    box-sizing: border-box;
+    padding-left: 15px;
+    padding-right: 30px;
+    transition: border-color .2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+
   .stuff {
     height: 48px;
     display: flex;
@@ -360,24 +389,34 @@
     margin: 0 auto;
   }
 
-  .tableStuff div {
+  .tableStuff .showStuff {
     display: flex;
     flex-direction: row;
   }
 
-  .tableStuff div span {
+  .showStuffName {
     flex: 1;
     height: 34px;
     line-height: 34px;
-  }
-
-  .tableStuff div span:first-child {
     padding-left: 15px;
   }
 
-  .tableStuff div span:last-child {
+  .showStuffNum {
+    flex: 1;
     text-align: right;
-    margin-right: 75px;
+  }
+
+  .showStuffNum span {
+    width: 80px;
+    height: 34px;
+    line-height: 34px;
+    display: inline-block;
+    text-align: left;
+  }
+
+  .showStuffNum img {
+    position: relative;
+    top: 2px;
   }
 
   .conatiner_step {

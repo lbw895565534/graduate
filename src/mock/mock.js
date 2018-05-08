@@ -50,14 +50,32 @@ const state = {
       likes: Mock.Random.natural(1, 100),
       collects: Mock.Random.natural(1, 100),
       info: "凉拌菜是餐桌不可忽视美味。即使是素菜，凉拌一下也很美味，凉拌茄子是最喜欢的凉拌菜之一。简单、美味、开胃，多吃也不怕长肉。",
-      content: [],
+      content: [
+        {num: 1, content: "备好茄子及蒜头"},
+        {num: 2, content: "茄子上蒸锅，蒸至熟"},
+        {num: 3, content: "蒜头压成蒜头泥备用"},
+        {num: 4, content: "蒸好的茄子出锅"},
+        {num: 5, content: "用筷子划散茄子"},
+        {num: 6, content: "加入蒜头"},
+        {num: 7, content: "加入适量酱油调味即可"}      
+      ],
       date: Mock.Random.date('yyyy-MM-dd'),
       shoplist: [{
-        id: 11,
-        num: "1"
+        id: 15,
+        name: "茄子",
+        num: "500g"
       }, {
-        id: 13,
-        num: "半勺"
+        id: 16,
+        name: "尖椒",
+        num: "半个"
+      }, {
+        id: 17,
+        name: "蒜头",
+        num: "三个"
+      }, {
+        id: 14,
+        name: "酱油",
+        num: "适量"
       }],
       likeUser: ["Liming"],
       collectUser: []
@@ -71,13 +89,49 @@ const state = {
       collects: Mock.Random.natural(1, 100),
       info: "菠萝咕咾肉是一道广东的传统名菜，属于粤菜系。其口感清新解腻，酸甜的味道能增进食欲，无论下酒还是下饭，都非常美味。这道菜因为其酸甜的口味、鲜艳的色泽，深受孩子们的喜爱，里面青红椒、菠萝的加入，不仅丰富了其口感，还增加了营养，妈妈们可以常给孩子做。",
       content: [
-
+        {num: 1, content: "备好原料菠萝，番茄"},
+        {num: 2, content: "将肉丝提前用葱姜酒盐腌制，用淀粉拌匀，裹上面包糠"},
+        {num: 3, content: "入锅炸熟"},
+        {num: 4, content: "将肉丝乘出后放入菠萝和番茄翻炒，然后加入肉丝"},
+        {num: 5, content: "淋入少许酱油 糖 盐 翻炒装盘"},
       ],
       date: Mock.Random.date('yyyy-MM-dd'),
       shoplist: [{
+        id: 112,
+        name: "菠萝",
+        num: "适量"
+      },{
+        id: 110,
+        name: "猪肉",
+        num: "适量"
+      },{
+        id: 111,
+        name: "番茄",
+        num: "适量"
+      },{
+        id: 11,
+        name: "葱",
+        num: "适量"
+      },{
+        id: 18,
+        name: "姜",
+        num: "适量"
+      },{
+        id: 19,
+        name: "黄酒",
+        num: "适量"
+      },{
         id: 13,
         name: "食盐",
-        num: "半勺"
+        num: "适量"
+      },{
+        id: 14,
+        name: "酱油",
+        num: "适量"
+      },{
+        id: 113,
+        name: "面包糠",
+        num: "适量"
       }],
       likeUser: [],
       collectUser: []
@@ -396,8 +450,89 @@ const state = {
       img: "static/images/stuff/jiangyou.jpg",
       price: 13,
       unit: "瓶",
-      info: " 李锦记蒸鱼豉油，豉香浓郁，味道鲜甜，使用方法简单，可轻易带吃蒸鱼的鲜美本质，也可用于蒸食和烹饪海鲜，味道媲美酒家出品。",
-      site: "广东江门",
+      info: "李锦记蒸鱼豉油，豉香浓郁，味道鲜甜，使用方法简单，可轻易带吃蒸鱼的鲜美本质，也可用于蒸食和烹饪海鲜，味道媲美酒家出品。",
+      site: "广东江门",      
+    },
+    {
+      id: 15,
+      name: "茄子",
+      img: "static/images/stuff/qiezi.jpg",
+      price: 13,
+      unit: "斤",
+      info: "",
+      site: "广东江门",      
+    },
+    {
+      id: 16,
+      name: "尖椒",
+      img: "static/images/stuff/jianjiao.jpg",
+      price: 13,
+      unit: "斤",
+      info: "",
+      site: "广东江门",      
+    },
+    {
+      id: 17,
+      name: "蒜头",
+      img: "static/images/stuff/suantou.jpg",
+      price: 13,
+      unit: "斤",
+      info: "",
+      site: "广东江门",      
+    },
+    {
+      id: 18,
+      name: "姜",
+      img: "static/images/stuff/jiang.jpg",
+      price: 13,
+      unit: "斤",
+      info: "",
+      site: "广东江门",      
+    },
+    {
+      id: 19,
+      name: "黄酒",
+      img: "static/images/stuff/huangjiu.jpg",
+      price: 13,
+      unit: "瓶",
+      info: "",
+      site: "广东江门",      
+    },
+    {
+      id: 110,
+      name: "猪肉",
+      img: "static/images/stuff/zhurou.jpg",
+      price: 13,
+      unit: "斤",
+      info: "",
+      site: "广东江门",      
+    },
+    {
+      id: 111,
+      name: "番茄",
+      img: "static/images/stuff/fanqie.jpg",
+      price: 13,
+      unit: "斤",
+      info: "",
+      site: "广东江门",      
+    },
+    {
+      id: 112,
+      name: "菠萝",
+      img: "static/images/stuff/boluo.jpg",
+      price: 13,
+      unit: "斤",
+      info: "",
+      site: "广东江门",      
+    },
+    {
+      id: 113,
+      name: "面包",
+      img: "static/images/stuff/mianbao.jpg",
+      price: 13,
+      unit: "斤",
+      info: "",
+      site: "广东江门",      
     }
   ],
 }
