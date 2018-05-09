@@ -67,10 +67,10 @@
         <span class="left">种类</span>
       </div>
       <div class="inputKind">
+        <div class="kind" :class="{sel:kind=='staple'}" @click="kind='staple'">主食</div>
         <div class="kind" :class="{sel:kind=='homecook'}" @click="kind='homecook'">常菜</div>
-        <div class="kind" :class="{sel:kind=='drink'}" @click="kind='drink'">饮料</div>
-        <div class="kind" :class="{sel:kind=='pizza'}" @click="kind='pizza'">比萨</div>
-        <div class="kind" :class="{sel:kind=='cake'}" @click="kind='cake'">蛋糕</div>
+        <div class="kind" :class="{sel:kind=='soup'}" @click="kind='soup'">汤</div>
+        <div class="kind" :class="{sel:kind=='sweets'}" @click="kind='sweets'">甜品</div>
       </div>
     </div>
     <div class="container_btn">
@@ -79,444 +79,446 @@
   </div>
 </template>
 <script>
-  import axios from "axios"
-  import {
-    mapGetters,
-    mapActions
-  } from "vuex";
-  export default {
-    data() {
-      return {
-        img: "",
-        showImg: false,
-        options: [{
-            name: "香葱",
-            id: 11,
-          },
-          {
-            name: "白砂糖",
-            id: 12,
-          },
-          {
-            name: "食盐",
-            id: 13,
-          },
-          {
-            name: "酱油",
-            id: 14,
-          },
-        ],
-        placeholder: {
-          name: "名称",
-          num: "用量"
+import axios from "axios";
+import { mapGetters, mapActions } from "vuex";
+export default {
+  data() {
+    return {
+      img: "",
+      showImg: false,
+      options: [
+        {
+          name: "香葱",
+          id: 11
         },
-        //发送的信息数据
-        imageUrl: "",
-        title: "",
-        info: "",
-        stuff: [],
-        step: [{
+        {
+          name: "白砂糖",
+          id: 12
+        },
+        {
+          name: "食盐",
+          id: 13
+        },
+        {
+          name: "酱油",
+          id: 14
+        }
+      ],
+      placeholder: {
+        name: "名称",
+        num: "用量"
+      },
+      //发送的信息数据
+      imageUrl: "",
+      title: "",
+      info: "",
+      stuff: [],
+      step: [
+        {
           num: 1,
           content: ""
-        }],
-        kind: "homecook"
+        }
+      ],
+      kind: "homecook"
+    };
+  },
+  methods: {
+    //上传图片
+    handleAvatarSuccess(res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw);
+    },
+    //验证文件格式
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === "image/jpeg";
+      //是否小于2M
+      const isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!isJPG) {
+        this.$message.error("上传头像图片只能是 JPG 格式!");
+      }
+      if (!isLt2M) {
+        this.$message.error("上传头像图片大小不能超过 2MB!");
+      }
+      return isJPG && isLt2M;
+    },
+    upload() {
+      var file = this.$refs.inputImg.files[0];
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = function(e) {
+        this.src = e.target.result;
+        console.log(this.src);
       };
     },
-    methods: {
-      //上传图片
-      handleAvatarSuccess(res, file) {
-        this.imageUrl = URL.createObjectURL(file.raw);
-      },
-      //验证文件格式
-      beforeAvatarUpload(file) {
-        const isJPG = file.type === "image/jpeg";
-        //是否小于2M
-        const isLt2M = file.size / 1024 / 1024 < 2;
-
-        if (!isJPG) {
-          this.$message.error("上传头像图片只能是 JPG 格式!");
-        }
-        if (!isLt2M) {
-          this.$message.error("上传头像图片大小不能超过 2MB!");
-        }
-        return isJPG && isLt2M;
-      },
-      upload() {
-        var file = this.$refs.inputImg.files[0];
-        var reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = function (e) {
-          this.src = e.target.result;
-          console.log(this.src);
-        };
-      },
-      //限制字数
-      limitText() {
-        this.$refs.stuffNum.value = this.$refs.stuffNum.value.substring(0, 5);
-      },
-      //添加食材
-      addStuff() {
-        //正则表达式去除括号
-        var name = this.placeholder.name.replace(/\([^\)]*\)/g, "");
-        var num = this.placeholder.num;
-        var id = "";
-        //字段记录判断是否已经添加了该食材
-        var isAdd = false;
-        //判断条件
-        if (name == "名称" || num == "用量") {
+    //限制字数
+    limitText() {
+      this.$refs.stuffNum.value = this.$refs.stuffNum.value.substring(0, 5);
+    },
+    //添加食材
+    addStuff() {
+      //正则表达式去除括号
+      var name = this.placeholder.name.replace(/\([^\)]*\)/g, "");
+      var num = this.placeholder.num;
+      var id = "";
+      //字段记录判断是否已经添加了该食材
+      var isAdd = false;
+      //判断条件
+      if (name == "名称" || num == "用量") {
+        isAdd = true;
+      }
+      this.stuff.forEach(n => {
+        if (n.name == name) {
           isAdd = true;
         }
+      });
+      //根据isAdd的值执行相应操作
+      if (!isAdd) {
+        this.options.forEach(n => {
+          if (n.name == name) {
+            this.stuff.push({
+              id: n.id,
+              name: n.name,
+              num: this.placeholder.num
+            });
+          }
+        });
+      }
+      //若已添加，修改用量
+      if (isAdd) {
         this.stuff.forEach(n => {
           if (n.name == name) {
-            isAdd = true;
+            n.num = this.placeholder.num;
           }
         });
-        //根据isAdd的值执行相应操作
-        if (!isAdd) {
-          this.options.forEach(n => {
-            if (n.name == name) {
-              this.stuff.push({
-                id: n.id,
-                name: n.name,
-                num: this.placeholder.num,
-              })
-            }
-          })
-        };
-        //若已添加，修改用量
-        if (isAdd) {
-          this.stuff.forEach(n => {
-            if (n.name == name) {
-              n.num = this.placeholder.num;
-            }
-          })
-        };
-      },
-      //删除食材
-      delStuff(name) {
-        this.stuff.forEach((n,i) => {
-          if (n.name == name) {
-            this.stuff.splice(i,1);
-          }
-        })
-      },
-      //添加步骤
-      addStep() {
-        var n = this.step.length;
-        this.step.push({
-          num: n + 1,
-          content: ""
-        });
-        console.log(this.step);
-      },
-      //删除步骤
-      delStep(n) {
-        if (n != 0) {
-          this.step.splice(n, 1);
-          for (var i = n; i < this.step.length; i++) {
-            this.step[i].num = this.step[i].num - 1;
-          }
-        }
-      },
-      //提交
-      ...mapActions(["shareCookbook"]),
-      submit() {
-        var share = {};
-        share.kind = this.kind;
-        share.name = this.title;
-        share.img = this.imageUrl;
-        share.info = this.info;
-        share.content = this.step;
-        share.shoplist = this.stuff;
-        this.shareCookbook(share);
-        // axios.post("/share/shareInput", share).then(res => {
-        //     state.user_status = res.data;
-        //   })
-        //   .catch(err => {
-        //     console.log(error);
-        //   });
       }
+    },
+    //删除食材
+    delStuff(name) {
+      this.stuff.forEach((n, i) => {
+        if (n.name == name) {
+          this.stuff.splice(i, 1);
+        }
+      });
+    },
+    //添加步骤
+    addStep() {
+      var n = this.step.length;
+      this.step.push({
+        num: n + 1,
+        content: ""
+      });
+      console.log(this.step);
+    },
+    //删除步骤
+    delStep(n) {
+      if (n != 0) {
+        this.step.splice(n, 1);
+        for (var i = n; i < this.step.length; i++) {
+          this.step[i].num = this.step[i].num - 1;
+        }
+      }
+    },
+    //提交
+    ...mapActions(["shareCookbook"]),
+    submit() {
+      var share = {};
+      share.kind = this.kind;
+      share.name = this.title;
+      share.img = this.imageUrl;
+      share.info = this.info;
+      share.content = this.step;
+      share.shoplist = this.stuff;
+      this.shareCookbook(share);
+      // axios.post("/share/shareInput", share).then(res => {
+      //     state.user_status = res.data;
+      //   })
+      //   .catch(err => {
+      //     console.log(error);
+      //   });
     }
-  };
-
+  }
+};
 </script>
 <style scoped>
-  hr {
-    width: 90%;
-    size: 1px;
-    margin: 0 auto;
-  }
+hr {
+  width: 90%;
+  size: 1px;
+  margin: 0 auto;
+}
 
-  .container_picture {
-    width: 100%;
-    height: 245px;
-  }
+.container_picture {
+  width: 100%;
+  height: 245px;
+}
 
-  .avatar-uploader {
-    width: 100%;
-    height: 100%;
-    background: #ddd;
-    text-align: center;
-  }
+.avatar-uploader {
+  width: 100%;
+  height: 100%;
+  background: #ddd;
+  text-align: center;
+}
 
-  .el-upload {
-    width: 100%;
-    height: 100%;
-    border: 1px dashed #ddd;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
+.el-upload {
+  width: 100%;
+  height: 100%;
+  border: 1px dashed #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
 
-  .avatar-uploader-icon {
-    color: #8c939d;
-    width: 375px;
-    height: 245px;
-    line-height: 245px;
-    text-align: center;
-  }
+.avatar-uploader-icon {
+  color: #8c939d;
+  width: 375px;
+  height: 245px;
+  line-height: 245px;
+  text-align: center;
+}
 
-  .el-icon-plus:before {
-    font-size: 56px;
-  }
+.el-icon-plus:before {
+  font-size: 56px;
+}
 
-  .avatar {
-    width: 375px;
-    height: 245px;
-    display: block;
-  }
+.avatar {
+  width: 375px;
+  height: 245px;
+  display: block;
+}
 
-  .container_name {
-    width: 100%;
-    height: 48px;
-  }
+.container_name {
+  width: 100%;
+  height: 48px;
+}
 
-  .inputTitle {
-    height: 34px;
-    width: 80%;
-    line-height: 48px;
-    margin: 0 auto;
-    position: relative;
-    top: 6px;
-    border: none;
-  }
+.inputTitle {
+  height: 34px;
+  width: 80%;
+  line-height: 48px;
+  margin: 0 auto;
+  position: relative;
+  top: 6px;
+  border: none;
+}
 
-  .inputTitle input {
-    width: 100%;
-    height: 100%;
-    display: inline-block;
-    position: absolute;
-    border: none;
-    outline: none;
-    font-size: 20px;
-    text-align: center;
-    font-family: "黑体";
-  }
+.inputTitle input {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  position: absolute;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  text-align: center;
+  font-family: "黑体";
+}
 
-  .conatiner_info {
-    width: 100%;
-    height: 100px;
-    position: relative;
-    margin-bottom: 10px;
-  }
+.conatiner_info {
+  width: 100%;
+  height: 100px;
+  position: relative;
+  margin-bottom: 10px;
+}
 
-  .inputInfo {
-    width: 90%;
-    height: 100%;
-    margin: 0 auto;
-  }
+.inputInfo {
+  width: 90%;
+  height: 100%;
+  margin: 0 auto;
+}
 
-  .inputInfo textarea {
-    width: 100%;
-    height: 100%;
-    outline: none;
-    border-left: none;
-    border-right: none;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    padding-top: 10px;
-    font-size: 16px;
-    color: #999;
-    resize: none;
-    font-family: "楷体";
-  }
+.inputInfo textarea {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  border-left: none;
+  border-right: none;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding-top: 10px;
+  font-size: 16px;
+  color: #999;
+  resize: none;
+  font-family: "楷体";
+}
 
-  .container_stuff {
-    width: 100%;
-    height: auto;
-    margin-bottom: 10px;
-  }
+.container_stuff {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
 
-  .inputStuff {
-    width: 90%;
-    margin: 0 auto;
-  }
+.inputStuff {
+  width: 90%;
+  margin: 0 auto;
+}
 
-  .stuffNum {
-    width: 118px;
-    height: 32px;
-    line-height: 34px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    color: #606266;
-    border-radius: 4px;
-    outline: none;
-    background: #fff;
-    background-image: none;
-    border: 1px solid #dcdfe6;
-    box-sizing: border-box;
-    padding-left: 15px;
-    padding-right: 30px;
-    transition: border-color .2s cubic-bezier(0.645, 0.045, 0.355, 1);
-  }
+.stuffNum {
+  width: 118px;
+  height: 32px;
+  line-height: 34px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color: #606266;
+  border-radius: 4px;
+  outline: none;
+  background: #fff;
+  background-image: none;
+  border: 1px solid #dcdfe6;
+  box-sizing: border-box;
+  padding-left: 15px;
+  padding-right: 30px;
+  transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
 
-  .stuff {
-    height: 48px;
-    display: flex;
-    align-items: center;
-  }
+.stuffNum:focus {
+  border-color: #409eff;
+}
 
-  .stuff div {
-    flex: 1;
-  }
+.stuff {
+  height: 48px;
+  display: flex;
+  align-items: center;
+}
 
-  .tableStuff {
-    width: 90%;
-    height: 136px;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    margin: 0 auto;
-  }
+.stuff div {
+  flex: 1;
+}
 
-  .tableStuff .showStuff {
-    display: flex;
-    flex-direction: row;
-  }
+.tableStuff {
+  width: 90%;
+  height: 136px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  margin: 0 auto;
+}
 
-  .showStuffName {
-    flex: 1;
-    height: 34px;
-    line-height: 34px;
-    padding-left: 15px;
-  }
+.tableStuff .showStuff {
+  display: flex;
+  flex-direction: row;
+}
 
-  .showStuffNum {
-    flex: 1;
-    text-align: right;
-  }
+.showStuffName {
+  flex: 1;
+  height: 34px;
+  line-height: 34px;
+  padding-left: 15px;
+}
 
-  .showStuffNum span {
-    width: 80px;
-    height: 34px;
-    line-height: 34px;
-    display: inline-block;
-    text-align: left;
-  }
+.showStuffNum {
+  flex: 1;
+  text-align: right;
+}
 
-  .showStuffNum img {
-    position: relative;
-    top: 2px;
-  }
+.showStuffNum span {
+  width: 80px;
+  height: 34px;
+  line-height: 34px;
+  display: inline-block;
+  text-align: left;
+}
 
-  .conatiner_step {
-    width: 100%;
-    height: auto;
-  }
+.showStuffNum img {
+  position: relative;
+  top: 2px;
+}
 
-  .method {
-    width: 90%;
-    height: 48px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    font-size: 16px;
-    font-weight: bold;
-  }
+.conatiner_step {
+  width: 100%;
+  height: auto;
+}
 
-  .left {
-    flex: 1;
-  }
+.method {
+  width: 90%;
+  height: 48px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+}
 
-  .right {
-    color: #f55263;
-  }
+.left {
+  flex: 1;
+}
 
-  .inputStep {
-    width: 90%;
-    margin: 0 auto;
-    font-size: 16px;
-    position: relative;
-    margin-bottom: 10px;
-  }
+.right {
+  color: #f55263;
+}
 
-  .num {
-    font-weight: bold;
-  }
+.inputStep {
+  width: 90%;
+  margin: 0 auto;
+  font-size: 16px;
+  position: relative;
+  margin-bottom: 10px;
+}
 
-  .del {
-    font-weight: bold;
-    color: #999;
-    position: absolute;
-    right: 0;
-  }
+.num {
+  font-weight: bold;
+}
 
-  .inputStep textarea {
-    margin-top: 10px;
-    width: 100%;
-    height: 90px;
-    font-size: 16px;
-    border: none;
-    outline: none;
-    resize: none;
-    font-family: "楷体";
-  }
+.del {
+  font-weight: bold;
+  color: #999;
+  position: absolute;
+  right: 0;
+}
 
-  .container_btn {
-    width: 100%;
-    height: 50px;
-  }
+.inputStep textarea {
+  margin-top: 10px;
+  width: 100%;
+  height: 90px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  resize: none;
+  font-family: "楷体";
+}
 
-  .submit {
-    width: 100%;
-    height: 48px;
-    background: #f55263;
-    border: none;
-    position: fixed;
-    bottom: 0;
-    color: #fff;
-    font-size: 20px;
-  }
+.container_btn {
+  width: 100%;
+  height: 50px;
+}
 
-  .container_kind {
-    width: 100%;
-    height: 116px;
-  }
+.submit {
+  width: 100%;
+  height: 48px;
+  background: #f55263;
+  border: none;
+  position: fixed;
+  bottom: 0;
+  color: #fff;
+  font-size: 20px;
+}
 
-  .inputKind {
-    width: 90%;
-    height: 34px;
-    display: flex;
-    margin: 7px auto;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 5px 0 #ddd;
-  }
+.container_kind {
+  width: 100%;
+  height: 116px;
+}
 
-  .kind {
-    height: 34px;
-    flex: 1;
-    text-align: center;
-    line-height: 34px;
-    color: #f95754;
-    border-right: 1px solid #ddd;
-  }
+.inputKind {
+  width: 90%;
+  height: 34px;
+  display: flex;
+  margin: 7px auto;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 5px 0 #ddd;
+}
 
-  .sel {
-    background: #f95754;
-    color: #fff;
-  }
+.kind {
+  height: 34px;
+  flex: 1;
+  text-align: center;
+  line-height: 34px;
+  color: #f95754;
+  border-right: 1px solid #ddd;
+}
 
+.sel {
+  background: #f95754;
+  color: #fff;
+}
 </style>

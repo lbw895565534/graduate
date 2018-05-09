@@ -39,7 +39,7 @@ const getters = {
   cookbookSearch: state => state.cookbook_search,
   //购物车的列表
   cartProducts: state => {
-    return state.added.map(({
+    return state.loginUser.cart.map(({
       id,
       num,
       checked
@@ -88,25 +88,25 @@ const actions = {
   }) {
     commit('getCookbook')
   },
+  getStaple({
+    commit
+  }) {
+    commit('getStaple')
+  },
   getHomecook({
     commit
   }) {
     commit('getHomecook')
   },
-  getDrink({
+  getSoup({
     commit
   }) {
-    commit('getDrink')
+    commit('getSoup')
   },
-  getPizza({
+  getSweets({
     commit
   }) {
-    commit('getPizza')
-  },
-  getCake({
-    commit
-  }) {
-    commit('getCake')
+    commit('getSweets')
   },
   getStuff({
     commit
@@ -265,6 +265,14 @@ const mutations = {
       console.log(err)
     })
   },
+  getStaple(state) {
+    state.cookbook_filter = [];
+    state.cookbook_list.forEach((n, i) => {
+      if (n.kind == "staple") {
+        state.cookbook_filter.push(n);
+      }
+    })
+  },
   getHomecook(state) {
     state.cookbook_filter = [];
     state.cookbook_list.forEach((n, i) => {
@@ -273,26 +281,18 @@ const mutations = {
       }
     })
   },
-  getDrink(state) {
+  getSoup(state) {
     state.cookbook_filter = [];
     state.cookbook_list.forEach((n, i) => {
-      if (n.kind == "drink") {
+      if (n.kind == "soup") {
         state.cookbook_filter.push(n);
       }
     })
   },
-  getPizza(state) {
+  getSweets(state) {
     state.cookbook_filter = [];
     state.cookbook_list.forEach((n, i) => {
-      if (n.kind == "pizza") {
-        state.cookbook_filter.push(n);
-      }
-    })
-  },
-  getCake(state) {
-    state.cookbook_filter = [];
-    state.cookbook_list.forEach((n, i) => {
-      if (n.kind == "cake") {
+      if (n.kind == "sweets") {
         state.cookbook_filter.push(n);
       }
     })
@@ -419,9 +419,9 @@ const mutations = {
   add(state, {
     id
   }) {
-    let record = state.added.find(n => n.id == id);
+    let record = state.loginUser.cart.find(n => n.id == id);
     if (!record) {
-      state.added.push({
+      state.loginUser.cart.push({
         id,
         num: 1,
         checked: false
@@ -432,39 +432,39 @@ const mutations = {
   },
   //清除购物车所有项
   clearAll(state) {
-    state.added = []
+    state.loginUser.cart = []
   },
   //删除购物车的指定项
   del(state, product) {
-    state.added.forEach((n, i) => {
+    state.loginUser.cart.forEach((n, i) => {
       if (n.id == product.id) {
-        state.added.splice(i, 1)
+        sstate.loginUser.cart.splice(i, 1)
       }
     })
   },
   //商品数目增加
   addNum(state, product) {
-    state.added.forEach((n, i) => {
+    state.loginUser.cart.forEach((n, i) => {
       if (n.id == product.id) {
-        state.added[i].num++;
+        state.loginUser.cart[i].num++;
       }
     })
   },
   //商品数目减少
   reduceNum(state, product) {
-    state.added.forEach((n, i) => {
+    state.loginUser.cart.forEach((n, i) => {
       if (n.id == product.id) {
-        if (state.added[i].num > 1) {
-          state.added[i].num--;
+        if (state.loginUser.cart[i].num > 1) {
+          state.loginUser.cart[i].num--;
         }
       }
     })
   },
   //商品选择
   shopChecked(state, product) {
-    state.added.forEach((n, i) => {
+    state.loginUser.cart.forEach((n, i) => {
       if (n.id == product.id) {
-        state.added[i].checked = !state.added[i].checked;
+        state.loginUser.cart[i].checked = !state.loginUser.cart[i].checked;
       }
     })
   },
@@ -472,7 +472,7 @@ const mutations = {
   allChecked(state) {
     let n = false;
     if (!n) {
-      state.added.forEach(n => {
+      state.loginUser.cart.forEach(n => {
         n.checked = !n.checked;
       });
       n = true;
@@ -480,9 +480,9 @@ const mutations = {
   },
   //支付成功删除商品
   delPayed(state) {
-    state.added.forEach((n,i) => {
+    state.loginUser.cart.forEach((n,i) => {
       if (n.checked) {
-        state.added.splice(i, 1);
+        state.loginUser.cart.splice(i, 1);
       }
     });
   },

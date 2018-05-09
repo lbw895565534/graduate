@@ -2,25 +2,25 @@
   <div>
     <router-link :to="{ name:'sort', params: {name: txt[0].name, kind: txt[0].kind , lastShow: true} }" class="keep">
       <div class="sort_box">
-        <img class="sort_icon" src="@/assets/img/icon/rice.png" alt="">
+        <img class="sort_icon" src="@/assets/img/icon/staple.png" alt="">
         <span class="sort_name">{{ txt[0].name }}</span>
       </div>
     </router-link>
     <router-link :to="{ name:'sort', params: {name: txt[1].name, kind: txt[1].kind , lastShow: true} }" class="keep">
       <div class="sort_box">
-        <img class="sort_icon" src="@/assets/img/icon/drink.png" alt="">
+        <img class="sort_icon" src="@/assets/img/icon/homecook.png" alt="">
         <span class="sort_name">{{ txt[1].name }}</span>
       </div>
     </router-link>
     <router-link :to="{ name:'sort', params: {name: txt[2].name, kind: txt[2].kind , lastShow: true} }" class="keep">
       <div class="sort_box">
-        <img class="sort_icon" src="@/assets/img/icon/pizza.png" alt="">
+        <img class="sort_icon" src="@/assets/img/icon/soup.png" alt="">
         <span class="sort_name">{{ txt[2].name }}</span>
       </div>
     </router-link>
     <router-link :to="{ name:'sort', params: {name: txt[3].name, kind: txt[3].kind , lastShow: true} }" class="keep">
       <div class="sort_box">
-        <img class="sort_icon" src="@/assets/img/icon/cake.png" alt="">
+        <img class="sort_icon" src="@/assets/img/icon/sweets.png" alt="">
         <span class="sort_name">{{ txt[3].name }}</span>
       </div>
     </router-link>
@@ -31,10 +31,10 @@ export default {
   data: function() {
     return {
       txt: [
+      {name: "主食", kind: "staple"},
       {name: "常菜", kind: "homecook"},
-      {name: "饮料", kind: "drink"},
-      {name: "比萨", kind: "pizza"},
-      {name: "蛋糕", kind: "cake"}]
+      {name: "汤", kind: "soup"},
+      {name: "甜品", kind: "sweets"}]
     };
   },
   methods: {

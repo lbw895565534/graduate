@@ -20,17 +20,11 @@ export default {
     };
   },
   mounted() {
-    this.$http.get("/commodity").then(
-      res => {
-        this.cart = res.data.data;
-      },
-      res => {
-        console.log("请求无响应");
-      }
-    );
+    console.log(this.loginUser.cart);
+    this.cart = this.loginUser.cart;
   },
   computed: {
-    ...mapGetters(["cartProducts"])
+    ...mapGetters(["loginUser"])
   }
 };
 </script>

@@ -36,13 +36,6 @@
       Banner,
       Program,
       Sort
-    },
-    mounted() {
-      this.getCookbook();
-    },
-    methods: {
-      //获取全部美食
-      ...mapActions(["getCookbook"]),
     }
   };
 

@@ -26,7 +26,7 @@
       <table>
         <tr>
           <th>原料</th>
-          <th class="addAll" @click="allAdd()">全部加入</th>
+          <th class="addAll" @click="allAdd(cookbook.shoplist)">全部加入</th>
         </tr>
         <tr v-for="shop in cookbook.shoplist">
           <td @click="addOne(shop)">{{ shop.name }}</td>
@@ -35,7 +35,15 @@
       </table>
     </div>
     <div class="step">
-
+      <div class="step_title">
+        <span>制作步骤</span>
+      </div>
+      <div class="step_content" v-for="step in cookbook.content">
+        <span class="num">步骤{{ step.num }}/{{ cookbook.content.length }}：</span>
+        <div class="content">
+          <span>{{ step.content }}</span>
+        </div>
+      </div>
     </div>
     <div class="comment">
 
@@ -58,7 +66,7 @@ export default {
   },
   computed: {
     ...mapGetters(["stufflist"]),
-    ...mapGetters(["loginUser"]),
+    ...mapGetters(["loginUser"])
   },
   methods: {
     ...mapActions(["getStuff"]),
@@ -66,33 +74,58 @@ export default {
     ...mapActions(["addCollect"]),
     ...mapActions(["addToCart"]),
     isLiked(arr, value) {
-      for (var i = 0;i<arr.length;i++) {
+      for (var i = 0; i < arr.length; i++) {
         if (arr[i] == value) {
           this.liked = true;
         }
       }
     },
     isCollected(arr, value) {
-      for (var i = 0;i<arr.length;i++) {
+      for (var i = 0; i < arr.length; i++) {
         if (arr[i] == value) {
           this.collected = true;
         }
       }
     },
-    allAdd() {
-      MessageBox.confirm("是否将食材全部加入购物车?", "提示").then(action => {
-        if (action == "confirm") {
-          Indicator.open();
-          setTimeout(() => Indicator.close(), 2000);
-          setTimeout(() => {
-            MessageBox.confirm("是否进入购物车?", "操作成功").then(action => {
-              if (action == "confirm") {
-                this.$router.push({ name: "cart" });
-              }
+    opLike() {
+      if (this.loginUser != null) {
+        this.addLike();
+      }
+    },
+    opCollect() {
+      if (this.loginUser != null) {
+        this.addCollect();
+      }
+    },
+    allAdd(stuff) {
+      if (this.loginUser != null) {
+        MessageBox.confirm("是否将食材全部加入购物车?", "提示").then(action => {
+          if (action == "confirm") {
+            Indicator.open();
+            stuff.forEach(n => {
+              this.addToCart(n.id);
             });
-          }, 2000);
-        }
-      });
+            setTimeout(() => Indicator.close(), 2000);
+            setTimeout(() => {
+              MessageBox.confirm("是否进入购物车?", "操作成功").then(action => {
+                if (action == "confirm") {
+                  this.$router.push({ name: "cart" });
+                }
+              });
+            }, 2000);
+          }
+        });
+      }
+      if (this.loginUser == null) {
+        Toast({
+          message: "请先登录",
+          position: "bottom",
+          duration: 2000
+        });
+        setTimeout(() => {
+          this.$router.push({ name: "login" });
+        }, 2000);
+      }
     },
     addOne(shop) {
       this.addToCart(shop);
@@ -175,6 +208,7 @@ table {
   width: 80%;
   margin: auto;
   text-align: center;
+  border-bottom: 1px solid #ddd;
 }
 
 th {
@@ -188,5 +222,28 @@ th {
 td {
   color: #555;
   line-height: 25px;
+}
+.step {
+  width: 80%;
+  height: auto;
+  margin: 20px auto;
+}
+.step_title {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+.step_content {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+}
+.num {
+  font-weight: bold;
+  display: inline-block;
+}
+.content > span {
+  display: inline-block;
+  margin: 10px 0;
+  margin-left: 2rem3;
 }
 </style>

@@ -62,9 +62,15 @@
     },
     mounted() {
       this.changePage("home");
+      this.getCookbook();
+      this.getShop();
     },
     methods: {
       ...mapActions(["changePage"]),
+       //获取全部食谱
+      ...mapActions(["getCookbook"]),
+      //获取食材
+      ...mapActions(["getShop"]),
       //  获取选中的Item的mark值，并且实现Item路由跳转
       getItem: function (i) {
         this.changePage(i);

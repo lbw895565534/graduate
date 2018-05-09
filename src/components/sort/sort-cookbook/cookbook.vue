@@ -40,10 +40,10 @@ export default {
     ...mapGetters(["loginUser"]),
   },
   methods: {
+    ...mapActions(["getStaple"]),
     ...mapActions(["getHomecook"]),
-    ...mapActions(["getDrink"]),
-    ...mapActions(["getPizza"]),
-    ...mapActions(["getCake"]),
+    ...mapActions(["getSoup"]),
+    ...mapActions(["getSweets"]),
     ...mapActions(["sortOfLikes"]),
     ...mapActions(["sortOfCollects"]),
     ...mapActions(["clearCookbookFilter"]),
@@ -63,20 +63,20 @@ export default {
   },
   mounted() {
     switch (this.kind) {
+      case "staple": {
+        this.getStaple();
+        break;
+      }
       case "homecook": {
         this.getHomecook();
         break;
       }
-      case "drink": {
-        this.getDrink();
+      case "soup": {
+        this.getSoup();
         break;
       }
-      case "pizza": {
-        this.getPizza();
-        break;
-      }
-      case "cake": {
-        this.getCake();
+      case "sweets": {
+        this.getSweets();
         break;
       }
       case "like": {
