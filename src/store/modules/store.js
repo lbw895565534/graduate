@@ -38,7 +38,7 @@ const getters = {
   //搜索食谱
   cookbookSearch: state => state.cookbook_search,
   //购物车的列表
-  cartProducts: state => {
+  userCart: state => {
     return state.loginUser.cart.map(({
       id,
       num,
@@ -55,7 +55,7 @@ const getters = {
   //计算总价
   totalPrice: (state, getters) => {
     let total = 0;
-    getters.cartProducts.forEach(n => {
+    getters.userCart.forEach(n => {
       if (n.checked) {
         total += n.price * n.num
       }
@@ -65,7 +65,7 @@ const getters = {
   //计算总数量
   totalNum: (state, getters) => {
     let total = 0;
-    getters.cartProducts.forEach(n => {
+    getters.userCart.forEach(n => {
       if (n.checked) {
         total += n.num
       }
@@ -231,7 +231,7 @@ const actions = {
   pay({
     commit
   }, paynumber) {
-    commit('delPayed', {
+    commit('pay', {
       paynumber: paynumber
     })
   },
@@ -297,7 +297,9 @@ const mutations = {
       }
     })
   },
-  getStuff(state, { cookbook }) {
+  getStuff(state, {
+    cookbook
+  }) {
     state.stuff_list = [];
     for (i in cookbook) {
       for (n in state.shop_list) {
@@ -308,7 +310,9 @@ const mutations = {
     }
   },
   //发布食谱
-  shareCookbook(state, { cookbook }) {
+  shareCookbook(state, {
+    cookbook
+  }) {
     var d = new Date();
     var date = d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate();
     cookbook.likes = 0;
@@ -319,7 +323,7 @@ const mutations = {
   //搜索
   search(state, value) {
     var result = [];
-    for (var i = 0;i < state.cookbook_list.length;i++) {
+    for (var i = 0; i < state.cookbook_list.length; i++) {
       if (state.cookbook_list[i].name.search(value) != -1 || state.cookbook_list[i].info.search(value) != -1) {
         result.push(state.cookbook_list[i]);
       }
@@ -359,18 +363,18 @@ const mutations = {
     var right = state.cookbook_hot.length - 1;
     while (left < right) {
       for (var i = 0; i < right; i++) {
-        if ((state.cookbook_hot[i].likes + state.cookbook_hot[i].collects) < (state.cookbook_hot[i+1].likes + state.cookbook_hot[i+1].collects)) {
+        if ((state.cookbook_hot[i].likes + state.cookbook_hot[i].collects) < (state.cookbook_hot[i + 1].likes + state.cookbook_hot[i + 1].collects)) {
           var temp = state.cookbook_hot[i];
-          state.cookbook_hot[i] = state.cookbook_hot[i+1];
-          state.cookbook_hot[i+1] = temp;
+          state.cookbook_hot[i] = state.cookbook_hot[i + 1];
+          state.cookbook_hot[i + 1] = temp;
         }
       }
       right--;
       for (var i = right; i > left; i--) {
-        if ((state.cookbook_hot[i-1].likes + state.cookbook_hot[i-1].collects) < (state.cookbook_hot[i].likes + state.cookbook_hot[i].collects)) {
+        if ((state.cookbook_hot[i - 1].likes + state.cookbook_hot[i - 1].collects) < (state.cookbook_hot[i].likes + state.cookbook_hot[i].collects)) {
           var temp = state.cookbook_hot[i];
-          state.cookbook_hot[i] = state.cookbook_hot[i-1];
-          state.cookbook_hot[i-1] = temp;
+          state.cookbook_hot[i] = state.cookbook_hot[i - 1];
+          state.cookbook_hot[i - 1] = temp;
         }
       }
       left++;
@@ -380,7 +384,7 @@ const mutations = {
   sortOfMine(state) {
     if (state.loginUser != null) {
       state.cookbook_mine = state.loginUser.cookbook;
-    }else {
+    } else {
       state.cookbook_mine = "";
     }
   },
@@ -429,6 +433,7 @@ const mutations = {
     } else {
       record.num++
     }
+    console.log(state.loginUser.cart);
   },
   //清除购物车所有项
   clearAll(state) {
@@ -438,7 +443,7 @@ const mutations = {
   del(state, product) {
     state.loginUser.cart.forEach((n, i) => {
       if (n.id == product.id) {
-        sstate.loginUser.cart.splice(i, 1)
+        state.loginUser.cart.splice(i, 1)
       }
     })
   },
@@ -470,17 +475,15 @@ const mutations = {
   },
   //商品全选
   allChecked(state) {
-    let n = false;
-    if (!n) {
-      state.loginUser.cart.forEach(n => {
-        n.checked = !n.checked;
-      });
-      n = true;
-    }
+    let b = false;
+    state.loginUser.cart.forEach(n => {
+      n.checked = b;
+    });
+    b = true;
   },
   //支付成功删除商品
   delPayed(state) {
-    state.loginUser.cart.forEach((n,i) => {
+    state.loginUser.cart.forEach((n, i) => {
       if (n.checked) {
         state.loginUser.cart.splice(i, 1);
       }
@@ -488,9 +491,9 @@ const mutations = {
   },
   //判断支付密码
   pay(state, paynumber) {
-    if (paynumber == loginUser.paynumber) {
+    if (paynumber == state.loginUser.paynumber) {
       return true;
-    }else {
+    } else {
       return false;
     }
   }

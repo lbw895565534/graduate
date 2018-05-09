@@ -26,7 +26,7 @@
           </div>
           <div class="list_item_op">
             <div class="item_op">
-              <img src="@/assets/img/icon/cart.svg" class="item_op_btn" @click="addToCart(shop)"></img>
+              <img src="@/assets/img/icon/cart.svg" class="item_op_btn" @click="add(shop)"></img>
             </div>
           </div>
         </div>
@@ -35,26 +35,34 @@
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
+import { Toast } from "mint-ui";
 export default {
-  props: [],
-  data() {
-    name: "product";
-    return {
-      stuff: []
-    };
-  },
   created() {
     this.getShop();
   },
-  mounted() {
-    this.stuff = this.shoplist;
-  },
   computed: {
-    ...mapGetters(['shoplist'])
+    ...mapGetters(['shoplist']),
+    ...mapGetters(['loginUser'])
   },
   methods: {
     ...mapActions(['getShop']),
-    ...mapActions(['addToCart'])
+    ...mapActions(['addToCart']),
+    add (shop) {
+      if (this.isLogin()) {
+        this.addToCart(shop);
+      }
+    },
+    isLogin() {
+      if (this.loginUser == null) {
+        Toast({
+          message: "请先登录",
+          position: "bottom",
+          duration: 2000
+        });
+        return false;
+      }
+      return true;
+    }
   }
 };
 </script>

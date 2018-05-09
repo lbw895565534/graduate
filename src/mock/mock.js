@@ -13,7 +13,8 @@ const state = {
       info: "",
       paynumber: 123456,
       cookbook: [],
-      cart: []
+      cart: [],
+      collect: []
     },
     {
       id: 2,
@@ -26,7 +27,8 @@ const state = {
       info: "",
       paynumber: 123456,
       cookbook: [],
-      cart: []
+      cart: [],
+      collect: []
     },
     {
       id: 3,
@@ -39,7 +41,8 @@ const state = {
       info: "",
       paynumber: 123456,
       cookbook: [],
-      cart: []
+      cart: [],
+      collect: []
     }
   ],
   cookbooks: [{
@@ -78,7 +81,8 @@ const state = {
         num: "适量"
       }],
       likeUser: ["Liming"],
-      collectUser: []
+      collectUser: ["Liming"],
+      comment: []
     },
     {
       id: 12,
@@ -134,7 +138,8 @@ const state = {
         num: "适量"
       }],
       likeUser: [],
-      collectUser: []
+      collectUser: [],
+      comment: []
     },
     {
       id: 13,
@@ -154,7 +159,8 @@ const state = {
         num: "半勺"
       }],
       likeUser: [],
-      collectUser: []
+      collectUser: [],
+      comment: []
     },
     {
       id: 14,
@@ -174,7 +180,8 @@ const state = {
         num: "半勺"
       }],
       likeUser: [],
-      collectUser: []
+      collectUser: [],
+      comment: []
     },
     {
       id: 15,
@@ -194,7 +201,8 @@ const state = {
         num: "半勺"
       }],
       likeUser: [],
-      collectUser: []
+      collectUser: [],
+      comment: []
     },
     {
       id: 16,
@@ -214,7 +222,8 @@ const state = {
         num: "半勺"
       }],
       likeUser: [],
-      collectUser: []
+      collectUser: [],
+      comment: []
     },
     {
       id: 17,
@@ -234,7 +243,8 @@ const state = {
         num: "半勺"
       }],
       likeUser: [],
-      collectUser: []
+      collectUser: [],
+      comment: []
     },
     {
       id: 18,
@@ -254,7 +264,8 @@ const state = {
         num: "半勺"
       }],
       likeUser: [],
-      collectUser: []
+      collectUser: [],
+      comment: []
     },
     {
       id: 19,
@@ -274,7 +285,8 @@ const state = {
         num: "半勺"
       }],
       likeUser: [],
-      collectUser: []
+      collectUser: [],
+      comment: []
     }
   ],
   stuff: [{

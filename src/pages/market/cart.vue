@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Cart :cart="cart"></Cart>
+    <Cart :cart="userCart"></Cart>
     <Operate></Operate>
   </div>
 </template>
@@ -13,18 +13,9 @@ export default {
     Cart,
     Operate
   },
-  props: [],
-  data() {
-    return {
-      cart: []
-    };
-  },
-  mounted() {
-    console.log(this.loginUser.cart);
-    this.cart = this.loginUser.cart;
-  },
   computed: {
-    ...mapGetters(["loginUser"])
+    ...mapGetters(["loginUser"]),
+    ...mapGetters(["userCart"]),
   }
 };
 </script>

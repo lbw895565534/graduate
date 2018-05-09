@@ -39,8 +39,9 @@
         <span>制作步骤</span>
       </div>
       <div class="step_content" v-for="step in cookbook.content">
-        <span class="num">步骤{{ step.num }}/{{ cookbook.content.length }}：</span>
+        <span class="num">步骤{{ step.num }}/{{ cookbook.content.length }}:</span>
         <div class="content">
+          <div class="blank"></div>
           <span>{{ step.content }}</span>
         </div>
       </div>
@@ -52,9 +53,8 @@
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
-import { Indicator } from "mint-ui";
-import { MessageBox } from "mint-ui";
-import { Toast } from "mint-ui";
+import { Indicator,MessageBox,Toast } from "mint-ui";
+
 export default {
   data() {
     return {
@@ -103,7 +103,7 @@ export default {
           if (action == "confirm") {
             Indicator.open();
             stuff.forEach(n => {
-              this.addToCart(n.id);
+              this.addToCart(n);
             });
             setTimeout(() => Indicator.close(), 2000);
             setTimeout(() => {
@@ -236,14 +236,23 @@ td {
 .step_content {
   margin-bottom: 10px;
   border-bottom: 1px solid #ddd;
+  box-shadow: 0 0 5px 0 #ddd;
 }
 .num {
-  font-weight: bold;
   display: inline-block;
+  margin: 10px 10px 0 0;
 }
+.content {
+  display: flex;
+  flex-direction: column;
+  
+}
+
 .content > span {
+  flex: 1;
   display: inline-block;
+  font-family: arial;
   margin: 10px 0;
-  margin-left: 2rem3;
+  margin-left: 1rem;
 }
 </style>

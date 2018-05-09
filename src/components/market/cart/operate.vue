@@ -50,6 +50,7 @@ export default {
                     message: "操作成功",
                     iconClass: "mintui mintui-success"
                   });
+                  this.delPayed();
                 }else {
                   Toast({
                     message: "密码错误",
@@ -58,8 +59,7 @@ export default {
                 }
               }
             });
-          }
-          this.delPayed();
+          }          
         });
       }
     }

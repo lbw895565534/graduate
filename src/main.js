@@ -6,8 +6,6 @@ import router from './router'
 import axios from 'axios'
 import store from './store'
 import MintUI from 'mint-ui'
-import { MessageBox } from "mint-ui";
-import { Indicator } from "mint-ui";
 import '@/assets/css/my-mint.css';
 import '@/assets/libs/font/iconfont.css';
 import 'mint-ui/lib/style.css'

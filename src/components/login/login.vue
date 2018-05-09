@@ -18,7 +18,7 @@
           <img src="@/assets/img/icon/password.svg" alt="" class="icon" v-if="!form[1].focus">
           <img src="@/assets/img/icon/password_after.svg" alt="" class="icon" v-if="form[1].focus">
         </div>
-        <input type="text" class="input_password" placeholder="密码" v-model="password" @click="focus(1)" @blur="unFocus(1)">
+        <input type="password" class="input_password" placeholder="密码" v-model="password" @click="focus(1)" @blur="unFocus(1)">
       </div>
     </div>
     <div id="input4" class="input">
