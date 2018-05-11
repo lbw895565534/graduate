@@ -35,28 +35,42 @@ export default new Router({
     {
       path: '/main',
       name: 'main',
-      component: Main,      
+      component: Main,
+      meta: {
+        keepAlive: true, //此组件需要被缓存
+      },
       children: [{
-          path: 'home',
-          name: 'home',
-          component: Home,
-        },
-        {
-          path: 'share',
-          name: 'share',
-          component: Share,
-          
-        },
-        {
-          path: 'market',
-          name: 'market',
-          component: Market
-        },
-        {
-          path: 'mine',
-          name: 'mine',
-          component: Mine
+        path: 'home',
+        name: 'home',
+        component: Home,
+        meta: {
+          keepAlive: true, //此组件需要被缓存
         }
+      },
+      {
+        path: 'share',
+        name: 'share',
+        component: Share,
+        meta: {
+          keepAlive: true, //此组件需要被缓存
+        }
+      },
+      {
+        path: 'market',
+        name: 'market',
+        component: Market,
+        meta: {
+          keepAlive: true, //此组件需要被缓存
+        }
+      },
+      {
+        path: 'mine',
+        name: 'mine',
+        component: Mine,
+        meta: {
+          keepAlive: false, //此组件不需要被缓存
+        }
+      }
       ]
     },
     {
@@ -64,41 +78,41 @@ export default new Router({
       name: 'next',
       component: Next,
       children: [{
-          path: 'sort/:kind',
-          name: 'sort',
-          component: Sort,          
-        },
-        {
-          path: 'cart',
-          name: 'cart',
-          component: Cart
-        },
-        {
-          path: 'detail',
-          name: 'detail',
-          component: Detail,          
-        },
-        {
-          path: 'comments',
-          name: 'comments',
-          component: Comments
-        },
-        {
-          path: 'search',
-          name: 'search',
-          component: Search
-        },
-        {
-          path: 'share/ShareInput',
-          name: 'shareInput',
-          component: ShareInput
-        },
-        {
-          path: 'mine/profile',
-          name: 'profile',
-          component: Profile
-        }
+        path: 'sort/:kind',
+        name: 'sort',
+        component: Sort,
+      },
+      {
+        path: 'cart',
+        name: 'cart',
+        component: Cart
+      },
+      {
+        path: 'detail',
+        name: 'detail',
+        component: Detail,
+      },
+      {
+        path: 'search',
+        name: 'search',
+        component: Search
+      },
+      {
+        path: 'share/ShareInput',
+        name: 'shareInput',
+        component: ShareInput
+      },
+      {
+        path: 'mine/profile',
+        name: 'profile',
+        component: Profile
+      }
       ]
-    }
+    },
+    {
+      path: '/comments',
+      name: 'comments',
+      component: Comments
+    },
   ]
 })

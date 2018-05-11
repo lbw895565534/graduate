@@ -1,5 +1,8 @@
 <template>
   <div class="box">
+    <div class="top">
+      <i class="mintui mintui-back" @click="back()"></i>
+    </div>
     <div class="item" v-for="c in comments">
       <div class="container">
         <div class="row1">
@@ -20,12 +23,19 @@
   export default {
     data() {
       return {
+        cookbook: [],
         comments: []
       }
     },
+    methods: {
+      back() {
+        this.$router.push({name: 'detail', query: {params: this.cookbook}});
+      }
+    },
     mounted() {
-      this.comments = this.$route.params.comments;
-      console.log(this.comments);
+      this.cookbook = this.$route.params.cookbook;
+      this.comments = this.cookbook.comment;
+      console.log(this.cookbook);
     }
   }
 
@@ -38,7 +48,18 @@
     flex-direction: column;
   }
 
-  .container {    
+  .top {
+    width: 100%;
+    height: 45px;
+    background: #E9A144;
+  }
+  i {
+    position: relative;
+    top: 12px;
+    left: 10px;
+    color: #fff;
+  }
+  .container {
     width: 90%;
     height: auto;
     margin: 0 auto;
@@ -46,7 +67,7 @@
   }
 
   .item {
-    width: 100%;    
+    width: 100%;
     border-bottom: 1px solid #ddd;
   }
 

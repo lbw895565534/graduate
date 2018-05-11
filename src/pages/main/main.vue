@@ -8,19 +8,19 @@
     </div>
     <div class="footer">
         <div class="tabbarFooter" >
-            <Item txt="首页" mark="home" :sel="getPage.page" @change="getItem">
+            <Item txt="首页" mark="home" :sel="selected" @change="getItem">
               <img src="@/assets/img/icon/home.png" alt="" slot="normalImg">
               <img src="@/assets/img/icon/homered.png" alt="" slot="activeImg">
             </Item>
-            <Item txt="分享" mark="share" :sel="getPage.page" @change="getItem">
+            <Item txt="分享" mark="share" :sel="selected" @change="getItem">
               <img src="@/assets/img/icon/share.png" alt="" slot="normalImg">
               <img src="@/assets/img/icon/sharered.png" alt="" slot="activeImg">
             </Item>
-            <Item txt="市集" mark="market" :sel="getPage.page" @change="getItem">
+            <Item txt="市集" mark="market" :sel="selected" @change="getItem">
               <img src="@/assets/img/icon/market.png" alt="" slot="normalImg">
               <img src="@/assets/img/icon/marketred.png" alt="" slot="activeImg">
             </Item>
-            <Item txt="我的" mark="mine" :sel="getPage.page" @change="getItem">
+            <Item txt="我的" mark="mine" :sel="selected" @change="getItem">
               <img src="@/assets/img/icon/mine.png" alt="" slot="normalImg">
               <img src="@/assets/img/icon/minered.png" alt="" slot="activeImg">
             </Item>
@@ -51,6 +51,7 @@
       ...mapGetters(["getPage"])
     },
     watch: {
+      //标题是否显示
       getPage() {
         this.show = true;
         this.selected = this.getPage.page;
@@ -61,6 +62,7 @@
       }
     },
     mounted() {
+      this.selected = this.getPage.page;
       this.changePage("home");
       this.getCookbook();
       this.getShop();

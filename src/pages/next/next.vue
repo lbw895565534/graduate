@@ -2,9 +2,7 @@
   <div>
     <Top :title="$route.params.name"></Top>
     <div class="content">
-      <keep-alive>
-        <router-view></router-view>
-      </keep-alive>
+      <router-view></router-view>
     </div>
   </div>
 </template>
