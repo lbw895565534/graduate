@@ -35,10 +35,7 @@ export default new Router({
     {
       path: '/main',
       name: 'main',
-      component: Main,
-      meta: {
-        keepAlive: true, //此组件不需要被缓存
-      },
+      component: Main,      
       children: [{
           path: 'home',
           name: 'home',
@@ -69,10 +66,7 @@ export default new Router({
       children: [{
           path: 'sort/:kind',
           name: 'sort',
-          component: Sort,
-          meta: {
-            keepAlive: true, //此组件不需要被缓存
-          },
+          component: Sort,          
         },
         {
           path: 'cart',
@@ -82,11 +76,7 @@ export default new Router({
         {
           path: 'detail',
           name: 'detail',
-          component: Detail,
-          meta: {
-            keepAlive: true, //此组件不需要被缓存
-            isBack: false,
-          },
+          component: Detail,          
         },
         {
           path: 'comments',

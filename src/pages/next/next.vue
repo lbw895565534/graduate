@@ -3,7 +3,7 @@
     <Top :title="$route.params.name"></Top>
     <div class="content">
       <keep-alive>
-        <router-view v-if="$route.meta.keepAlive"></router-view>
+        <router-view></router-view>
       </keep-alive>
     </div>
   </div>
