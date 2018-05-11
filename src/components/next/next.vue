@@ -18,7 +18,6 @@
     methods: {
       ...mapActions(["toMain"]),
       back() {
-        this.toMain();
         this.$router.go(-1);
       }
     }

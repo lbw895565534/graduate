@@ -15,7 +15,6 @@ import ElementUI from 'element-ui';
 import '@/assets/css/my-element.css';
 import 'element-ui/lib/theme-chalk/index.css';
 
-
 require("@/mock/mock.js")
 
 Vue.prototype.$http = axios

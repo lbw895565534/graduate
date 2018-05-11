@@ -2,9 +2,10 @@
   <div>
     <Top :title="$route.params.name"></Top>
     <div class="content">
-      <router-view></router-view>
+      <keep-alive>
+        <router-view v-if="$route.meta.keepAlive"></router-view>
+      </keep-alive>
     </div>
-
   </div>
 </template>
 <script>

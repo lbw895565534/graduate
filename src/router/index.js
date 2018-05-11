@@ -12,6 +12,7 @@ import Share from '@/pages/share/share'
 import Next from '@/pages/next/next'
 import Sort from '@/pages/sort/sort'
 import Detail from '@/pages/detail/detail'
+import Comments from '@/pages/detail/comments'
 import Cart from '@/pages/market/cart'
 import Search from '@/pages/search/search'
 import ShareInput from '@/pages/share/shareInput'
@@ -22,7 +23,10 @@ Vue.use(Router)
 export default new Router({
   routes: [
     //重定向到main/home
-    {path: '/', redirect: 'main/home'},
+    {
+      path: '/',
+      redirect: 'main/home'
+    },
     {
       path: '/login',
       name: 'login',
@@ -32,6 +36,9 @@ export default new Router({
       path: '/main',
       name: 'main',
       component: Main,
+      meta: {
+        keepAlive: true, //此组件不需要被缓存
+      },
       children: [{
           path: 'home',
           name: 'home',
@@ -41,6 +48,7 @@ export default new Router({
           path: 'share',
           name: 'share',
           component: Share,
+          
         },
         {
           path: 'market',
@@ -58,11 +66,13 @@ export default new Router({
       path: '/next',
       name: 'next',
       component: Next,
-      children: [
-        {
+      children: [{
           path: 'sort/:kind',
           name: 'sort',
-          component: Sort
+          component: Sort,
+          meta: {
+            keepAlive: true, //此组件不需要被缓存
+          },
         },
         {
           path: 'cart',
@@ -72,7 +82,16 @@ export default new Router({
         {
           path: 'detail',
           name: 'detail',
-          component: Detail
+          component: Detail,
+          meta: {
+            keepAlive: true, //此组件不需要被缓存
+            isBack: false,
+          },
+        },
+        {
+          path: 'comments',
+          name: 'comments',
+          component: Comments
         },
         {
           path: 'search',

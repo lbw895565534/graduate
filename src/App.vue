@@ -1,15 +1,20 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <router-view></router-view>      
   </div>
 </template>
 
 <script>
   export default {
-    name: 'app'
+    name: 'app',
+    data() {
+      return {
+        
+      }
+    }
   }
 </script>
-<style>
+<style>  
   body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,
   fieldset,input,textarea,p,blockquote,th,td {
   margin:0;
