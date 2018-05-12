@@ -93,6 +93,11 @@ export default new Router({
         component: Detail,
       },
       {
+        path: '/comments',
+        name: 'comments',
+        component: Comments
+      },    
+      {
         path: 'search',
         name: 'search',
         component: Search
@@ -108,11 +113,6 @@ export default new Router({
         component: Profile
       }
       ]
-    },
-    {
-      path: '/comments',
-      name: 'comments',
-      component: Comments
-    },
+    }
   ]
 })

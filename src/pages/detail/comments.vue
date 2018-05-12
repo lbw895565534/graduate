@@ -1,8 +1,5 @@
 <template>
   <div class="box">
-    <div class="top">
-      <i class="mintui mintui-back" @click="back()"></i>
-    </div>
     <div class="item" v-for="c in comments">
       <div class="container">
         <div class="row1">
@@ -48,17 +45,6 @@
     flex-direction: column;
   }
 
-  .top {
-    width: 100%;
-    height: 45px;
-    background: #E9A144;
-  }
-  i {
-    position: relative;
-    top: 12px;
-    left: 10px;
-    color: #fff;
-  }
   .container {
     width: 90%;
     height: auto;

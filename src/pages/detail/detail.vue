@@ -65,7 +65,8 @@
     MessageBox,
     Toast
   } from "mint-ui";
-    import Top from "@/components/next/next";
+  import Top from "@/components/next/next";
+  import Page from '@/store/modules/page'
   export default {
     components: {
       Top
@@ -82,7 +83,8 @@
     },
     computed: {
       ...mapGetters(["stufflist"]),
-      ...mapGetters(["loginUser"])
+      ...mapGetters(["loginUser"]),
+      ...mapGetters(["getParams"])
     },
     methods: {
       ...mapActions(["getStuff"]),
@@ -162,22 +164,37 @@
             this.mark[m] = false;
           }
         }
-        console.log(this.mark);
       }
     },
-    beforeMount() {
-      this.cookbook = this.$route.query.param;
+    mounted() {      
+      this.cookbook = this.$route.params;
+      if(this.cookbook.name == undefined){
+        this.getParams.forEach((n,i) => {
+          if (n.name = "detail") {
+            this.cookbook = n.params;
+          }
+        })
+      }
       this.stuffId = this.cookbook.shoplist;
       this.nums = this.cookbook.comment.length;
       //记录制作步骤
-      // var length = this.cookbook.content.length;
-      // this.mark.length = length;
-      // for (var m = 0; m < length; m++) {
-      //   this.mark[m] = false;
-      // }
+      var length = this.cookbook.content.length;
+      this.mark.length = length;
+      for (var m = 0; m < length; m++) {
+        this.mark[m] = false;
+      }
       this.getStuff(this.stuffId);
       this.isLiked(this.cookbook.likeUser, this.loginUser);
       this.isCollected(this.cookbook.collectUser, this.loginUser);
+    },
+    beforeRouteLeave(to, from, next) {
+      if (to.name == "comments") {        
+        this.$store.dispatch('refreshParams', from);
+      }
+      if (to.name == "sort") {        
+        this.$store.dispatch('removeParams', from);
+      }
+      next();
     }
   };
 
@@ -187,12 +204,14 @@
     margin: 0;
     padding: 0;
   }
+
   .box_back {
     width: 100%;
     height: 42px;
     position: absolute;
     background: #ffffff47;
   }
+
   .box_back>img {
     margin-top: 5px;
     margin-left: 5px;
@@ -314,4 +333,5 @@
     height: auto;
     margin: 20px auto;
   }
+
 </style>

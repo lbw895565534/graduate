@@ -1,12 +1,13 @@
 import axios from 'axios'
 
 const state = {
-  page: "home"
+  page: "home",
+  paramsMap: []
 }
 
 const getters = {
   getPage: state => state.page,
-
+  getParams: state => state.paramsMap
 }
 
 const actions = {
@@ -17,10 +18,15 @@ const actions = {
       page: page
     })
   },
-  toMain({
+  refreshParams({
     commit
-  }) {
-    commit('toMain')
+  }, route) {
+    commit('refreshParams',route)
+  },
+  removeParams({
+    commit
+  }, route) {
+    commit('removeParams',route)
   },
 }
 
@@ -29,9 +35,21 @@ const mutations = {
     state.page = page;
     localStorage.setItem("page", state.page);
   },
-  toMain(state) {
-    console.log(window.localStorage.getItem("page"));
-    state.page = localStorage.getItem("page");
+  refreshParams(state, route) { 
+    var isAdd = false;   
+    var r = {};
+    r.name = route.name;
+    r.params = route.params;
+    state.paramsMap.push(r);
+    console.log(state.paramsMap);
+  },
+  removeParams(state, route) {
+    state.paramsMap.forEach((n,i) => {
+      if (n.name == route.name) {
+        state.paramsMap.splice(i, 1);
+      }
+    });
+    console.log(state.paramsMap);
   }
 }
 
