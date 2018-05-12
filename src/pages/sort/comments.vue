@@ -26,7 +26,7 @@
     },
     methods: {
       back() {
-        this.$router.push({name: 'detail', query: {params: this.cookbook}});
+        this.$router.push({name: 'detailCookbook', query: {params: this.cookbook}});
       }
     },
     mounted() {

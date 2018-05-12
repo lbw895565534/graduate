@@ -56,9 +56,7 @@ export default {
       return false;
     },
     toDetail(c) {
-      var data = c;
-      // console.log(data);
-      this.$router.push({name:'detail',params:c});
+      this.$router.push({name:'detailCookbook',params:c});
     }
   },
   mounted() {

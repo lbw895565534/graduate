@@ -1,10 +1,10 @@
 <template>
     <div class="list_box">
       <div class="list_item" v-for="(shop,index) in shoplist">
-        <div class="list_item_picture">
+        <div class="list_item_picture" @click="toDetail(shop)">
           <img v-bind:src="shop.img">
         </div>
-        <div class="center">
+        <div class="center"  @click="toDetail(shop)">
           <div class="msg">
             <div class="item list_item_name">
               <div class="item_name">{{ shop.name }}</div>
@@ -47,6 +47,7 @@ export default {
   methods: {
     ...mapActions(['getShop']),
     ...mapActions(['addToCart']),
+    ...mapActions(['saveStuffDetail']),
     add (shop) {
       if (this.isLogin()) {
         this.addToCart(shop);
@@ -62,6 +63,10 @@ export default {
         return false;
       }
       return true;
+    },
+    toDetail(s) {     
+      this.saveStuffDetail(s); 
+      this.$router.push({name:'detailStuff'});      
     }
   }
 };

@@ -11,8 +11,9 @@ import Share from '@/pages/share/share'
 //二级页面
 import Next from '@/pages/next/next'
 import Sort from '@/pages/sort/sort'
-import Detail from '@/pages/detail/detail'
-import Comments from '@/pages/detail/comments'
+import DetailCookbook from '@/pages/sort/detailCookbook'
+import Comments from '@/pages/sort/comments'
+import DetailStuff from '@/pages/market/detailStuff'
 import Cart from '@/pages/market/cart'
 import Search from '@/pages/search/search'
 import ShareInput from '@/pages/share/shareInput'
@@ -62,13 +63,13 @@ export default new Router({
         meta: {
           keepAlive: true, //此组件需要被缓存
         }
-      },
+      },      
       {
         path: 'mine',
         name: 'mine',
         component: Mine,
         meta: {
-          keepAlive: false, //此组件不需要被缓存
+          keepAlive: true, //此组件不需要被缓存
         }
       }
       ]
@@ -80,7 +81,17 @@ export default new Router({
       children: [{
         path: 'sort/:kind',
         name: 'sort',
-        component: Sort,
+        component: Sort        
+      },
+      {
+        path: 'detailCookbook',
+        name: 'detailCookbook',
+        component: DetailCookbook,
+      },
+      {
+        path: 'detailStuff',
+        name: 'detailStuff',
+        component: DetailStuff,
       },
       {
         path: 'cart',
@@ -88,12 +99,7 @@ export default new Router({
         component: Cart
       },
       {
-        path: 'detail',
-        name: 'detail',
-        component: Detail,
-      },
-      {
-        path: '/comments',
+        path: 'comments',
         name: 'comments',
         component: Comments
       },    

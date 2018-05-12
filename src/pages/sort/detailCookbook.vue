@@ -65,12 +65,7 @@
     MessageBox,
     Toast
   } from "mint-ui";
-  import Top from "@/components/next/next";
-  import Page from '@/store/modules/page'
   export default {
-    components: {
-      Top
-    },
     data() {
       return {
         cookbook: "",
@@ -166,15 +161,14 @@
         }
       }
     },
-    mounted() {      
-      this.cookbook = this.$route.params;
-      if(this.cookbook.name == undefined){
-        this.getParams.forEach((n,i) => {
-          if (n.name = "detail") {
-            this.cookbook = n.params;
-          }
-        })
-      }
+    mounted() {
+      this.cookbook = this.$route.params; 
+      this.getParams.forEach((n, i) => {
+        if (n.name = "detailCookbook") {
+          console.log(n.params);
+          this.cookbook = n.params;
+        }
+      });                 
       this.stuffId = this.cookbook.shoplist;
       this.nums = this.cookbook.comment.length;
       //记录制作步骤
@@ -188,10 +182,11 @@
       this.isCollected(this.cookbook.collectUser, this.loginUser);
     },
     beforeRouteLeave(to, from, next) {
-      if (to.name == "comments") {        
+      if (to.name == "comments") {
+        console.log(from);
         this.$store.dispatch('refreshParams', from);
       }
-      if (to.name == "sort") {        
+      if (to.name == "sort") {
         this.$store.dispatch('removeParams', from);
       }
       next();
@@ -203,18 +198,6 @@
   * {
     margin: 0;
     padding: 0;
-  }
-
-  .box_back {
-    width: 100%;
-    height: 42px;
-    position: absolute;
-    background: #ffffff47;
-  }
-
-  .box_back>img {
-    margin-top: 5px;
-    margin-left: 5px;
   }
 
   hr {

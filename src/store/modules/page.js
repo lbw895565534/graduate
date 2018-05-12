@@ -2,12 +2,14 @@ import axios from 'axios'
 
 const state = {
   page: "home",
-  paramsMap: []
+  paramsMap: [],
+  detail_stuff: []
 }
 
 const getters = {
   getPage: state => state.page,
-  getParams: state => state.paramsMap
+  getParams: state => state.paramsMap,
+  getDetailStuff: state => state.detail_stuff
 }
 
 const actions = {
@@ -28,6 +30,11 @@ const actions = {
   }, route) {
     commit('removeParams',route)
   },
+  saveStuffDetail({
+    commit
+  }, stuff) {
+    commit('saveStuffDetail', stuff)
+  }
 }
 
 const mutations = {
@@ -50,6 +57,10 @@ const mutations = {
       }
     });
     console.log(state.paramsMap);
+  },
+  //保存打开的食材详情信息
+  saveStuffDetail(state, stuff) {
+    state.detail_stuff = stuff;
   }
 }
 

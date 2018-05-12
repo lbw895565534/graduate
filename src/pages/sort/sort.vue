@@ -8,19 +8,9 @@
 <script>
 import Cookbook from '@/components/sort/sort-cookbook/cookbook'
 
-export default {
-  props: ['lastShow'],
+export default {  
   components: {
-    Cookbook
-  },
-  props: ['SortName'],
-  methods: {
-    back: function () {
-      this.$router.push('/main/home');
-    }
-  },
-  mounted() {
-    console.log(this.$route);
+    Cookbook  
   }
 };
 </script>

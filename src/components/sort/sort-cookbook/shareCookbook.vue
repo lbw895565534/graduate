@@ -39,7 +39,7 @@ export default {
     toDetail(c) {
       var data = c;
       // console.log(data);
-      this.$router.push({ name: "detail", query: { param: c } });
+      this.$router.push({ name: "detailCookbook", params: c });
     }
   }
 };
