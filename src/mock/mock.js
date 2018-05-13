@@ -300,6 +300,7 @@ const state = {
       unit: "斤",
       info: "",
       site: "",
+      link: [12]
     },
     {
       id: 12,

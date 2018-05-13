@@ -11,6 +11,7 @@ const state = {
   cookbook_new: [],
   cookbook_hot: [],
   cookbook_mine: [],
+  cookbook_link: [],
   //商品列表
   shop_list: [],
   stuff_list: [],
@@ -31,6 +32,7 @@ const getters = {
   cookbooknew: state => state.cookbook_new,
   cookbookhot: state => state.cookbook_hot,
   cookbookmine: state => state.cookbook_mine,
+  cookbooklink: state => state.cookbook_link,
   //商品列表
   shoplist: state => state.shop_list,
   //菜谱所需食材
@@ -235,6 +237,11 @@ const actions = {
       paynumber: paynumber
     })
   },
+  getLink({
+    commit
+  }, link) {
+    commit('getLink', link)
+  }
 }
 
 //mutation
@@ -496,6 +503,20 @@ const mutations = {
     } else {
       return false;
     }
+  },
+  getLink(state, link) {
+    console.log(link);
+    var cookbook = [];
+    for( var i = 0;i<link.length;i++) {
+      state.cookbook_list.forEach(n => {
+        if(link[i] == n.id) {
+          cookbook.push(n);
+        }        
+      })
+    };
+    state.cookbook_link = cookbook;
+    console.log(state.cookbook_list);
+    console.log(cookbook);
   }
 }
 
