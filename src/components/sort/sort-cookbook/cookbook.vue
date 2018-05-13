@@ -10,6 +10,7 @@
         <div class="item list_item_name">
           <div class="item_name">{{ cookbook.name }}</div>
         </div>
+
         <div class="item list_item_info">
           <div class="item_info">
             {{ cookbook.info }}
@@ -47,15 +48,9 @@ export default {
     ...mapActions(["sortOfLikes"]),
     ...mapActions(["sortOfCollects"]),
     ...mapActions(["clearCookbookFilter"]),
-    isSel(arr, value) {
-      for (var i = 0;i < arr.length;i++) {
-        if (arr[i] == value) {
-          return true;
-        }
-      }
-      return false;
-    },
+    ...mapActions(["saveCookbookDetail"]),
     toDetail(c) {
+      this.saveCookbookDetail(c);
       this.$router.push({name:'detailCookbook',params:c});
     }
   },
@@ -145,6 +140,7 @@ export default {
   width: 98%;
   height: 100%;
   font-size: 12px;
+  color: #999;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 3;

@@ -5,23 +5,31 @@
     </div>
     <div class="input input2">
       <div class="column">
-          <input :class={focus:form[0].focus} type="text" placeholder="用户名" v-model="username" @click="focus(0)" @blur="unFocus(0)">
+          <div :class={focus:form[0].focus} class="container">
+            <input type="text" placeholder="用户名" v-model="username" @focus="focus(0)" @blur="unFocus(0)">
+          </div>
       </div>
     </div>
     <div class="input input2">
       <div class="column">
-        <input :class={focus:form[1].focus} type="text" placeholder="密码" v-model="password" @click="focus(1)" @blur="unFocus(1)">
+        <div :class={focus:form[1].focus} class="container">
+        <input type="text" placeholder="密码" v-model="password" @focus="focus(1)" @blur="unFocus(1)">
+      </div>
       </div>
     </div>
 
     <div class="input input2">
       <div class="column">
-        <input :class={focus:form[2].focus} type="text" placeholder="手机号码" v-model="telnumber" @click="focus(2)" @blur="unFocus(2)">
+        <div :class={focus:form[2].focus} class="container">
+        <input type="text" placeholder="手机号码" v-model="telnumber" @focus="focus(2)" @blur="unFocus(2)">
+      </div>
       </div>
     </div>
       <div class="input input2">
       <div class="column">
-        <input :class={focus:form[3].focus} type="text" placeholder="支付密码" v-model="paynumber" @click="focus(3)" @blur="unFocus(3)">
+        <div :class={focus:form[3].focus} class="container">
+        <input type="text" placeholder="支付密码" v-model="paynumber" @focus="focus(3)" @blur="unFocus(3)">
+      </div>
       </div>
     </div>
       <div class="input input2">
@@ -90,8 +98,11 @@ export default {
 </script>
 <style scoped>
 .box_regist {
-  width: 85%;
+  width: 80%;
+  max-width: 320px;  
   height: 70%;
+  min-height: 450px;
+  max-height: 520px;
   margin: auto;
   position: fixed;
   left: 0;
@@ -137,13 +148,17 @@ export default {
   align-items: center;
   justify-content: center;
 }
+.column .container {
+  width: 100%;
+  box-shadow: 0px 0px 3px 0 #999;
+  padding-right: 5px;
+  padding-left: 5px;
+}
 input[type="text"] {
   height: 45px;
   width: 100%;
-  outline: none;
   border: none;
-  padding-left: 5px;
-  box-shadow: 0px 0px 5px 0 #999;
+  outline: none;
 }
 .sexbox {
   width: 40%;

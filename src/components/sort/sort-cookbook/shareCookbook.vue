@@ -36,9 +36,9 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   props: ["cookbook"],
   methods: {
+    ...mapActions(["saveCookbookDetail"]),
     toDetail(c) {
-      var data = c;
-      // console.log(data);
+      this.saveCookbookDetail(c);
       this.$router.push({ name: "detailCookbook", params: c });
     }
   }
@@ -95,6 +95,7 @@ export default {
   width: 98%;
   height: 100%;
   font-size: 12px;
+  color: #999;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 3;

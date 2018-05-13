@@ -79,7 +79,7 @@
     computed: {
       ...mapGetters(["stufflist"]),
       ...mapGetters(["loginUser"]),
-      ...mapGetters(["getParams"])
+      ...mapGetters(["getDetailCookbook"]),
     },
     methods: {
       ...mapActions(["getStuff"]),
@@ -161,14 +161,8 @@
         }
       }
     },
-    mounted() {
-      this.cookbook = this.$route.params; 
-      this.getParams.forEach((n, i) => {
-        if (n.name = "detailCookbook") {
-          console.log(n.params);
-          this.cookbook = n.params;
-        }
-      });                 
+    mounted() {      
+      this.cookbook = this.getDetailCookbook;                      
       this.stuffId = this.cookbook.shoplist;
       this.nums = this.cookbook.comment.length;
       //记录制作步骤
@@ -180,16 +174,6 @@
       this.getStuff(this.stuffId);
       this.isLiked(this.cookbook.likeUser, this.loginUser);
       this.isCollected(this.cookbook.collectUser, this.loginUser);
-    },
-    beforeRouteLeave(to, from, next) {
-      if (to.name == "comments") {
-        console.log(from);
-        this.$store.dispatch('refreshParams', from);
-      }
-      if (to.name == "sort") {
-        this.$store.dispatch('removeParams', from);
-      }
-      next();
     }
   };
 
@@ -309,6 +293,7 @@
     font-family: arial;
     margin: 10px 0;
     margin-left: 1rem;
+    margin-right: 1rem;
   }
 
   .comment {

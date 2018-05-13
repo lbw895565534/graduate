@@ -3,12 +3,15 @@ import axios from 'axios'
 const state = {
   page: "home",
   paramsMap: [],
-  detail_stuff: []
+  detail_cookbook: [],
+  detail_stuff: [],
+  
 }
 
 const getters = {
   getPage: state => state.page,
   getParams: state => state.paramsMap,
+  getDetailCookbook: state => state.detail_cookbook,
   getDetailStuff: state => state.detail_stuff
 }
 
@@ -29,6 +32,11 @@ const actions = {
     commit
   }, route) {
     commit('removeParams',route)
+  },
+  saveCookbookDetail({
+    commit
+  }, cookbook) {
+    commit('saveCookbookDetail', cookbook)
   },
   saveStuffDetail({
     commit
@@ -57,6 +65,10 @@ const mutations = {
       }
     });
     console.log(state.paramsMap);
+  },
+  //保存打开的食谱详情信息
+  saveCookbookDetail(state, cookbook) {
+    state.detail_cookbook = cookbook;
   },
   //保存打开的食材详情信息
   saveStuffDetail(state, stuff) {

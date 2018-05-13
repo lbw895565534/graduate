@@ -15,7 +15,7 @@
           <div class="item_site">{{ shop.info }}</div>
         </div>
         <div class="item list_item_price">
-          <div class="item_price">￥{{ shop.price }}.00</small>
+          <div class="item_price">￥{{ shop.price }}</small>
           </div>
         </div>
       </div>

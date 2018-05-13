@@ -20,7 +20,7 @@
         <div class="right">
           <div class="list_item_price">
             <div class="item_price">
-              <span class="red">{{ shop.price }}.00/</span>
+              <span class="red">{{ shop.price }}/</span>
               <span class="small">{{ shop.unit }}</span>
             </div>
           </div>

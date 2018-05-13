@@ -9,7 +9,7 @@
           <img src="@/assets/img/icon/username.svg" alt="" class="icon" v-if="!form[0].focus">
           <img src="@/assets/img/icon/username_after.svg" alt="" class="icon" v-if="form[0].focus">
         </div>
-        <input type="text" class="input_username" placeholder="用户名" v-model="username" @click="focus(0)" @blur="unFocus(0)">
+        <input type="text" class="input_username" placeholder="用户名" v-model="username" @focus="focus(0)" @blur="unFocus(0)">
       </div>
     </div>
     <div id="input3" class="input">
@@ -18,7 +18,7 @@
           <img src="@/assets/img/icon/password.svg" alt="" class="icon" v-if="!form[1].focus">
           <img src="@/assets/img/icon/password_after.svg" alt="" class="icon" v-if="form[1].focus">
         </div>
-        <input type="password" class="input_password" placeholder="密码" v-model="password" @click="focus(1)" @blur="unFocus(1)">
+        <input type="password" class="input_password" placeholder="密码" v-model="password" @focus="focus(1)" @blur="unFocus(1)">
       </div>
     </div>
     <div id="input4" class="input">
@@ -80,8 +80,11 @@ export default {
 </script>
 <style scoped>
 .box_login {
-  width: 85%;
+  width: 80%;
+  max-width: 320px;  
   height: 50%;
+  min-height: 320px;
+  max-height: 360px; 
   margin: auto;
   position: fixed;
   left: 0;
@@ -130,7 +133,7 @@ export default {
 }
 
 .border {
-  width: 90%;
+  width: 75%;
   height: 45px;
   border-radius: 30px;
   background: #fff;

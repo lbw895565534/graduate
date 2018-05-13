@@ -84,7 +84,7 @@
 <style scoped>
   .body {width: 100%; height: 100%;position: absolute;}
   .tabbarHeader {width: 100%;height: 44px;position: relative;top:0;left:0;}
-  .content {width: 100%;z-index: 1;position: relative;padding-bottom: 64px;}
+  .content {width: 100%;z-index: 1;position: relative;padding-bottom: 64px;margin: 0 auto;}
   .footer {z-index: 5;width: 100%;height: 64px;position: fixed;bottom:0;left:0;}
   .tabbarFooter {width: 100%; height: 64px;border-top: 1px solid #ccc; text-align: center;background: #fff;}
 </style>

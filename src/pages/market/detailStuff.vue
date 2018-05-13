@@ -2,45 +2,41 @@
   <div class="box">
     <div class="picture">
       <img class="img-stuff" :src="getDetailStuff.img" alt="">
-    </div>
-    <div class="seperator"></div>
+    </div>    
     <div class="container">
-        <div class="item information">
-            <div class="np">
-              <div class="name">
-                <span>{{ getDetailStuff.name }}</span>
-              </div>
-              <div class="blank"></div>
-              <div class="price">
-                <span>{{ getDetailStuff.price }}.00</span>/
-                <span>{{ getDetailStuff.unit }}</span>
-              </div>
-            </div>
-            <div class="info">
-              <span>{{ getDetailStuff.info }}</span>
-            </div>
-            <div class="site">
-              <span>{{ getDetailStuff.site }}</span>
-            </div>
+      <div class="item information">
+        <div class="np">
+          <div class="name">
+            <span>{{ getDetailStuff.name }}</span>
           </div>
+          <div class="blank"></div>
+          <div class="price">
+            <span>{{ getDetailStuff.price }}</span>/<span>{{ getDetailStuff.unit }}</span>
+          </div>
+        </div>
+        <div class="info">
+          <span>{{ getDetailStuff.info }}</span>
+        </div>
+        <div class="site">
+          <span>{{ getDetailStuff.site }}</span>
+        </div>
+      </div>
     </div>
-    
-    <div class="seperator"></div>
     <div class="item link">
       <div class="title">
         <span>食材可以做：</span>
       </div>
       <div>
-          <div class="tab" ref="tab">
-              <ul class="tab_content" ref="tabWrapper">
-                <li class="tab_item" v-for="link in cookbooklink" ref="tabitem">
-                  <img :src="link.img" alt="">
-                  <span>{{ link.name }}</span>
-                </li>
-              </ul>
-            </div>
+        <div class="tab" ref="tab">
+          <ul class="tab_content" ref="tabWrapper">
+            <li class="tab_item" v-for="cookbook in cookbooklink" ref="tabitem" @click="toCookbook(cookbook)">
+              <img :src="cookbook.img" alt="">
+              <span>{{ cookbook.name }}</span>
+            </li>
+          </ul>
+        </div>
       </div>
-     
+
     </div>
   </div>
 </template>
@@ -86,6 +82,9 @@
             this.scroll.refresh()
           }
         });
+      },
+      toCookbook(c) {
+        this.$router.push({name: 'detailCookbook', params: c});
       }
     },
     created() {
@@ -104,25 +103,15 @@
     margin: 0;
     padding: 0;
   }
-
-  hr {
-    width: 90%;
-    size: 1px;
-    color: #eee;
-    margin: 10px 0 10px 0;
-  }
-  .seperator {
-    width: 100%;
-    height: 20px;
-    background: #eee;
-  }  
-
+ 
   .box {
     width: 100%;
-    height: 100%;
+    max-width: 512px;
+    height: 100%;   
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 0 auto;
   }
 
   .picture {
@@ -136,9 +125,13 @@
     max-width: 512px;
     height: 245px;
   }
+
   .container {
     width: 100%;
     height: auto;
+    border-top: 10px solid #eee;
+    border-bottom: 10px solid #eee;  
+    margin: 0 auto;  
   }
 
   .item {
@@ -148,7 +141,7 @@
   }
 
   .information {
-    height: 120px;
+    height: 120px;   
   }
 
   .np {
@@ -157,6 +150,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin-bottom: 20px;
   }
 
   .name {
@@ -189,17 +183,16 @@
   }
 
   .site {
-    padding-top: 10px;
+    padding-bottom: 10px;
     font-size: 12px;
     color: #999;
   }
 
+  /*  水平滚动  */
   .link {
     height: 300px;
     margin-top: 10px;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
+    margin-bottom: 20px;    
   }
 
   .title {
@@ -227,13 +220,17 @@
     margin-right: 20px;
     box-shadow: 0 0 5px 0 #999;
   }
+
   .tab_item>img {
     width: 150px;
     margin: 4px;
   }
+
   .tab_item>span {
-    margin: 0 auto;
     font-size: 16px;
+    text-align: center;
+    display: inherit;
+    margin-bottom: 20px;
   }
 
 </style>
