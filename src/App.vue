@@ -53,7 +53,5 @@ td {
 i {
   font-size: 20px !important;
 }
-input, textarea {
-  -webkit-appearance: none;
-}
+
 </style>

@@ -37,40 +37,25 @@ export default new Router({
       path: '/main',
       name: 'main',
       component: Main,
-      meta: {
-        keepAlive: true, //此组件需要被缓存
-      },
       children: [{
         path: 'home',
         name: 'home',
         component: Home,
-        meta: {
-          keepAlive: true, //此组件需要被缓存
-        }
       },
       {
         path: 'share',
         name: 'share',
         component: Share,
-        meta: {
-          keepAlive: true, //此组件需要被缓存
-        }
       },
       {
         path: 'market',
         name: 'market',
         component: Market,
-        meta: {
-          keepAlive: true, //此组件需要被缓存
-        }
       },      
       {
         path: 'mine',
         name: 'mine',
         component: Mine,
-        meta: {
-          keepAlive: true, //此组件不需要被缓存
-        }
       }
       ]
     },

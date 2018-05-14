@@ -15,7 +15,7 @@
           <div class="item_site">{{ shop.info }}</div>
         </div>
         <div class="item list_item_price">
-          <div class="item_price">￥{{ shop.price }}</small>
+          <div class="item_price">￥{{ shop.price.toFixed(2) }}</small>
           </div>
         </div>
       </div>
@@ -66,6 +66,18 @@
       ...mapActions(["addNum"]),
       ...mapActions(["reduceNum"]),
       ...mapActions(["shopChecked"])
+    },
+    beforeRouteEnter() {
+      if (this.loginUser == null) {
+        setTimeout(function(){
+          this.$router.push({name: 'login'});
+        }, 1000);
+        Toast({
+          message: "请先登录",
+          position: "bottom",
+          duration: 1000,
+        });
+      }
     }
   };
 

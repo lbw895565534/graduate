@@ -351,7 +351,6 @@ const mutations = {
   },
   //收藏排序
   sortOfCollects(state) {
-    console.log(state.cookbook_list);
     state.cookbook_filter = state.cookbook_list;
     state.cookbook_filter.sort(function (a, b) {
       return b.collects - a.collects;
@@ -360,7 +359,6 @@ const mutations = {
   //时间排序
   sortOfDate(state) {
     state.cookbook_new = state.cookbook_list;
-    console.log(state.cookbook_new);
     state.cookbook_new.sort((a, b) => new Date(b).getTime() - new Date(a).getTime())
   },
   //热度排序
@@ -389,10 +387,11 @@ const mutations = {
   },
   //用户发布的食谱
   sortOfMine(state) {
-    if (state.loginUser != null) {
-      state.cookbook_mine = state.loginUser.cookbook;
-    } else {
+    if (state.user_status == 400) {
       state.cookbook_mine = "";
+    } 
+    if (state.user_status == 200) {
+      state.cookbook_mine = state.loginUser.shareMine;      
     }
   },
   //点赞，收藏

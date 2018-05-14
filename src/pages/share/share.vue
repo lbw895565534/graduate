@@ -33,8 +33,7 @@
 <script>
 import Cookbook from "@/components/sort/sort-cookbook/shareCookbook";
 import Publish from "@/components/share/publish";
-import { Navbar, TabItem } from "mint-ui";
-import { TabContainer, TabContainerItem } from "mint-ui";
+import { Navbar, TabItem, TabContainer, TabContainerItem } from "mint-ui";
 import { mapGetters, mapActions } from "vuex";
 export default {
   data() {

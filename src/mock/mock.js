@@ -12,7 +12,7 @@ const state = {
       telnumber: "18819492932",
       info: "",
       paynumber: 123456,
-      cookbook: [],
+      shareMine: [11,15,18,19],
       cart: [],
       collect: []
     },
@@ -26,7 +26,7 @@ const state = {
       telnumber: "18819492932",
       info: "",
       paynumber: 123456,
-      cookbook: [],
+      shareMine: [12,16],
       cart: [],
       collect: []
     },
@@ -40,7 +40,7 @@ const state = {
       telnumber: "18819492932",
       info: "",
       paynumber: 123456,
-      cookbook: [],
+      shareMine: [13,14,17],
       cart: [],
       collect: []
     }
