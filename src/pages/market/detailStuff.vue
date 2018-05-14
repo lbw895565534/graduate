@@ -2,7 +2,7 @@
   <div class="box">
     <div class="picture">
       <img class="img-stuff" :src="getDetailStuff.img" alt="">
-    </div>    
+    </div>
     <div class="container">
       <div class="item information">
         <div class="np">
@@ -11,7 +11,7 @@
           </div>
           <div class="blank"></div>
           <div class="price">
-            <span>{{ getDetailStuff.price }}</span>/<span>{{ getDetailStuff.unit }}</span>
+            <span>{{ getDetailStuff.price.toFixed(2) }}</span>/<span>{{ getDetailStuff.unit }}</span>
           </div>
         </div>
         <div class="info">
@@ -36,7 +36,6 @@
           </ul>
         </div>
       </div>
-
     </div>
   </div>
 </template>
@@ -51,18 +50,14 @@
     Toast
   } from "mint-ui";
   import BScroll from 'better-scroll'
-  export default {
-    data() {
-      return {
-        itemList: []
-      };
-    },
+  export default {   
     computed: {
       ...mapGetters(['getDetailStuff']),
-      ...mapGetters(['cookbooklink'])
+      ...mapGetters(['cookbooklink'])      
     },
     methods: {
       ...mapActions(['getLink']),
+      ...mapActions(['saveCookbookDetail']),
       InitTabScroll() {
         let width = 0
         for (let i = 0; i < this.itemList.length; i++) {
@@ -84,6 +79,7 @@
         });
       },
       toCookbook(c) {
+        this.saveCookbookDetail(c);
         this.$router.push({name: 'detailCookbook', params: c});
       }
     },
@@ -149,8 +145,7 @@
     height: 50px;
     display: flex;
     flex-direction: row;
-    align-items: center;
-    margin-bottom: 20px;
+    align-items: center; 
   }
 
   .name {
@@ -178,6 +173,7 @@
   }
 
   .info {
+    height: 42px;
     font-size: 16px;
     color: #999;
   }
@@ -206,6 +202,8 @@
   .tab {
     width: 90vw;
     height: 100%;
+    padding-bottom: 20px;
+    overflow-x: scroll;
   }
 
   .tab_content {
@@ -216,8 +214,9 @@
 
   .tab_item {
     flex: 0 0 158px;
-    height: 100%;
-    margin-right: 20px;
+    height: 165px;
+    margin-left: 1px;
+    margin-right: 10px;
     box-shadow: 0 0 5px 0 #999;
   }
 

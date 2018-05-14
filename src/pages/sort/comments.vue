@@ -26,13 +26,12 @@
     },
     methods: {
       back() {
-        this.$router.push({name: 'detailCookbook', query: {params: this.cookbook}});
+        this.$router.push({name: 'detailCookbook'});
       }
     },
     mounted() {
       this.cookbook = this.$route.params.cookbook;
       this.comments = this.cookbook.comment;
-      console.log(this.cookbook);
     }
   }
 
