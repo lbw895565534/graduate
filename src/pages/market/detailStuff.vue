@@ -50,10 +50,17 @@
     Toast
   } from "mint-ui";
   import BScroll from 'better-scroll'
+<<<<<<< HEAD
   export default {
     computed: {
       ...mapGetters(['getDetailStuff']),
       ...mapGetters(['cookbooklink'])
+=======
+  export default {   
+    computed: {
+      ...mapGetters(['getDetailStuff']),
+      ...mapGetters(['cookbooklink'])      
+>>>>>>> bdb91c9a29cbdb68f0fc41aadaf94d2bb17a7933
     },
     methods: {
       ...mapActions(['getLink']),
@@ -99,11 +106,19 @@
     margin: 0;
     padding: 0;
   }
+<<<<<<< HEAD
 
   .box {
     width: 100%;
     max-width: 512px;
     height: 100%;
+=======
+ 
+  .box {
+    width: 100%;
+    max-width: 512px;
+    height: 100%;   
+>>>>>>> bdb91c9a29cbdb68f0fc41aadaf94d2bb17a7933
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -126,8 +141,13 @@
     width: 100%;
     height: auto;
     border-top: 10px solid #eee;
+<<<<<<< HEAD
     border-bottom: 10px solid #eee;
     margin: 0 auto;
+=======
+    border-bottom: 10px solid #eee;  
+    margin: 0 auto;  
+>>>>>>> bdb91c9a29cbdb68f0fc41aadaf94d2bb17a7933
   }
 
   .item {
@@ -137,7 +157,11 @@
   }
 
   .information {
+<<<<<<< HEAD
     height: 120px;
+=======
+    height: 120px;   
+>>>>>>> bdb91c9a29cbdb68f0fc41aadaf94d2bb17a7933
   }
 
   .np {
@@ -145,7 +169,11 @@
     height: 50px;
     display: flex;
     flex-direction: row;
+<<<<<<< HEAD
     align-items: center;
+=======
+    align-items: center; 
+>>>>>>> bdb91c9a29cbdb68f0fc41aadaf94d2bb17a7933
   }
 
   .name {
@@ -188,7 +216,11 @@
   .link {
     height: 300px;
     margin-top: 10px;
+<<<<<<< HEAD
     margin-bottom: 20px;
+=======
+    margin-bottom: 20px;    
+>>>>>>> bdb91c9a29cbdb68f0fc41aadaf94d2bb17a7933
   }
 
   .title {
