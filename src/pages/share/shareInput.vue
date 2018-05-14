@@ -354,13 +354,14 @@ hr {
 
 .stuffNum {
   width: 118px;
-  height: 32px;
+  height: 34px;
   line-height: 34px;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
   color: #606266;
   border-radius: 4px;
   outline: none;
+  -webkit-appearance: none;
   background: #fff;
   background-image: none;
   border: 1px solid #dcdfe6;

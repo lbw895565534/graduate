@@ -54,18 +54,24 @@
 
   .box_sort {
     width: 100%;
+    max-width: 512px;
     height: 120px;
+    margin: 0 auto;
   }
 
   .box_program {
     width: 100%;
+    max-width: 512px;
     height: 160px;
+    margin: 0 auto;
   }
 
   .box_banner {
     width: 100%;
+    max-width: 512px;
     height: 240px;
     padding-top: 20px;
+    margin: 0 auto;
   }
 
 </style>

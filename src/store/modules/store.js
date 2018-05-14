@@ -11,6 +11,7 @@ const state = {
   cookbook_new: [],
   cookbook_hot: [],
   cookbook_mine: [],
+  cookbook_link: [],
   //商品列表
   shop_list: [],
   stuff_list: [],
@@ -31,6 +32,7 @@ const getters = {
   cookbooknew: state => state.cookbook_new,
   cookbookhot: state => state.cookbook_hot,
   cookbookmine: state => state.cookbook_mine,
+  cookbooklink: state => state.cookbook_link,
   //商品列表
   shoplist: state => state.shop_list,
   //菜谱所需食材
@@ -235,6 +237,11 @@ const actions = {
       paynumber: paynumber
     })
   },
+  getLink({
+    commit
+  }, link) {
+    commit('getLink', link)
+  }
 }
 
 //mutation
@@ -344,7 +351,6 @@ const mutations = {
   },
   //收藏排序
   sortOfCollects(state) {
-    console.log(state.cookbook_list);
     state.cookbook_filter = state.cookbook_list;
     state.cookbook_filter.sort(function (a, b) {
       return b.collects - a.collects;
@@ -353,7 +359,6 @@ const mutations = {
   //时间排序
   sortOfDate(state) {
     state.cookbook_new = state.cookbook_list;
-    console.log(state.cookbook_new);
     state.cookbook_new.sort((a, b) => new Date(b).getTime() - new Date(a).getTime())
   },
   //热度排序
@@ -382,10 +387,11 @@ const mutations = {
   },
   //用户发布的食谱
   sortOfMine(state) {
-    if (state.loginUser != null) {
-      state.cookbook_mine = state.loginUser.cookbook;
-    } else {
+    if (state.user_status == 400) {
       state.cookbook_mine = "";
+    } 
+    if (state.user_status == 200) {
+      state.cookbook_mine = state.loginUser.shareMine;      
     }
   },
   //点赞，收藏
@@ -496,6 +502,20 @@ const mutations = {
     } else {
       return false;
     }
+  },
+  getLink(state, link) {
+    console.log(link);
+    var cookbook = [];
+    for( var i = 0;i<link.length;i++) {
+      state.cookbook_list.forEach(n => {
+        if(link[i] == n.id) {
+          cookbook.push(n);
+        }        
+      })
+    };
+    state.cookbook_link = cookbook;
+    console.log(state.cookbook_list);
+    console.log(cookbook);
   }
 }
 

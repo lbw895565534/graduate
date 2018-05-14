@@ -10,15 +10,18 @@
       <div class="column_core">
         <div class="core" @click="toShare()">
           <img class="icon" src="static/images/icon/mine/shareMine.svg" alt="">
-          <span class="record">发布：{{ record.shareMine }}</span>
+          <span v-if="loginUser" class="record">发布：{{ loginUser.shareMine.length }}</span>
+          <span v-if="!loginUser" class="record">未登录</span>
         </div>
         <div class="core core_middle" @click="toCollect()">
           <img class="icon" src="static/images/icon/mine/collect.svg" alt="">
-          <span class="record">收藏：{{ record.collect }}</span>
+          <span v-if="loginUser" class="record">收藏：{{ loginUser.collect.length }}</span>
+          <span v-if="!loginUser" class="record">未登录</span>
         </div>
         <div class="core" @click="toCart()">
           <img class="icon" src="static/images/icon/mine/cart.svg" alt="">
-          <span class="record">购物：{{ record.cart }}</span>
+          <span v-if="loginUser" class="record">购物：{{ loginUser.cart.length }}</span>
+          <span v-if="!loginUser" class="record">未登录</span>
         </div>
       </div>
     </div>
@@ -116,13 +119,15 @@
       },
       //跳转页面
       toShare() {
-        this.changePage("share");
-        this.$router.push({
-          name: "share",
-          params: {
-            selected: "3"
-          }
-        });
+        if (this.isLogin()) {
+          this.changePage("share");
+          this.$router.push({
+            name: "share",
+            params: {
+              selected: "3"
+            }
+          });
+        }
       },
       toCollect() {
         if (this.isLogin()) {
