@@ -176,6 +176,11 @@ const actions = {
   }, ids) {
     commit('addCollect', ids)
   },
+  addComment({
+    commit
+  }, txt) {
+    commit('addComment', txt)
+  },
   //获取食材
   getShop({
     commit
@@ -459,6 +464,15 @@ const mutations = {
         state.cookbook_filter = state.cookbook_list[i];
       }
     });    
+  },
+  addComment(state, txt) {
+    var id = state.cookbook_filter.id;
+    state.cookbook_list.forEach(n => {
+      if (n.id == id) {
+        n.comment.add(txt);
+        state.cookbook_filter = n;
+      }
+    })    
   },
   //获取食材
   getShop(state) {

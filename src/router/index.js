@@ -13,6 +13,7 @@ import Next from '@/pages/next/next'
 import Sort from '@/pages/sort/sort'
 import DetailCookbook from '@/pages/sort/detailCookbook'
 import Comments from '@/pages/sort/comments'
+import Edit from '@/pages/sort/edit'
 import DetailStuff from '@/pages/market/detailStuff'
 import Cart from '@/pages/market/cart'
 import Search from '@/pages/search/search'
@@ -102,6 +103,11 @@ export default new Router({
         path: 'comments',
         name: 'comments',
         component: Comments
+      },    
+      {
+        path: 'edit',
+        name: 'edit',
+        component: Edit
       },    
       {
         path: 'search',

@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="edit">
-      <img src="static/images/icon/edit.svg" alt="">
+      <img src="static/images/icon/detail/edit.svg" alt="" @click="toEdit()">
     </div>
   </div>
 </template>
@@ -37,6 +37,9 @@
     methods: {
       back() {
         this.$router.push({name: 'detailCookbook'});
+      },
+      toEdit() {
+        this.$router.push({name: 'edit'});
       }
     },
     mounted() {
@@ -100,4 +103,11 @@
     padding-bottom: 10px;
   }
 
+  .edit {
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    right: 20px;
+    bottom: 84px;
+  }
 </style>

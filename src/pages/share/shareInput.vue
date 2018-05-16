@@ -376,6 +376,7 @@ hr {
   flex: 1;
   height: 34px;
   line-height: 34px;
+  padding-left: 15px; 
 }
 
 .showStuffNum {
