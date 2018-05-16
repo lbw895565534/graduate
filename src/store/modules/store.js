@@ -85,6 +85,11 @@ const actions = {
       user: user
     })
   },
+  logout({
+    commit
+  }) {
+    commit('logout')
+  },
   getCookbook({
     commit
   }) {
@@ -163,17 +168,13 @@ const actions = {
   },
   addLike({
     commit
-  }, cookbook) {
-    commit('addLike', {
-      id: cookbook.id
-    })
+  }, ids) {
+    commit('addLike', ids)
   },
   addCollect({
     commit
-  }, cookbook) {
-    commit('addCollect', {
-      id: cookbook.id
-    })
+  }, ids) {
+    commit('addCollect', ids)
   },
   //获取食材
   getShop({
@@ -250,16 +251,29 @@ const mutations = {
   login(state, user) {
     axios.post('/user/login', user).then(
       res => {
-        console.log(res);
-        state.loginUser = res.data;
-        if (state.loginUser != null) {
-          state.user_status = 200;
+        if (res.data.status == 200) {
+          state.user_status = res.data.status;
+          state.loginUser = res.data.user;
+        } else if (res.data.status == 400) {
+          state.user_status = res.data.status;
         }
       }
     ).catch(err => {
       console.log(error);
     })
-
+    console.log(state.loginuser);
+  },
+  //登出
+  logout(state) {
+    console.log(state.loginUser);
+    if (state.loginUser != null) {
+      state.loginUser = null;
+      state.user_status = 400;
+      return true;
+    }
+    if (state.loginUser == null) {
+      return false;
+    }
   },
   //获取食谱
   getCookbook(state) {
@@ -389,29 +403,62 @@ const mutations = {
   sortOfMine(state) {
     if (state.user_status == 400) {
       state.cookbook_mine = "";
-    } 
+    }
     if (state.user_status == 200) {
-      state.cookbook_mine = state.loginUser.shareMine;      
+      var mine = state.loginUser.shareMine;
+      var cookbook = new Array();
+      for (var i = 0; i < mine.length; i++) {
+        state.cookbook_list.forEach(n => {
+          if (n.id == mine[i]) {
+            console.log(n);
+            cookbook.push(n);
+          }
+        })
+      }
+      state.cookbook_mine = cookbook;
     }
   },
   //点赞，收藏
-  addLike(state, {
-    id
-  }) {
+  addLike(state, ids) {
+    var cid = ids.cid;
+    var uid = ids.uid;
+    var judge = true;
     state.cookbook_list.forEach((n, i) => {
-      if (n.id == cookbook.id) {
-        state.cookbook_list[i].likes++;
+      if (n.id == cid) {
+        for (var j = 0; j < n.likeUser.length; j++) {
+          if (n.likeUser[j] == uid) {
+            judge = false;
+            break;
+          }
+        }
+        console.log(judge);
+        if (judge) {       
+          state.cookbook_list[i].likeUser.push(uid);
+          state.cookbook_list[i].likes++;
+          state.cookbook_filter = state.cookbook_list[i];
+        }        
       }
-    })
+    });
   },
-  addCollect(state, {
-    id
-  }) {
+  addCollect(state, ids) {
+    var cid = ids.cid;
+    var uid = ids.uid;
+    var judge = true;
     state.cookbook_list.forEach((n, i) => {
-      if (n.id == cookbook.id) {
-        state.cookbook_list[i].collects++;
+      if (n.id == cid) {
+        for (var j = 0; j < n.collectUser.length; j++) {
+          if (n.collectUser[j].id == uid) {
+            judge = false;
+            
+          }
+        }
       }
-    })
+      if (judge) {     
+        state.cookbook_list[i].collectUser.push(uid);
+        state.cookbook_list[i].collects++;
+        state.cookbook_filter = state.cookbook_list[i];
+      }
+    });    
   },
   //获取食材
   getShop(state) {
@@ -506,16 +553,14 @@ const mutations = {
   getLink(state, link) {
     console.log(link);
     var cookbook = [];
-    for( var i = 0;i<link.length;i++) {
+    for (var i = 0; i < link.length; i++) {
       state.cookbook_list.forEach(n => {
-        if(link[i] == n.id) {
+        if (link[i] == n.id) {
           cookbook.push(n);
-        }        
+        }
       })
     };
     state.cookbook_link = cookbook;
-    console.log(state.cookbook_list);
-    console.log(cookbook);
   }
 }
 

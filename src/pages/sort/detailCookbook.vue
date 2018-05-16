@@ -10,15 +10,28 @@
     <div class="introduce">
       <div class="op">
         <div class="op_like">
-          <img src="@/assets/img/icon/like.svg" width="16px" @click="addLike(cookbook)" v-if="!liked">
-          <img src="@/assets/img/icon/liked.svg" width="16px" @click="addLike(cookbook)" v-if="liked">
-          <span>{{ cookbook.likes }}</span>
+          <div v-if="loginUser">
+            <img src="@/assets/img/icon/like.svg" width="16px" @click="opLike(cookbook.id)" v-if="!isBeing(cookbook.likeUser,loginUser.id)">
+            <img src="@/assets/img/icon/liked.svg" width="16px" @click="" v-if="isBeing(cookbook.likeUser,loginUser.id)">
+            <span>{{ cookbook.likes }}</span>
+          </div>
+          <div v-if="!loginUser">
+            <img src="@/assets/img/icon/like.svg" width="16px" @click="loginTip()">
+            <span>{{ cookbook.likes }}</span>
+          </div>
+
         </div>
         <div class="blank"></div>
         <div class="op_collect">
-          <img src="@/assets/img/icon/collect.svg" width="16px" @click="addCollect(cookbook)" v-if="!collected">
-          <img src="@/assets/img/icon/collected.svg" width="16px" @click="addCollect(cookbook)" v-if="collected">
-          <span>{{ cookbook.collects }}</span>
+          <div v-if="loginUser">
+            <img src="@/assets/img/icon/collect.svg" width="16px" @click="opCollect(cookbook.id)" v-if="!isBeing(cookbook.collectUser,loginUser.id)">
+            <img src="@/assets/img/icon/collected.svg" width="16px" @click="" v-if="isBeing(cookbook.collectUser,loginUser.id)">
+            <span>{{ cookbook.collects }}</span>
+          </div>
+          <div v-if="!loginUser">
+            <img src="@/assets/img/icon/collect.svg" width="16px" @click="loginTip()">
+            <span>{{ cookbook.collects }}</span>
+          </div>
         </div>
       </div>
       <div class="info">{{ cookbook.info }}</div>
@@ -50,7 +63,7 @@
     <div class="comment">
       <div class="step_title">
         <span>留言板</span>
-        <router-link :to="{ name: 'comments', params: {name: '留言板', cookbook: cookbook}}">{{ nums }}条留言</router-link>
+          <router-link :to="{ name: 'comments', params: {name: '留言板', cookbook: cookbook}}">{{ nums }}条留言</router-link>
       </div>
     </div>
   </div>
@@ -71,8 +84,6 @@
         cookbook: "",
         stuffId: [],
         mark: [],
-        liked: false,
-        collected: false,
         nums: 0
       };
     },
@@ -86,29 +97,33 @@
       ...mapActions(["addLike"]),
       ...mapActions(["addCollect"]),
       ...mapActions(["addToCart"]),
-      isLiked(arr, value) {
-        for (var i = 0; i < arr.length; i++) {
-          if (arr[i] == value) {
-            this.liked = true;
+      ...mapActions(["addLike"]),
+      ...mapActions(["addCollect"]),
+      opLike(cid) {
+        if (this.loginUser != null) {
+          var ids = {
+            uid: this.loginUser.id,
+            cid: cid
+          };
+          this.addLike(ids);
+        }
+      },
+      opCollect(cid) {
+        if (this.loginUser != null) {
+          var ids = {
+            uid: this.loginUser.id,
+            cid: cid
+          };
+          this.addCollect(ids);
+        }
+      },
+      isBeing(users, uid) {
+        for (var i = 0; i < users.length; i++) {
+          if (users[i] == uid) {
+            return true;
           }
         }
-      },
-      isCollected(arr, value) {
-        for (var i = 0; i < arr.length; i++) {
-          if (arr[i] == value) {
-            this.collected = true;
-          }
-        }
-      },
-      opLike() {
-        if (this.loginUser != null) {
-          this.addLike();
-        }
-      },
-      opCollect() {
-        if (this.loginUser != null) {
-          this.addCollect();
-        }
+        return false;
       },
       allAdd(stuff) {
         if (this.loginUser != null) {
@@ -159,10 +174,17 @@
             this.mark[m] = false;
           }
         }
+      },
+      loginTip() {
+        Toast({
+          message: "请先登录",
+          position: "bottom",
+          duration: 2000
+        });
       }
     },
-    mounted() {      
-      this.cookbook = this.getDetailCookbook;                      
+    mounted() {
+      this.cookbook = this.getDetailCookbook;
       this.stuffId = this.cookbook.shoplist;
       this.nums = this.cookbook.comment.length;
       //记录制作步骤
@@ -172,8 +194,6 @@
         this.mark[m] = false;
       }
       this.getStuff(this.stuffId);
-      this.isLiked(this.cookbook.likeUser, this.loginUser);
-      this.isCollected(this.cookbook.collectUser, this.loginUser);
     }
   };
 
@@ -270,6 +290,9 @@
     font-weight: bold;
     font-size: 16px;
     margin-bottom: 20px;
+  }
+  .step_title>a {
+    float: right;
   }
 
   .step_content {

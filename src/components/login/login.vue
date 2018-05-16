@@ -1,9 +1,5 @@
 <template>
   <div class="box_login box_input1 animated">
-    <mt-popup
-      v-model="success"
-      position="top"    
-    ></mt-popup>
     <div id="input1" class="input">
       <span class="title">用户登录</span>
     </div>
@@ -54,7 +50,7 @@
             focus: false
           }
         ],
-        sucess: false
+        success: true
       };
     },
     computed: {
@@ -69,31 +65,42 @@
         this.form[i].focus = false;
       },
       submit() {
-        if (this.username == "" || this.password == ""){
+        if (this.username == "" || this.password == "") {
           Toast({
-            message:'用户名或者密码不能为空',
+            message: '用户名或者密码不能为空',
             position: 'bottom',
             duration: 1000
           });
-        }else {
+        } else {
           var user = {
-          username: this.username,
-          password: this.password
-        };
-        this.login(user);
-        this.loginSuccess();
-        }        
+            username: this.username,
+            password: this.password
+          }
+          this.login(user);
+        }
       },
       loginSuccess() {
         if (this.userstatus == 200) {
-          this.sucess = true;
-          this.$router.push({
-            name: "main"
-          });
+          Toast({
+            message: '登录成功',
+            iconClass: 'icon icon-success'
+          })
+          setTimeout(() => {
+            this.$router.push({
+              name: "home"
+            });
+          }, 1000)
         }
       },
       toRegist() {
         this.$emit("turn", "regist");
+      }
+    },
+    watch: {
+      userstatus(val) {
+        if (val == 200) {
+          this.loginSuccess();
+        }
       }
     }
   };

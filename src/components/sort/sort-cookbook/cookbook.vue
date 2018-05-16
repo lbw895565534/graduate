@@ -10,7 +10,6 @@
         <div class="item list_item_name">
           <div class="item_name">{{ cookbook.name }}</div>
         </div>
-
         <div class="item list_item_info">
           <div class="item_info">
             {{ cookbook.info }}
@@ -48,7 +47,7 @@ export default {
     ...mapActions(["sortOfLikes"]),
     ...mapActions(["sortOfCollects"]),
     ...mapActions(["clearCookbookFilter"]),
-    ...mapActions(["saveCookbookDetail"]),
+    ...mapActions(["saveCookbookDetail"]),    
     toDetail(c) {
       this.saveCookbookDetail(c);
       this.$router.push({name:'detailCookbook',params:c});

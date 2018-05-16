@@ -80,8 +80,8 @@ const state = {
         name: "酱油",
         num: "适量"
       }],
-      likeUser: ["Liming"],
-      collectUser: ["Liming"],
+      likeUser: [],
+      collectUser: [],
       comment: [
         {name: "用户13245", txt: "还不错巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉", date: "2018-03-28"},
         {name: "君莫笑", txt: "很详细，已经做出来了！", date: "2018-01-20"},
@@ -530,14 +530,20 @@ Mock.mock('/user/login', (req, res) => {
   //状态码
   var status = 400;
   //返回对象
-  var loginUser = null;
+  var temp = null;
+  var loginUser = {};
   //验证用户名和密码
   state.user.forEach(n => {
     if (n.username == user.username && n.password == user.password) {
       status = 200;
-      loginUser = n;
+      temp = n;
+      loginUser.status = status;
+      loginUser.user = temp;
+    }else {
+      loginUser.status = status;
     }
   });
+  console.log(loginUser);
   return loginUser;
 })
 /* 注册 */

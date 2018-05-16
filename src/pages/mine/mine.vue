@@ -55,6 +55,9 @@
           </div>
         </div>
       </div>
+      <div class="container_logout">
+        <button @click="exit()">退出登录</button>
+      </div>
     </div>
   </div>
 </template>
@@ -95,10 +98,12 @@
       };
     },
     computed: {
-      ...mapGetters(["loginUser"])
+      ...mapGetters(["loginUser"]),
+      ...mapGetters(["userstatus"])
     },
     methods: {
       ...mapActions(["changePage"]),
+      ...mapActions(["logout"]),
       isLogin() {
         console.log(this.loginUser);
         if (this.loginUser == null) {
@@ -172,6 +177,29 @@
             }
           });
         }
+      },
+      exit() {
+        console.log(this.loginUser);
+        if (this.loginUser != null) {
+          var that = this;
+          Toast({
+            message: '退出成功',
+            position: 'bottom',
+            duration: 2000
+          })
+          setTimeout(() => {
+            that.$router.push({
+              name: "login"
+            });
+          }, 2000)
+        }
+        if (this.loginUser == null) {
+          Toast({
+            message: '请先登录',
+            position: 'bottom',
+            duration: 2000
+          });
+        }
       }
     }
   };
@@ -189,7 +217,7 @@
 
   .box_headshot {
     width: 100%;
-    flex: 1;
+    height: 278px;
     display: flex;
     flex-direction: column;
   }
@@ -257,19 +285,21 @@
     height: 100%;
     flex: 1;
     position: relative;
+    border-top: 10px solid #eee;
   }
 
   .container {
     width: 100%;
-    height: 100%;
-    flex: 1;
-    position: absolute;
   }
 
   .blank {
     width: 100%;
     height: 15px;
     background: #fff;
+  }
+
+  .cell:first-child {
+    border-top: 1px solid #d9d9d9
   }
 
   .cell {
@@ -306,6 +336,27 @@
     position: relative;
     top: 15px;
     right: 10px;
+  }
+
+  .container_logout {
+    width: 100%;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 10px solid #eee;
+  }
+
+  .container_logout>button {
+    width: 80%;
+    max-width: 360px;
+    height: 36px;
+    color: #fff;
+    font-family: "黑体";
+    border: none;
+    background: #ff2c45;
+    border-radius: 18px;
+    outline: none;
   }
 
 </style>

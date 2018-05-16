@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <div class="item" v-for="c in comments">
+    <div class="item" v-for="c in getDetailCookbook.comment">
       <div class="container">
         <div class="row1">
           <img src="static/images/cookbook/boy.svg" alt="">
@@ -14,15 +14,25 @@
         </div>
       </div>
     </div>
+    <div class="edit">
+      <img src="static/images/icon/edit.svg" alt="">
+    </div>
   </div>
 </template>
 <script>
+  import {
+    mapGetters,
+    mapActions
+  } from "vuex";
   export default {
     data() {
       return {
         cookbook: [],
         comments: []
       }
+    },
+    computed: {
+      ...mapGetters(['getDetailCookbook'])
     },
     methods: {
       back() {

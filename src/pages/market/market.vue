@@ -4,7 +4,10 @@
       <Stuff></Stuff>
     </div>
     <div class="box-img">
-      <img class="toCart" src="@/assets/img/icon/tocart.svg" @click="toCart()">
+      <el-badge v-if="loginUser" :value="loginUser.cart.length" class="item">
+        <img  class="toCart" src="@/assets/img/icon/tocart.svg" @click="toCart()">
+      </el-badge>
+      <img v-if="!loginUser" class="toCart" src="@/assets/img/icon/tocart.svg" @click="toCart()">
     </div>
   </div>
 </template>
@@ -22,7 +25,8 @@
       Stuff
     },
     computed: {
-      ...mapGetters(["loginUser"])
+      ...mapGetters(["loginUser"]),
+      ...mapGetters(["userCart"]),      
     },
     methods: {
       //是否已经登录
@@ -67,6 +71,7 @@
     right: 20px;
     bottom: 84px;
   }
+
   .toCart {
     width: 50px;
     position: fixed;

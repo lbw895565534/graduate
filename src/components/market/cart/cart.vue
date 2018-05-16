@@ -87,6 +87,9 @@
     margin: 0;
     padding: 0;
   }
+  .list_box {
+    padding-bottom: 64px;
+  }
 
   .list_item {
     width: 100%;

@@ -6,12 +6,6 @@
         <img v-if="imageUrl" :src="imageUrl" class="avatar">
         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
       </el-upload>
-
-      <!-- <div id="inputImg">
-        <img src="static/images/icon/shareInput/upload.svg" alt="">
-        <input type="file" @change="upload()" ref="inputImg">
-      </div>
-      <img src="" alt="" v-if="showImg"> -->
     </div>
     <div class="container_name">
       <div class="inputTitle" type="text">
@@ -32,7 +26,7 @@
         <div class="stuff">
           <div>
             <el-select v-model="placeholder.name" placeholder="食材名称">
-              <el-option v-for="o in options" :key="o.name" :value="o.name">
+              <el-option v-for="o in shoplist" :key="o.name" :value="o.name">
               </el-option>
             </el-select>
           </div>
@@ -42,11 +36,11 @@
         </div>
       </div>
       <div class="tableStuff">
-        <div v-for="s in stuff" class="showStuff">
+        <div v-for="s in stuff" class="showStuff">         
           <span class="showStuffName">{{ s.name }}</span>
           <div class="showStuffNum">
-            <span>{{ s.num }}</span>
-            <img src="static/images/icon/shareInput/cancel.svg" @click="delStuff(s.name)">
+            <span>{{ s.num }}</span>  
+            <img src="static/images/icon/shareInput/cancel.svg" @click="delStuff(s.name)">          
           </div>
         </div>
       </div>
@@ -82,28 +76,13 @@
 import axios from "axios";
 import { mapGetters, mapActions } from "vuex";
 export default {
+  computed: {
+    ...mapGetters(["shoplist"])
+  },
   data() {
     return {
       img: "",
-      showImg: false,
-      options: [
-        {
-          name: "香葱",
-          id: 11
-        },
-        {
-          name: "白砂糖",
-          id: 12
-        },
-        {
-          name: "食盐",
-          id: 13
-        },
-        {
-          name: "酱油",
-          id: 14
-        }
-      ],
+      showImg: false,      
       placeholder: {
         name: "名称",
         num: "用量"
@@ -173,7 +152,7 @@ export default {
       });
       //根据isAdd的值执行相应操作
       if (!isAdd) {
-        this.options.forEach(n => {
+        this.shoplist.forEach(n => {
           if (n.name == name) {
             this.stuff.push({
               id: n.id,
@@ -229,12 +208,6 @@ export default {
       share.content = this.step;
       share.shoplist = this.stuff;
       this.shareCookbook(share);
-      // axios.post("/share/shareInput", share).then(res => {
-      //     state.user_status = res.data;
-      //   })
-      //   .catch(err => {
-      //     console.log(error);
-      //   });
     }
   }
 };
@@ -391,6 +364,7 @@ hr {
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   margin: 0 auto;
+  overflow: scroll;
 }
 
 .tableStuff .showStuff {
@@ -402,7 +376,6 @@ hr {
   flex: 1;
   height: 34px;
   line-height: 34px;
-  padding-left: 15px;
 }
 
 .showStuffNum {
@@ -420,7 +393,6 @@ hr {
 
 .showStuffNum img {
   position: relative;
-  top: 2px;
 }
 
 .conatiner_step {

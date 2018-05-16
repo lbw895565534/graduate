@@ -25,7 +25,7 @@
             </div>
           </div>
           <div class="list_item_op">
-            <div class="item_op">
+            <div class="item_op">                
               <img src="@/assets/img/icon/cart.svg" class="item_op_btn" @click="add(shop)"></img>
             </div>
           </div>

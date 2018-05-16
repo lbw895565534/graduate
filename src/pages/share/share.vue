@@ -61,7 +61,7 @@ export default {
     this.sortOfDate();
     this.sortOfHot();
     this.sortOfMine();
-    console.log(this.cookbooknew);
+    console.log(this.cookbookmine);
     if (this.$route.params.selected) {
       this.selected = this.$route.params.selected;
     }

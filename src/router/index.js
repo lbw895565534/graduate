@@ -37,25 +37,40 @@ export default new Router({
       path: '/main',
       name: 'main',
       component: Main,
+      meta: {
+        keepAlive: true
+      },
       children: [{
         path: 'home',
         name: 'home',
         component: Home,
+        meta: {
+          keepAlive: true
+        }
       },
       {
         path: 'share',
         name: 'share',
         component: Share,
+        meta: {
+          keepAlive: true
+        }
       },
       {
         path: 'market',
         name: 'market',
         component: Market,
+        meta: {
+          keepAlive: true
+        }
       },      
       {
         path: 'mine',
         name: 'mine',
         component: Mine,
+        meta: {
+          keepAlive: true
+        }
       }
       ]
     },
