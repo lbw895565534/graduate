@@ -14,11 +14,14 @@ import Sort from '@/pages/sort/sort'
 import DetailCookbook from '@/pages/sort/detailCookbook'
 import Comments from '@/pages/sort/comments'
 import Edit from '@/pages/sort/edit'
+import Collect from '@/pages/mine/collect'
 import DetailStuff from '@/pages/market/detailStuff'
 import Cart from '@/pages/market/cart'
 import Search from '@/pages/search/search'
 import ShareInput from '@/pages/share/shareInput'
 import Profile from '@/pages/mine/profile'
+import Setting from '@/pages/mine/setting'
+import Encourage from '@/pages/mine/encourage'
 
 Vue.use(Router)
 
@@ -120,9 +123,24 @@ export default new Router({
         component: ShareInput
       },
       {
+        path: 'collect',
+        name: 'collect',
+        component: Collect
+      },
+      {
         path: 'mine/profile',
         name: 'profile',
         component: Profile
+      },
+      {
+        path: 'mine/setting',
+        name: 'setting',
+        component: Setting
+      },
+      {
+        path: 'mine/encourage',
+        name: 'encourage',
+        component: Encourage
       }
       ]
     }

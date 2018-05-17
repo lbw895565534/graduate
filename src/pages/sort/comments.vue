@@ -41,11 +41,7 @@
       toEdit() {
         this.$router.push({name: 'edit'});
       }
-    },
-    mounted() {
-      this.cookbook = this.$route.params.cookbook;
-      this.comments = this.cookbook.comment;
-    }
+    }    
   }
 
 </script>

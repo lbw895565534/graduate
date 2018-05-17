@@ -180,7 +180,7 @@
           message: "请先登录",
           position: "bottom",
           duration: 2000
-        });
+        });        
       }
     },
     mounted() {

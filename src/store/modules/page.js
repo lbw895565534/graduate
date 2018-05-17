@@ -42,7 +42,12 @@ const actions = {
     commit
   }, stuff) {
     commit('saveStuffDetail', stuff)
-  }
+  },
+  addComment({
+    commit
+  }, data) {
+    commit('addComment', data)
+  },
 }
 
 const mutations = {
@@ -89,7 +94,30 @@ const mutations = {
   //保存打开的食材详情信息
   saveStuffDetail(state, stuff) {
     state.detail_stuff = stuff;
-  }
+  },
+  //留言
+  addComment(state, data) {
+    var n = data.name;
+    var t = data.txt;
+    var time = new Date();
+    var d = time.getFullYear()+"-"+time.getMonth()+"-"+time.getDay();
+    if (n == "") {
+      n = "无名用户"
+    }
+    state.detail_cookbook.comment.push({
+      name: n,
+      txt: t,
+      date: d
+    });
+    // var id = state.detail_cookbook.id;
+    // console.log(id);
+    // state.cookbook_list.forEach(n => {
+    //   if (n.id == id) {
+    //     n.comment.add(txt);
+    //     state.cookbook_filter = n;
+    //   }
+    // })    
+  },
 }
 
 export default {
